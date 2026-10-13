@@ -1,0 +1,13 @@
+// Install locally only after replacing the exact unit list and reviewing it.
+// Grants start/stop/restart only, never arbitrary shell commands, unit editing,
+// daemon-reload, enable/disable, reboot or other privileged systemd operations.
+polkit.addRule(function(action, subject) {
+    var units = ["example-worker.service"];
+    var verbs = ["start", "stop", "restart"];
+    if (subject.user === "psc-agent" &&
+        action.id === "org.freedesktop.systemd1.manage-units" &&
+        units.indexOf(action.lookup("unit")) >= 0 &&
+        verbs.indexOf(action.lookup("verb")) >= 0) {
+        return polkit.Result.YES;
+    }
+});

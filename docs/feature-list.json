@@ -1,0 +1,1003 @@
+[
+  {
+    "feature_id": "F001",
+    "feature": "Central dashboard",
+    "description": "One UI for services across the Pi, mini PC, and laptop.",
+    "implementation": "Done",
+    "target_verification": "mocked/source evidence; not deployed"
+  },
+  {
+    "feature_id": "F002",
+    "feature": "Mobile-friendly interface",
+    "description": "Browser/phone access through a PWA.",
+    "implementation": "Done",
+    "target_verification": "mocked/source evidence; not deployed"
+  },
+  {
+    "feature_id": "F003",
+    "feature": "Service grid and filters",
+    "description": "Cards with state and controls; filter by host, tag, and state.",
+    "implementation": "Done",
+    "target_verification": "mocked/source evidence; not deployed"
+  },
+  {
+    "feature_id": "F004",
+    "feature": "Service-first organization",
+    "description": "Represent an application as one service containing its containers, units, processes, files, and metadata.",
+    "implementation": "Done",
+    "target_verification": "mocked/source evidence; not deployed"
+  },
+  {
+    "feature_id": "F005",
+    "feature": "Multi-host agents",
+    "description": "Controller on the Pi; local agents discover and operate services on each managed Linux host.",
+    "implementation": "Done",
+    "target_verification": "mocked/source evidence; not deployed"
+  },
+  {
+    "feature_id": "F006",
+    "feature": "Host availability",
+    "description": "Online, stale, and offline states based on agent heartbeats.",
+    "implementation": "Done",
+    "target_verification": "mocked/source evidence; not deployed"
+  },
+  {
+    "feature_id": "F007",
+    "feature": "Offline-tolerant operation",
+    "description": "Handle the intermittently connected laptop; reject offline commands explicitly instead of silently queuing them.",
+    "implementation": "Done",
+    "target_verification": "mocked/source evidence; not deployed"
+  },
+  {
+    "feature_id": "F008",
+    "feature": "Docker discovery",
+    "description": "Discover standalone containers, ports, mounts, and runtime details.",
+    "implementation": "Done",
+    "target_verification": "mocked/source evidence; not deployed"
+  },
+  {
+    "feature_id": "F009",
+    "feature": "Compose discovery",
+    "description": "Recognize Compose projects from labels and identify their components and paths.",
+    "implementation": "Done",
+    "target_verification": "mocked/source evidence; not deployed"
+  },
+  {
+    "feature_id": "F010",
+    "feature": "systemd discovery",
+    "description": "Discover system services and their units.",
+    "implementation": "Done",
+    "target_verification": "mocked/source evidence; not deployed"
+  },
+  {
+    "feature_id": "F011",
+    "feature": "pm2 discovery",
+    "description": "Discover applications managed by pm2.",
+    "implementation": "Done",
+    "target_verification": "mocked/source evidence; not deployed"
+  },
+  {
+    "feature_id": "F012",
+    "feature": "Raw-process discovery",
+    "description": "Suggest services from listening sockets not owned by another recognized runtime.",
+    "implementation": "Not started",
+    "target_verification": "mocked/source evidence; not deployed"
+  },
+  {
+    "feature_id": "F013",
+    "feature": "Known-application recognition",
+    "description": "Prefill names, icons, and URLs for known applications such as Minecraft, Ollama, and Portainer.",
+    "implementation": "Done",
+    "target_verification": "mocked/source evidence; not deployed"
+  },
+  {
+    "feature_id": "F014",
+    "feature": "OS-service filtering",
+    "description": "Hide routine system units by default, with an option to reveal them.",
+    "implementation": "Done",
+    "target_verification": "mocked/source evidence; not deployed"
+  },
+  {
+    "feature_id": "F015",
+    "feature": "Component grouping",
+    "description": "Group related components using Compose projects, wrapper units, or shared working directories.",
+    "implementation": "Done",
+    "target_verification": "mocked/source evidence; not deployed"
+  },
+  {
+    "feature_id": "F016",
+    "feature": "Manual split/merge",
+    "description": "Correct service grouping through the UI.",
+    "implementation": "Done",
+    "target_verification": "mocked/source evidence; not deployed"
+  },
+  {
+    "feature_id": "F017",
+    "feature": "Discovery review",
+    "description": "Review new, changed, and gone services; accept or reject candidates.",
+    "implementation": "Done",
+    "target_verification": "mocked/source evidence; not deployed"
+  },
+  {
+    "feature_id": "F018",
+    "feature": "Scheduled/manual rescans",
+    "description": "Scan on demand and periodically, defaulting to every six hours.",
+    "implementation": "Done",
+    "target_verification": "mocked/source evidence; not deployed"
+  },
+  {
+    "feature_id": "F019",
+    "feature": "Start, stop, restart",
+    "description": "One-click runtime-specific control for Docker, Compose, systemd, pm2, and configured raw processes.",
+    "implementation": "Done",
+    "target_verification": "mocked/source evidence; not deployed"
+  },
+  {
+    "feature_id": "F020",
+    "feature": "Boot behavior",
+    "description": "Enable/disable startup behavior for systemd and Compose through their respective mechanisms.",
+    "implementation": "Not started",
+    "target_verification": "mocked/source evidence; not deployed"
+  },
+  {
+    "feature_id": "F021",
+    "feature": "Bulk actions",
+    "description": "Select several services and perform an action together.",
+    "implementation": "Done",
+    "target_verification": "mocked/source evidence; not deployed"
+  },
+  {
+    "feature_id": "F022",
+    "feature": "Dependency-aware control",
+    "description": "Offer to start dependencies; warn before stopping a service another running service needs.",
+    "implementation": "Done",
+    "target_verification": "mocked/source evidence; not deployed"
+  },
+  {
+    "feature_id": "F023",
+    "feature": "Live runtime state",
+    "description": "Show running, stopped, restarting, failed, or unknown state.",
+    "implementation": "Done",
+    "target_verification": "mocked/source evidence; not deployed"
+  },
+  {
+    "feature_id": "F024",
+    "feature": "Health checks",
+    "description": "HTTP(S), TCP, and custom-command checks; default interval of 60 seconds.",
+    "implementation": "Done",
+    "target_verification": "mocked/source evidence; not deployed"
+  },
+  {
+    "feature_id": "F025",
+    "feature": "Uptime history",
+    "description": "Uptime percentages for 24 hours, seven days, and 30 days.",
+    "implementation": "Done",
+    "target_verification": "mocked/source evidence; not deployed"
+  },
+  {
+    "feature_id": "F026",
+    "feature": "Response times and incidents",
+    "description": "Store latency, outages, and recent incident history.",
+    "implementation": "Done",
+    "target_verification": "mocked/source evidence; not deployed"
+  },
+  {
+    "feature_id": "F027",
+    "feature": "Resource snapshots",
+    "description": "CPU usage, memory usage, restart count, and uptime since last start.",
+    "implementation": "Done",
+    "target_verification": "mocked/source evidence; not deployed"
+  },
+  {
+    "feature_id": "F028",
+    "feature": "Operational alerts",
+    "description": "Notify about service failures, offline hosts, and repeated restarts.",
+    "implementation": "Done",
+    "target_verification": "mocked/source evidence; not deployed"
+  },
+  {
+    "feature_id": "F029",
+    "feature": "Notification integrations",
+    "description": "Deliver alerts through ntfy or Telegram, with the channel chosen in settings.",
+    "implementation": "Done",
+    "target_verification": "mocked/source evidence; not deployed"
+  },
+  {
+    "feature_id": "F030",
+    "feature": "Uptime Kuma import",
+    "description": "Optional import of existing monitors, with the stated intent of retaining history.",
+    "implementation": "Not started",
+    "target_verification": "mocked/source evidence; not deployed"
+  },
+  {
+    "feature_id": "F031",
+    "feature": "Uptime Kuma embedding",
+    "description": "Embed Kuma views or pull its data instead of building equivalent monitoring.",
+    "implementation": "Not started",
+    "target_verification": "mocked/source evidence; not deployed"
+  },
+  {
+    "feature_id": "F032",
+    "feature": "Lightweight ping checks",
+    "description": "Ping/HTTP monitoring was proposed in the earlier dashboard discussion; the spec lists HTTP/TCP/custom checks.",
+    "implementation": "Done",
+    "target_verification": "mocked/source evidence; not deployed"
+  },
+  {
+    "feature_id": "F033",
+    "feature": "Host wake",
+    "description": "Send Wake-on-LAN packets from the Pi for configured hosts.",
+    "implementation": "Done",
+    "target_verification": "mocked/source evidence; not deployed"
+  },
+  {
+    "feature_id": "F034",
+    "feature": "Host suspend/shutdown",
+    "description": "Sleep or shut down a host, warning about its running services.",
+    "implementation": "Done",
+    "target_verification": "mocked/source evidence; not deployed"
+  },
+  {
+    "feature_id": "F035",
+    "feature": "Service schedules",
+    "description": "Cron-style start/stop windows.",
+    "implementation": "Done",
+    "target_verification": "mocked/source evidence; not deployed"
+  },
+  {
+    "feature_id": "F036",
+    "feature": "Idle service shutdown",
+    "description": "Stop after a configured period without port connections; Minecraft’s example uses no players.",
+    "implementation": "Done",
+    "target_verification": "mocked/source evidence; not deployed"
+  },
+  {
+    "feature_id": "F037",
+    "feature": "Manual wake of idle services",
+    "description": "Start an automatically stopped service again from the UI.",
+    "implementation": "Done",
+    "target_verification": "mocked/source evidence; not deployed"
+  },
+  {
+    "feature_id": "F038",
+    "feature": "Stop-reason visibility",
+    "description": "Distinguish scheduled sleep from a manual stop.",
+    "implementation": "Done",
+    "target_verification": "mocked/source evidence; not deployed"
+  },
+  {
+    "feature_id": "F039",
+    "feature": "Living service card",
+    "description": "A single page combining identity, runtime, access, files, credentials, installation, backups, dependencies, and history.",
+    "implementation": "Done",
+    "target_verification": "mocked/source evidence; not deployed"
+  },
+  {
+    "feature_id": "F040",
+    "feature": "Editable identity",
+    "description": "Service name, icon, tags, description, and host association.",
+    "implementation": "Done",
+    "target_verification": "mocked/source evidence; not deployed"
+  },
+  {
+    "feature_id": "F041",
+    "feature": "Access information",
+    "description": "URLs, ports, and protocols.",
+    "implementation": "Done",
+    "target_verification": "mocked/source evidence; not deployed"
+  },
+  {
+    "feature_id": "F042",
+    "feature": "File-location inventory",
+    "description": "Working directory, configuration, data directories, volumes, and log locations.",
+    "implementation": "Done",
+    "target_verification": "mocked/source evidence; not deployed"
+  },
+  {
+    "feature_id": "F043",
+    "feature": "Runtime documentation",
+    "description": "Show Compose/unit configuration, restart policy, and boot behavior.",
+    "implementation": "Done",
+    "target_verification": "mocked/source evidence; not deployed"
+  },
+  {
+    "feature_id": "F044",
+    "feature": "Dependency listings",
+    "description": "Show what a service needs and what depends on it.",
+    "implementation": "Done",
+    "target_verification": "mocked/source evidence; not deployed"
+  },
+  {
+    "feature_id": "F045",
+    "feature": "Owner notes",
+    "description": "Free-form Markdown notes per service.",
+    "implementation": "Done",
+    "target_verification": "mocked/source evidence; not deployed"
+  },
+  {
+    "feature_id": "F046",
+    "feature": "Automatically maintained fields",
+    "description": "Populate cards from discovery and keep observed fields current.",
+    "implementation": "Done",
+    "target_verification": "mocked/source evidence; not deployed"
+  },
+  {
+    "feature_id": "F047",
+    "feature": "Change-review indicators",
+    "description": "Mark configuration or metadata as changed since the last review.",
+    "implementation": "Done",
+    "target_verification": "mocked/source evidence; not deployed"
+  },
+  {
+    "feature_id": "F048",
+    "feature": "Combined service history",
+    "description": "Present configuration changes, incidents, and control actions together.",
+    "implementation": "Done",
+    "target_verification": "mocked/source evidence; not deployed"
+  },
+  {
+    "feature_id": "F049",
+    "feature": "Search",
+    "description": "Search service cards by name, port, path, and documentation.",
+    "implementation": "Done",
+    "target_verification": "mocked/source evidence; not deployed"
+  },
+  {
+    "feature_id": "F050",
+    "feature": "Markdown export",
+    "description": "Export one service or the entire lab’s documentation.",
+    "implementation": "Done",
+    "target_verification": "mocked/source evidence; not deployed"
+  },
+  {
+    "feature_id": "F051",
+    "feature": "Registry export/import",
+    "description": "Portable lab.yaml plus a Markdown docs/ folder.",
+    "implementation": "Done",
+    "target_verification": "mocked/source evidence; not deployed"
+  },
+  {
+    "feature_id": "F052",
+    "feature": "Live install recorder",
+    "description": "Record a named installation session’s terminal commands and output.",
+    "implementation": "Done",
+    "target_verification": "mocked/source evidence; not deployed"
+  },
+  {
+    "feature_id": "F053",
+    "feature": "Replayable recording format",
+    "description": "Store recordings using asciinema v2 cast format.",
+    "implementation": "Done",
+    "target_verification": "mocked/source evidence; not deployed"
+  },
+  {
+    "feature_id": "F054",
+    "feature": "Before/after snapshots",
+    "description": "Compare packages, systemd units, Docker resources, ports, and watched files.",
+    "implementation": "Done",
+    "target_verification": "mocked/source evidence; not deployed"
+  },
+  {
+    "feature_id": "F055",
+    "feature": "Configurable watched directories",
+    "description": "Watch standard locations and user-added directories for installation changes.",
+    "implementation": "Done",
+    "target_verification": "mocked/source evidence; not deployed"
+  },
+  {
+    "feature_id": "F056",
+    "feature": "Recording cleanup",
+    "description": "Ignore noisy cache/log/temp changes and allow pruning before saving.",
+    "implementation": "Done",
+    "target_verification": "mocked/source evidence; not deployed"
+  },
+  {
+    "feature_id": "F057",
+    "feature": "Generated reinstall instructions",
+    "description": "Turn recording and snapshot differences into ordered instructions for user review.",
+    "implementation": "Done",
+    "target_verification": "mocked/source evidence; not deployed"
+  },
+  {
+    "feature_id": "F058",
+    "feature": "Shell-history backfill",
+    "description": "Import Bash, Zsh, and Fish history for services installed previously.",
+    "implementation": "Done",
+    "target_verification": "mocked/source evidence; not deployed"
+  },
+  {
+    "feature_id": "F059",
+    "feature": "Relevant-command filtering",
+    "description": "Match historical commands using service names, paths, images, and ports.",
+    "implementation": "Done",
+    "target_verification": "mocked/source evidence; not deployed"
+  },
+  {
+    "feature_id": "F060",
+    "feature": "Reconstruction labels",
+    "description": "Clearly mark inferred installation instructions as reconstructed and unverified.",
+    "implementation": "Done",
+    "target_verification": "mocked/source evidence; not deployed"
+  },
+  {
+    "feature_id": "F061",
+    "feature": "Per-service file browser",
+    "description": "Browse files associated with each service.",
+    "implementation": "Done",
+    "target_verification": "mocked/source evidence; not deployed"
+  },
+  {
+    "feature_id": "F062",
+    "feature": "File editor",
+    "description": "Edit text configuration with syntax highlighting for YAML, JSON, TOML, INI, .env, and shell files.",
+    "implementation": "Partial",
+    "target_verification": "deferred by owner"
+  },
+  {
+    "feature_id": "F063",
+    "feature": "Host-root browsing option",
+    "description": "Explicit “open host root” toggle beyond service paths.",
+    "implementation": "Not started",
+    "target_verification": "mocked/source evidence; not deployed"
+  },
+  {
+    "feature_id": "F064",
+    "feature": "File-size/type handling",
+    "description": "Files over 2 MB become read-only; binaries are download-only.",
+    "implementation": "Done",
+    "target_verification": "mocked/source evidence; not deployed"
+  },
+  {
+    "feature_id": "F065",
+    "feature": "Automatic configuration versioning",
+    "description": "Commit UI saves into a per-service Git repository with a message.",
+    "implementation": "Done",
+    "target_verification": "mocked/source evidence; not deployed"
+  },
+  {
+    "feature_id": "F066",
+    "feature": "External-edit tracking",
+    "description": "Periodically capture changes made outside the dashboard.",
+    "implementation": "Done",
+    "target_verification": "mocked/source evidence; not deployed"
+  },
+  {
+    "feature_id": "F067",
+    "feature": "Configuration diffs",
+    "description": "Compare any two tracked versions.",
+    "implementation": "Done",
+    "target_verification": "mocked/source evidence; not deployed"
+  },
+  {
+    "feature_id": "F068",
+    "feature": "Configuration rollback",
+    "description": "Revert to a previous version with one click.",
+    "implementation": "Done",
+    "target_verification": "mocked/source evidence; not deployed"
+  },
+  {
+    "feature_id": "F069",
+    "feature": "Validate before saving",
+    "description": "Optional YAML/JSON validation and Compose configuration checks.",
+    "implementation": "Done",
+    "target_verification": "mocked/source evidence; not deployed"
+  },
+  {
+    "feature_id": "F070",
+    "feature": "Secret-file exclusions",
+    "description": "Exclude .env and other detected secret-bearing files from history by default.",
+    "implementation": "Done",
+    "target_verification": "mocked/source evidence; not deployed"
+  },
+  {
+    "feature_id": "F071",
+    "feature": "Live log viewer",
+    "description": "Stream Docker/Compose, systemd journal, pm2, or configured file logs.",
+    "implementation": "Done",
+    "target_verification": "mocked/source evidence; not deployed"
+  },
+  {
+    "feature_id": "F072",
+    "feature": "Log navigation",
+    "description": "Filter, pause, search, and jump to errors.",
+    "implementation": "Done",
+    "target_verification": "mocked/source evidence; not deployed"
+  },
+  {
+    "feature_id": "F073",
+    "feature": "Log download",
+    "description": "Download the last selected number of lines.",
+    "implementation": "Done",
+    "target_verification": "mocked/source evidence; not deployed"
+  },
+  {
+    "feature_id": "F074",
+    "feature": "Interactive host shell",
+    "description": "Open a real browser terminal in the service’s working directory.",
+    "implementation": "Done",
+    "target_verification": "mocked/source evidence; not deployed"
+  },
+  {
+    "feature_id": "F075",
+    "feature": "Shell-session safeguards",
+    "description": "Explicit confirmation, non-root session user, 15-minute idle timeout, and optional reauthentication.",
+    "implementation": "Done",
+    "target_verification": "mocked/source evidence; not deployed"
+  },
+  {
+    "feature_id": "F076",
+    "feature": "Session auditing",
+    "description": "Record session start/end and host; record content only when installation recording is enabled.",
+    "implementation": "Done",
+    "target_verification": "mocked/source evidence; not deployed"
+  },
+  {
+    "feature_id": "F077",
+    "feature": "Stream limits",
+    "description": "Cap simultaneous terminals and log streams to limit memory pressure.",
+    "implementation": "Done",
+    "target_verification": "mocked/source evidence; not deployed"
+  },
+  {
+    "feature_id": "F078",
+    "feature": "Local AI integration",
+    "description": "Use the user’s Ollama instance; configure endpoint, model, timeout, and context limits.",
+    "implementation": "Done",
+    "target_verification": "mocked/source evidence; not deployed"
+  },
+  {
+    "feature_id": "F079",
+    "feature": "Failure explanation",
+    "description": "Explain what happened, likely cause, suggested fix, and confidence.",
+    "implementation": "Done",
+    "target_verification": "mocked/source evidence; not deployed"
+  },
+  {
+    "feature_id": "F080",
+    "feature": "Context-aware diagnosis",
+    "description": "Use recent or selected logs, service metadata, configuration changes, and incidents.",
+    "implementation": "Done",
+    "target_verification": "mocked/source evidence; not deployed"
+  },
+  {
+    "feature_id": "F081",
+    "feature": "Save explanations",
+    "description": "Save AI responses as incident notes in service history.",
+    "implementation": "Done",
+    "target_verification": "mocked/source evidence; not deployed"
+  },
+  {
+    "feature_id": "F082",
+    "feature": "AI-written summaries",
+    "description": "Draft editable service descriptions from configuration and application fingerprints.",
+    "implementation": "Done",
+    "target_verification": "mocked/source evidence; not deployed"
+  },
+  {
+    "feature_id": "F083",
+    "feature": "AI installation cleanup",
+    "description": "Convert recorded or historical commands into readable setup instructions.",
+    "implementation": "Done",
+    "target_verification": "mocked/source evidence; not deployed"
+  },
+  {
+    "feature_id": "F084",
+    "feature": "AI availability indicator",
+    "description": "Disable explanation actions with a reason when Ollama is unreachable.",
+    "implementation": "Done",
+    "target_verification": "mocked/source evidence; not deployed"
+  },
+  {
+    "feature_id": "F085",
+    "feature": "Advice-only AI",
+    "description": "Display suggested commands without executing them automatically.",
+    "implementation": "Done",
+    "target_verification": "mocked/source evidence; not deployed"
+  },
+  {
+    "feature_id": "F086",
+    "feature": "Credential references",
+    "description": "Store labels, optional usernames, Vaultwarden links/IDs, and non-secret location hints.",
+    "implementation": "Done",
+    "target_verification": "mocked/source evidence; not deployed"
+  },
+  {
+    "feature_id": "F087",
+    "feature": "Credential shortcuts",
+    "description": "Open Vaultwarden and copy usernames.",
+    "implementation": "Done",
+    "target_verification": "mocked/source evidence; not deployed"
+  },
+  {
+    "feature_id": "F088",
+    "feature": "Secret discovery",
+    "description": "Scan during discovery and file saves for likely embedded credentials.",
+    "implementation": "Done",
+    "target_verification": "mocked/source evidence; not deployed"
+  },
+  {
+    "feature_id": "F089",
+    "feature": "Vault-link workflow",
+    "description": "Flag apparently unvaulted secrets and let the owner link them to a vault item.",
+    "implementation": "Done",
+    "target_verification": "mocked/source evidence; not deployed"
+  },
+  {
+    "feature_id": "F090",
+    "feature": "Secret masking",
+    "description": "Mask likely passwords, tokens, keys, headers, and high-entropy values before storage or AI use.",
+    "implementation": "Done",
+    "target_verification": "mocked/source evidence; not deployed"
+  },
+  {
+    "feature_id": "F091",
+    "feature": "Vault-reference verification",
+    "description": "Use Bitwarden CLI to check whether linked items still exist.",
+    "implementation": "Not started",
+    "target_verification": "mocked/source evidence; not deployed"
+  },
+  {
+    "feature_id": "F092",
+    "feature": "Per-service backups",
+    "description": "Back up selected configuration, data directories, and volumes.",
+    "implementation": "Not started",
+    "target_verification": "mocked/source evidence; not deployed"
+  },
+  {
+    "feature_id": "F093",
+    "feature": "NAS storage",
+    "description": "Store backups on the configured NAS through an SMB/NFS mount.",
+    "implementation": "Not started",
+    "target_verification": "mocked/source evidence; not deployed"
+  },
+  {
+    "feature_id": "F094",
+    "feature": "Manual/scheduled backups",
+    "description": "Run on demand, daily, or weekly.",
+    "implementation": "Not started",
+    "target_verification": "mocked/source evidence; not deployed"
+  },
+  {
+    "feature_id": "F095",
+    "feature": "Retention policies",
+    "description": "Configure snapshot retention, such as seven daily and four weekly backups.",
+    "implementation": "Not started",
+    "target_verification": "mocked/source evidence; not deployed"
+  },
+  {
+    "feature_id": "F096",
+    "feature": "Backup consistency modes",
+    "description": "Stop-copy-start for consistency, or live copying for static configuration.",
+    "implementation": "Not started",
+    "target_verification": "mocked/source evidence; not deployed"
+  },
+  {
+    "feature_id": "F097",
+    "feature": "Encryption and deduplication",
+    "description": "Use restic repositories for encrypted, deduplicated backups.",
+    "implementation": "Not started",
+    "target_verification": "mocked/source evidence; not deployed"
+  },
+  {
+    "feature_id": "F098",
+    "feature": "Backup-password sourcing",
+    "description": "Keep the repository password in Vaultwarden and supply it to the agent at runtime.",
+    "implementation": "Not started",
+    "target_verification": "mocked/source evidence; not deployed"
+  },
+  {
+    "feature_id": "F099",
+    "feature": "Documentation-inclusive backups",
+    "description": "Include service-card exports and Compose/unit files.",
+    "implementation": "Not started",
+    "target_verification": "mocked/source evidence; not deployed"
+  },
+  {
+    "feature_id": "F100",
+    "feature": "Backup status",
+    "description": "Show last success, size, next run, and failures.",
+    "implementation": "Not started",
+    "target_verification": "mocked/source evidence; not deployed"
+  },
+  {
+    "feature_id": "F101",
+    "feature": "Snapshot selection and preview",
+    "description": "Choose a backup and inspect files before restoring.",
+    "implementation": "Not started",
+    "target_verification": "mocked/source evidence; not deployed"
+  },
+  {
+    "feature_id": "F102",
+    "feature": "Guided restore",
+    "description": "Stop the service, restore files, start it, and run a health check.",
+    "implementation": "Not started",
+    "target_verification": "mocked/source evidence; not deployed"
+  },
+  {
+    "feature_id": "F103",
+    "feature": "Pre-restore safety snapshot",
+    "description": "Capture current data before overwriting it.",
+    "implementation": "Not started",
+    "target_verification": "mocked/source evidence; not deployed"
+  },
+  {
+    "feature_id": "F104",
+    "feature": "Backup failure alerts",
+    "description": "Notify when a backup fails.",
+    "implementation": "Not started",
+    "target_verification": "mocked/source evidence; not deployed"
+  },
+  {
+    "feature_id": "F105",
+    "feature": "Unknown-activity alerts",
+    "description": "Flag activity not previously recorded or approved.",
+    "implementation": "Not started",
+    "target_verification": "mocked/source evidence; not deployed"
+  },
+  {
+    "feature_id": "F106",
+    "feature": "New persistence/service detection",
+    "description": "Flag new systemd units, cron jobs, containers, and listening ports.",
+    "implementation": "Done",
+    "target_verification": "mocked/source evidence; not deployed"
+  },
+  {
+    "feature_id": "F107",
+    "feature": "Persistence-file monitoring",
+    "description": "Watch changes to shell startup files, autostart entries, SSH authorized keys, and systemd configuration.",
+    "implementation": "Not started",
+    "target_verification": "mocked/source evidence; not deployed"
+  },
+  {
+    "feature_id": "F108",
+    "feature": "Suspicious process indicators",
+    "description": "Flag processes executing from /tmp, /dev/shm, or deleted binaries.",
+    "implementation": "Not started",
+    "target_verification": "mocked/source evidence; not deployed"
+  },
+  {
+    "feature_id": "F109",
+    "feature": "Unexpected outbound connections",
+    "description": "Flag connections to unexpected destinations.",
+    "implementation": "Not started",
+    "target_verification": "mocked/source evidence; not deployed"
+  },
+  {
+    "feature_id": "F110",
+    "feature": "File malware scanning",
+    "description": "Integrate ClamAV.",
+    "implementation": "Not started",
+    "target_verification": "mocked/source evidence; not deployed"
+  },
+  {
+    "feature_id": "F111",
+    "feature": "Rootkit checks",
+    "description": "Integrate rkhunter.",
+    "implementation": "Not started",
+    "target_verification": "mocked/source evidence; not deployed"
+  },
+  {
+    "feature_id": "F112",
+    "feature": "Deeper security-tool integration",
+    "description": "Consider osquery or Wazuh later.",
+    "implementation": "Not started",
+    "target_verification": "mocked/source evidence; not deployed"
+  },
+  {
+    "feature_id": "F113",
+    "feature": "Scheduled security scans",
+    "description": "Run external scanners periodically through agents.",
+    "implementation": "Not started",
+    "target_verification": "mocked/source evidence; not deployed"
+  },
+  {
+    "feature_id": "F114",
+    "feature": "Host security results",
+    "description": "Present scan findings on the host page.",
+    "implementation": "Not started",
+    "target_verification": "mocked/source evidence; not deployed"
+  },
+  {
+    "feature_id": "F115",
+    "feature": "Private remote access",
+    "description": "Bind to Tailscale and avoid public internet exposure.",
+    "implementation": "Done",
+    "target_verification": "mocked/source evidence; not deployed"
+  },
+  {
+    "feature_id": "F116",
+    "feature": "Controller login",
+    "description": "Passkey or password plus TOTP. The earlier chat suggested initially skipping application authentication; the spec adds it.",
+    "implementation": "Done",
+    "target_verification": "mocked/source evidence; not deployed"
+  },
+  {
+    "feature_id": "F117",
+    "feature": "Agent authentication",
+    "description": "Controller authentication through mTLS certificates or signed tokens/commands.",
+    "implementation": "Done",
+    "target_verification": "mocked/source evidence; not deployed"
+  },
+  {
+    "feature_id": "F118",
+    "feature": "Restricted operations",
+    "description": "Allow-listed runtime actions and narrowly scoped privileged operations.",
+    "implementation": "Partial",
+    "target_verification": "deferred by owner"
+  },
+  {
+    "feature_id": "F119",
+    "feature": "Filesystem restrictions",
+    "description": "Restrict declared paths and reject traversal/symlink escapes.",
+    "implementation": "Done",
+    "target_verification": "mocked/source evidence; not deployed"
+  },
+  {
+    "feature_id": "F120",
+    "feature": "Action audit trail",
+    "description": "Log control actions, restores, reverts, shutdowns, and shell sessions.",
+    "implementation": "Done",
+    "target_verification": "mocked/source evidence; not deployed"
+  },
+  {
+    "feature_id": "F121",
+    "feature": "Linux distribution support",
+    "description": "Ubuntu and CachyOS, including relevant package-manager and shell differences.",
+    "implementation": "Partial",
+    "target_verification": "deferred by owner"
+  },
+  {
+    "feature_id": "F122",
+    "feature": "ARM64 and AMD64 builds",
+    "description": "Support Pi and x86 hosts; target approximately 250 MB combined controller/agent RAM.",
+    "implementation": "Partial",
+    "target_verification": "deferred by owner"
+  },
+  {
+    "feature_id": "F123",
+    "feature": "Installable deployment",
+    "description": "Compose deployment for the controller; agent installer and systemd service.",
+    "implementation": "Done",
+    "target_verification": "mocked/source evidence; not deployed"
+  },
+  {
+    "feature_id": "F124",
+    "feature": "Programmatic API",
+    "description": "REST operations plus WebSocket state, logs, and terminal streams.",
+    "implementation": "Done",
+    "target_verification": "mocked/source evidence; not deployed"
+  },
+  {
+    "feature_id": "F125",
+    "feature": "PWA push notifications",
+    "description": "Native-style mobile push through the PWA.",
+    "implementation": "Not started",
+    "target_verification": "mocked/source evidence; not deployed"
+  },
+  {
+    "feature_id": "F126",
+    "feature": "MCP server",
+    "description": "Let Claude or a local LLM query and control services.",
+    "implementation": "Not started",
+    "target_verification": "mocked/source evidence; not deployed"
+  },
+  {
+    "feature_id": "F127",
+    "feature": "Dependency graph",
+    "description": "Visualize dependencies and the impact of stopping a service.",
+    "implementation": "Done",
+    "target_verification": "mocked/source evidence; not deployed"
+  },
+  {
+    "feature_id": "F128",
+    "feature": "Safer application updates",
+    "description": "Snapshot before image updates and automatically roll back if health checks fail.",
+    "implementation": "Not started",
+    "target_verification": "mocked/source evidence; not deployed"
+  },
+  {
+    "feature_id": "F129",
+    "feature": "Out-of-band hardware agent",
+    "description": "A possible Zero 2 W for power cycling or serial-console access when another host is unreachable.",
+    "implementation": "Not started",
+    "target_verification": "mocked/source evidence; not deployed"
+  },
+  {
+    "feature_id": "F130",
+    "feature": "Broad host telemetry",
+    "description": "CPU, memory, disk, network, temperatures and system history.",
+    "implementation": "Partial",
+    "target_verification": "deferred by owner"
+  },
+  {
+    "feature_id": "F131",
+    "feature": "Standalone container management/logging",
+    "description": "Container inventory and individual control/log access.",
+    "implementation": "Done",
+    "target_verification": "mocked/source evidence; not deployed"
+  },
+  {
+    "feature_id": "F132",
+    "feature": "Manually maintained service manifest",
+    "description": "JSON/YAML alongside reviewed auto-discovery.",
+    "implementation": "Done",
+    "target_verification": "mocked/source evidence; not deployed"
+  },
+  {
+    "feature_id": "F133",
+    "feature": "App store/one-click installation",
+    "description": "Browse templates and install supported applications.",
+    "implementation": "Not started",
+    "target_verification": "mocked/source evidence; not deployed"
+  },
+  {
+    "feature_id": "F134",
+    "feature": "Kubernetes management",
+    "description": "Cluster workload inventory, health, logs and lifecycle controls.",
+    "implementation": "Not started",
+    "target_verification": "mocked/source evidence; not deployed"
+  },
+  {
+    "feature_id": "F135",
+    "feature": "Proxmox and VM management",
+    "description": "Nodes, guests, resource details and power controls.",
+    "implementation": "Not started",
+    "target_verification": "mocked/source evidence; not deployed"
+  },
+  {
+    "feature_id": "F136",
+    "feature": "Windows-side monitoring",
+    "description": "Services, processes, ports, telemetry, Event Logs and dual-boot identity.",
+    "implementation": "Done",
+    "target_verification": "mocked/source evidence; not deployed"
+  },
+  {
+    "feature_id": "F137",
+    "feature": "Obsidian connection",
+    "description": "Linked Markdown vault export and conflict-aware owner-note sync.",
+    "implementation": "Done",
+    "target_verification": "mocked/source evidence; not deployed"
+  },
+  {
+    "feature_id": "F138",
+    "feature": "Notebook header/top banner",
+    "description": "A personalized paper cover on every service notebook.",
+    "implementation": "Done",
+    "target_verification": "mocked/source evidence; not deployed"
+  },
+  {
+    "feature_id": "F139",
+    "feature": "Dark mode",
+    "description": "Light, dark and system-following themes.",
+    "implementation": "Done",
+    "target_verification": "mocked/source evidence; not deployed"
+  },
+  {
+    "feature_id": "F140",
+    "feature": "User appearance settings",
+    "description": "Accent color, density, text size and reduced motion.",
+    "implementation": "Done",
+    "target_verification": "mocked/source evidence; not deployed"
+  },
+  {
+    "feature_id": "F141",
+    "feature": "Windows software documentation/removal guides",
+    "description": "Detect installed software including AutoCAD and Microsoft products and open recommended help/removal pages.",
+    "implementation": "Done",
+    "target_verification": "mocked/source evidence; not deployed"
+  },
+  {
+    "feature_id": "F142",
+    "feature": "Linux/macOS software inventory and guides",
+    "description": "Include Linux and macOS software, process and socket visibility with appropriate official documentation and removal guidance.",
+    "implementation": "Done",
+    "target_verification": "mocked/source evidence; not deployed"
+  },
+  {
+    "feature_id": "F143",
+    "feature": "macOS native service support",
+    "description": "Focus on macOS alongside Linux and Windows.",
+    "implementation": "Partial",
+    "target_verification": "deferred by owner"
+  }
+]

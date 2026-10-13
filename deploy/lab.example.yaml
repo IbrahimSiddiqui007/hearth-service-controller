@@ -1,0 +1,35 @@
+version: 1
+hosts:
+  - id: worker-node1
+    name: worker-node1
+    os: Ubuntu Server
+    architecture: amd64
+    address: worker-node1
+    # Set these only after starting a real agent and provisioning its token.
+    agent_url: ""
+    token_env: ""
+services:
+  - id: minecraft
+    host_id: worker-node1
+    name: Minecraft
+    runtime: compose
+    description: Fabric server for friends.
+    tags: [games, friends]
+    ports: ["25565/tcp"]
+    paths: [/opt/services/minecraft]
+    dependencies: []
+    control_handle:
+      project: minecraft
+      path: /opt/services/minecraft
+    notes: |
+      ## Installation
+
+      Record the actual image version, mods, and startup instructions here.
+
+      ## Recovery
+
+      Record the backup location and verified restore procedure here.
+
+      ## Related
+
+      [[Host--worker-node1]]

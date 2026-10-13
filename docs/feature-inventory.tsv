@@ -1,0 +1,163 @@
+Dashboard, hosts, and discovery
+Feature	What was discussed	Source	Status
+Central dashboard	One UI for services across the Pi, mini PC, and laptop.	Both	Planned
+Mobile-friendly interface	Browser/phone access through a PWA.	Spec §5	Planned
+Service grid and filters	Cards with state and controls; filter by host, tag, and state.	Both; spec API	Planned
+Service-first organization	Represent an application as one service containing its containers, units, processes, files, and metadata.	Spec §4	Planned
+Multi-host agents	Controller on the Pi; local agents discover and operate services on each managed Linux host.	Spec §5	Planned
+Host availability	Online, stale, and offline states based on agent heartbeats.	Spec §5	Planned
+Offline-tolerant operation	Handle the intermittently connected laptop; reject offline commands explicitly instead of silently queuing them.	Spec §3–5	Planned
+Docker discovery	Discover standalone containers, ports, mounts, and runtime details.	Both; F1	Planned
+Compose discovery	Recognize Compose projects from labels and identify their components and paths.	Spec F1	Planned
+systemd discovery	Discover system services and their units.	Both; F1	Planned
+pm2 discovery	Discover applications managed by pm2.	Spec F1	Planned
+Raw-process discovery	Suggest services from listening sockets not owned by another recognized runtime.	Spec F1	Planned
+Known-application recognition	Prefill names, icons, and URLs for known applications such as Minecraft, Ollama, and Portainer.	Spec F1	Planned
+OS-service filtering	Hide routine system units by default, with an option to reveal them.	Spec F1	Planned
+Component grouping	Group related components using Compose projects, wrapper units, or shared working directories.	Spec §4	Planned
+Manual split/merge	Correct service grouping through the UI.	Spec §4	Planned
+Discovery review	Review new, changed, and gone services; accept or reject candidates.	Spec F1	Planned
+Scheduled/manual rescans	Scan on demand and periodically, defaulting to every six hours.	Spec F1	Planned
+
+
+Service control, monitoring, and power
+Feature	What was discussed	Source	Status
+Start, stop, restart	One-click runtime-specific control for Docker, Compose, systemd, pm2, and configured raw processes.	Both; F2	Planned
+Boot behavior	Enable/disable startup behavior for systemd and Compose through their respective mechanisms.	Spec F2	Planned
+Bulk actions	Select several services and perform an action together.	Spec F2	Planned
+Dependency-aware control	Offer to start dependencies; warn before stopping a service another running service needs.	Spec F2	Planned
+Live runtime state	Show running, stopped, restarting, failed, or unknown state.	Both; F3	Planned
+Health checks	HTTP(S), TCP, and custom-command checks; default interval of 60 seconds.	Spec F3	Planned
+Uptime history	Uptime percentages for 24 hours, seven days, and 30 days.	Both; F3	Planned
+Response times and incidents	Store latency, outages, and recent incident history.	Spec F3	Planned
+Resource snapshots	CPU usage, memory usage, restart count, and uptime since last start.	Both; F3	Planned
+Operational alerts	Notify about service failures, offline hosts, and repeated restarts.	Both; F3	Planned
+Notification integrations	Deliver alerts through ntfy or Telegram, with the channel chosen in settings.	Spec F3	Planned; choice open
+Uptime Kuma import	Optional import of existing monitors, with the stated intent of retaining history.	Spec F3	Planned; optional
+Uptime Kuma embedding	Embed Kuma views or pull its data instead of building equivalent monitoring.	History	Discussed alternative
+Lightweight ping checks	Ping/HTTP monitoring was proposed in the earlier dashboard discussion; the spec lists HTTP/TCP/custom checks.	History	Discussed
+Host wake	Send Wake-on-LAN packets from the Pi for configured hosts.	Spec F11	Planned
+Host suspend/shutdown	Sleep or shut down a host, warning about its running services.	Spec F11	Planned
+Service schedules	Cron-style start/stop windows.	Spec F11	Planned
+Idle service shutdown	Stop after a configured period without port connections; Minecraft’s example uses no players.	Spec F11	Planned
+Manual wake of idle services	Start an automatically stopped service again from the UI.	Spec F11	Planned
+Stop-reason visibility	Distinguish scheduled sleep from a manual stop.	Spec F11	Planned
+
+
+Service documentation and installation memory
+Feature	What was discussed	Source	Status
+Living service card	A single page combining identity, runtime, access, files, credentials, installation, backups, dependencies, and history.	Spec F4	Planned
+Editable identity	Service name, icon, tags, description, and host association.	Spec §4	Planned
+Access information	URLs, ports, and protocols.	Spec F4	Planned
+File-location inventory	Working directory, configuration, data directories, volumes, and log locations.	Both; F4	Planned
+Runtime documentation	Show Compose/unit configuration, restart policy, and boot behavior.	Spec F4	Planned
+Dependency listings	Show what a service needs and what depends on it.	Spec F4	Planned
+Owner notes	Free-form Markdown notes per service.	Spec F4	Planned
+Automatically maintained fields	Populate cards from discovery and keep observed fields current.	Spec F4	Planned
+Change-review indicators	Mark configuration or metadata as changed since the last review.	Spec F4	Planned
+Combined service history	Present configuration changes, incidents, and control actions together.	Spec F4	Planned
+Search	Search service cards by name, port, path, and documentation.	Spec F4	Planned
+Markdown export	Export one service or the entire lab’s documentation.	Spec F4	Planned
+Registry export/import	Portable lab.yaml plus a Markdown docs/ folder.	Spec §7	Planned
+Live install recorder	Record a named installation session’s terminal commands and output.	Spec F5	Planned
+Replayable recording format	Store recordings using asciinema v2 cast format.	Spec F5, §10	Planned
+Before/after snapshots	Compare packages, systemd units, Docker resources, ports, and watched files.	Spec F5	Planned
+Configurable watched directories	Watch standard locations and user-added directories for installation changes.	Spec F5	Planned
+Recording cleanup	Ignore noisy cache/log/temp changes and allow pruning before saving.	Spec §13	Planned
+Generated reinstall instructions	Turn recording and snapshot differences into ordered instructions for user review.	Spec F5	Planned
+Shell-history backfill	Import Bash, Zsh, and Fish history for services installed previously.	Spec F5	Planned
+Relevant-command filtering	Match historical commands using service names, paths, images, and ports.	Spec F5	Planned
+Reconstruction labels	Clearly mark inferred installation instructions as reconstructed and unverified.	Spec F5	Planned
+
+
+Files, configuration history, logs, and terminal
+Feature	What was discussed	Source	Status
+Per-service file browser	Browse files associated with each service.	Both; F6	Planned
+File editor	Edit text configuration with syntax highlighting for YAML, JSON, TOML, INI, .env, and shell files.	Both; F6	Planned
+Host-root browsing option	Explicit “open host root” toggle beyond service paths.	Spec F6	Planned text; conflicts with the stricter security section
+File-size/type handling	Files over 2 MB become read-only; binaries are download-only.	Spec F6	Planned
+Automatic configuration versioning	Commit UI saves into a per-service Git repository with a message.	Spec F6	Planned
+External-edit tracking	Periodically capture changes made outside the dashboard.	Spec F6	Planned
+Configuration diffs	Compare any two tracked versions.	Spec F6	Planned
+Configuration rollback	Revert to a previous version with one click.	Spec F6	Planned
+Validate before saving	Optional YAML/JSON validation and Compose configuration checks.	Spec F6	Planned
+Secret-file exclusions	Exclude .env and other detected secret-bearing files from history by default.	Spec F6	Planned
+Live log viewer	Stream Docker/Compose, systemd journal, pm2, or configured file logs.	Both; F7	Planned
+Log navigation	Filter, pause, search, and jump to errors.	Spec F7	Planned
+Log download	Download the last selected number of lines.	Spec F7	Planned
+Interactive host shell	Open a real browser terminal in the service’s working directory.	Both; F7	Planned
+Shell-session safeguards	Explicit confirmation, non-root session user, 15-minute idle timeout, and optional reauthentication.	Spec F7, §9	Planned
+Session auditing	Record session start/end and host; record content only when installation recording is enabled.	Spec F7	Planned
+Stream limits	Cap simultaneous terminals and log streams to limit memory pressure.	Spec §13	Planned
+
+
+AI and credential handling
+Feature	What was discussed	Source	Status
+Local AI integration	Use the user’s Ollama instance; configure endpoint, model, timeout, and context limits.	Spec F8	Planned
+Failure explanation	Explain what happened, likely cause, suggested fix, and confidence.	Spec F8	Planned
+Context-aware diagnosis	Use recent or selected logs, service metadata, configuration changes, and incidents.	Spec F8	Planned
+Save explanations	Save AI responses as incident notes in service history.	Spec F8	Planned
+AI-written summaries	Draft editable service descriptions from configuration and application fingerprints.	Spec F4/F8	Planned
+AI installation cleanup	Convert recorded or historical commands into readable setup instructions.	Spec F5/F8	Planned
+AI availability indicator	Disable explanation actions with a reason when Ollama is unreachable.	Spec F8	Planned
+Advice-only AI	Display suggested commands without executing them automatically.	Spec F8, §9	Planned
+Credential references	Store labels, optional usernames, Vaultwarden links/IDs, and non-secret location hints.	Spec F9	Planned
+Credential shortcuts	Open Vaultwarden and copy usernames.	Spec F9	Planned
+Secret discovery	Scan during discovery and file saves for likely embedded credentials.	Spec F9	Planned
+Vault-link workflow	Flag apparently unvaulted secrets and let the owner link them to a vault item.	Spec F9	Planned
+Secret masking	Mask likely passwords, tokens, keys, headers, and high-entropy values before storage or AI use.	Spec F5/F8/F9	Planned
+Vault-reference verification	Use Bitwarden CLI to check whether linked items still exist.	Spec F9, post-v1	Later
+
+
+Backup and restore
+Feature	What was discussed	Source	Status
+Per-service backups	Back up selected configuration, data directories, and volumes.	Spec F10	Planned
+NAS storage	Store backups on the configured NAS through an SMB/NFS mount.	Spec F10	Planned
+Manual/scheduled backups	Run on demand, daily, or weekly.	Spec F10	Planned
+Retention policies	Configure snapshot retention, such as seven daily and four weekly backups.	Spec F10	Planned
+Backup consistency modes	Stop-copy-start for consistency, or live copying for static configuration.	Spec F10	Planned
+Encryption and deduplication	Use restic repositories for encrypted, deduplicated backups.	Spec F10	Planned
+Backup-password sourcing	Keep the repository password in Vaultwarden and supply it to the agent at runtime.	Spec F10	Planned
+Documentation-inclusive backups	Include service-card exports and Compose/unit files.	Spec F10	Planned
+Backup status	Show last success, size, next run, and failures.	Spec F10	Planned
+Snapshot selection and preview	Choose a backup and inspect files before restoring.	Spec F10	Planned
+Guided restore	Stop the service, restore files, start it, and run a health check.	Spec F10	Planned
+Pre-restore safety snapshot	Capture current data before overwriting it.	Spec §9	Planned
+Backup failure alerts	Notify when a backup fails.	Spec F10	Planned
+
+
+Unknown-activity and malware-related ideas
+These appeared in the chat as a proposed F12; they are not present in the supplied spec.
+Feature	What was discussed	Source	Status
+Unknown-activity alerts	Flag activity not previously recorded or approved.	History	Discussed; proposed for phase 5
+New persistence/service detection	Flag new systemd units, cron jobs, containers, and listening ports.	History	Discussed
+Persistence-file monitoring	Watch changes to shell startup files, autostart entries, SSH authorized keys, and systemd configuration.	History	Discussed
+Suspicious process indicators	Flag processes executing from /tmp, /dev/shm, or deleted binaries.	History	Discussed
+Unexpected outbound connections	Flag connections to unexpected destinations.	History	Discussed
+File malware scanning	Integrate ClamAV.	History	Discussed
+Rootkit checks	Integrate rkhunter.	History	Discussed
+Deeper security-tool integration	Consider osquery or Wazuh later.	History	Discussed
+Scheduled security scans	Run external scanners periodically through agents.	History	Discussed
+Host security results	Present scan findings on the host page.	History	Discussed
+
+
+Security, platform support, and future extensions
+Feature	What was discussed	Source	Status
+Private remote access	Bind to Tailscale and avoid public internet exposure.	Both	Planned
+Controller login	Passkey or password plus TOTP. The earlier chat suggested initially skipping application authentication; the spec adds it.	Both; spec §9	Planned; method open
+Agent authentication	Controller authentication through mTLS certificates or signed tokens/commands.	Spec §5/9	Planned
+Restricted operations	Allow-listed runtime actions and narrowly scoped privileged operations.	Both; spec §9	Planned
+Filesystem restrictions	Restrict declared paths and reject traversal/symlink escapes.	Spec §9	Planned
+Action audit trail	Log control actions, restores, reverts, shutdowns, and shell sessions.	Spec F2, §9	Planned
+Linux distribution support	Ubuntu and CachyOS, including relevant package-manager and shell differences.	Spec §3/13	Planned
+ARM64 and AMD64 builds	Support Pi and x86 hosts; target approximately 250 MB combined controller/agent RAM.	Spec §3	Planned requirement
+Installable deployment	Compose deployment for the controller; agent installer and systemd service.	Spec §10–11	Planned
+Programmatic API	REST operations plus WebSocket state, logs, and terminal streams.	Spec §8	Planned
+PWA push notifications	Native-style mobile push through the PWA.	Spec post-v1	Later
+MCP server	Let Claude or a local LLM query and control services.	Spec post-v1	Later
+Dependency graph	Visualize dependencies and the impact of stopping a service.	Spec post-v1	Later
+Safer application updates	Snapshot before image updates and automatically roll back if health checks fail.	Spec post-v1	Later
+Out-of-band hardware agent	A possible Zero 2 W for power cycling or serial-console access when another host is unreachable.	History	Discussed only
+
+
+Alternatives and explicitly excluded capabilities

@@ -1,0 +1,52 @@
+# Example only. Run as an ordinary dedicated macOS account; no sudo/root agent.
+# Default launchd discovery observes the calling agent's launchd context only.
+discover: [launchd]
+secret_scan_files: {}
+power_actions: []
+# Shutdown additionally needs an explicitly approved current ordinary-user GUI domain.
+macos_power_domain: ''
+# Native permissions/Automation approval and suspend/shutdown behavior remain unverified.
+physical_host_id: ''
+state_dir: /Users/psc/Library/Application Support/PSC/state
+signing_key_env: PSC_AGENT_SIGNING_KEY
+resource_samples: true
+macos_system_apps: false
+persistence_inventory: false
+
+# All controls remain disabled. Explicit native controls accept only this account
+# GUI LaunchAgents, agent-owned trusted plist paths and discovered content hashes.
+allow_launchd: {}
+# Example: {org.example.server: /Users/psc/Library/LaunchAgents/org.example.server.plist}
+allow_containers: []
+allow_projects: {}
+allow_pm2: []
+pm2_home: ''
+allow_processes: []
+process_commands: {}
+# For an explicitly configured process, use discover: [launchd, process] and
+# an absolute executable/cwd. Only agent-started processes with verified saved
+# PID/time/executable/profile identity can be signalled. No arbitrary PID kill.
+
+file_roots: {}
+allow_file_edits: []
+log_files: {}
+health_commands: {}
+idle_checks: {}
+terminal_profiles: {}
+installation_snapshot_refs: []
+installation_watch_roots: {}
+# Locally approve snapshot refs and at most five watch directories per ref.
+# Watch directories must also be inside that ref's file_roots; no host-root scan.
+# Example under an exact discovered service ref:
+#   launchd-<discovery-hash>:
+#     maintenance:
+#       argv: [/bin/zsh, -f]
+#       cwd: /Users/psc/services/example
+# Requires signed requests and ordinary account; cwd is not a filesystem sandbox.
+# Editing additionally requires readable/preservable native ACLs/xattrs and an
+# existing file owned by the agent. Unsupported native metadata stays read-only.
+
+# Disabled by default. These require an already registered private controller,
+# matching host identity, independent signing key and local private state_dir.
+heartbeat_controller: ''
+controller_host_id: ''

@@ -1,0 +1,2 @@
+# Optional Windows interactive-terminal agent dependency; no shell is launched by installation.
+pywinpty>=3,<4

@@ -1,0 +1,30 @@
+services:
+  controller:
+    build:
+      context: ..
+      dockerfile: deploy/Dockerfile
+    # Loopback by default. Use a private authenticated ingress for remote access.
+    ports:
+      - "127.0.0.1:8787:8787"
+    environment:
+      # Explicit internal-container listener; host port above remains loopback.
+      PSC_CONTAINER_PRIVATE_INGRESS: "1"
+      PSC_TOKEN: "${PSC_TOKEN:?Set a random controller token of at least 24 characters}"
+      PSC_PASSWORD_HASH: "${PSC_PASSWORD_HASH:-}"
+      PSC_TOTP_SECRET: "${PSC_TOTP_SECRET:-}"
+      PSC_ORIGINS: "${PSC_ORIGINS:-http://127.0.0.1:8787}"
+      PSC_AGENT_WORKER: "${PSC_AGENT_WORKER:-}"
+      PSC_AGENT_WORKER_SIGNING: "${PSC_AGENT_WORKER_SIGNING:-}"
+      PSC_OLLAMA_URL: "${PSC_OLLAMA_URL:-}"
+      PSC_OLLAMA_MODEL: "${PSC_OLLAMA_MODEL:-}"
+      # Notification settings store this name only; the value stays in the environment.
+      PSC_NOTIFY_LAB: "${PSC_NOTIFY_LAB:-}"
+    volumes:
+      - psc-data:/app/data
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+volumes:
+  psc-data:

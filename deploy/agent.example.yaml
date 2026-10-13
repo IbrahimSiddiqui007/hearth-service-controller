@@ -1,0 +1,127 @@
+# Opt-in permissions. Copy to agent.local.yaml and edit before starting.
+discover: [docker, systemd]
+secret_scan_files: {}
+power_actions: []
+# Exact-file secret scans and signed host power are separate local opt-ins.
+# No example enables a power action or grants OS privileges.
+
+# Names only, not shell commands. Controls and logs are disabled by default.
+allow_containers: []
+# Example: [uptime-kuma, portainer]
+
+allow_units: []
+# Example: [ollama.service]
+# The agent's OS user still needs an appropriately scoped polkit permission.
+
+allow_projects: {}
+# Example:
+#   minecraft: /opt/services/minecraft
+# Paths must match the project's Docker Compose working-directory label.
+
+file_roots: {}
+# Approved roots, read-only unless allow_file_edits also enables this agent_ref.
+# Example:
+#   compose-0123456789ab:
+#     - /opt/services/minecraft
+# Do not grant roots containing private credentials or untrusted writable trees.
+
+# Existing Linux UTF-8 files only, owned by the agent; Windows stays read-only.
+# Atomic replacement needs write permission on the parent directory as well.
+allow_file_edits: []
+# Example: [compose-0123456789ab]
+# This does not grant runtime controls or restart services after a save.
+
+# Optional fixed validator argv. Each exact {file} argument is replaced with the
+# candidate file path; no shell, interpolation, or caller-provided command.
+config_validators: {}
+# Example:
+#   compose-0123456789ab:
+#     argv: [docker, compose, --project-directory, /opt/services/minecraft, -f, '{file}', config, --quiet]
+# Maximum runtime is 15 seconds. Validation failure preserves the original.
+# Prefer ${ENV_NAME} references in configuration; literal secrets are excluded.
+
+# Optional fixed custom-check profiles. The UI selects IDs, never supplies commands.
+health_commands: {}
+# Example:
+#   minecraft-ready:
+#     label: Minecraft readiness
+#     argv: [/usr/local/bin/check-minecraft]
+#     timeout_s: 5
+
+# Container stats and process/cgroup snapshots are read-only. Disable for lighter scans.
+resource_samples: true
+# Read-only metadata review of system cron files and TCP listeners. Private
+# user crontabs are not scanned and command contents are never exported.
+persistence_inventory: false
+# Fixed local read-only activity probes for optional automatic stopping.
+# Print exactly "idle" or "active"; anything else inhibits automatic stopping.
+# Probe actual client/session activity; low CPU is not a safe inactivity signal.
+idle_checks: {}
+# idle_checks:
+#   minecraft-activity:
+#     argv: [/opt/services/minecraft/check-players]
+#   tcp-idle:
+#     type: tcp_connections
+#     ports: [25565]
+#   minecraft-players:
+#     type: minecraft_players
+#     executable: /usr/local/bin/mcrcon
+#     port: 25575
+#     password_env: PSC_IDLE_MC_RCON_PASSWORD
+# Minecraft invokes only the fixed local "list" command. Password values stay
+# in an environment variable, never argv, registry, output, history or AI context.
+
+# Additional adapters are opt-in: add pm2/process to discover above.
+allow_pm2: []
+pm2_home: ''
+# Example: /home/psc-agent/.pm2, with an existing agent-owned daemon and IPC socket.
+# Discovery refuses to create a pm2 daemon or operate another user's daemon.
+# Existing pm2 application names only. Numeric instance IDs are verified from
+# jlist before every action, avoiding pm2 namespace/glob expansion.
+allow_processes: []
+process_commands: {}
+state_dir: ''
+# Optional signed requests in addition to the bearer token. Configure an
+# independent random key of at least 32 bytes in this environment variable and
+# the controller host's signing_env. state_dir must exist, be owned by the
+# agent, and have mode 0700 on Linux; nonce claims persist across restart.
+signing_key_env: ''
+# Optional outbound persistent heartbeat. Register the host on the controller,
+# configure matching signing_env/token_env there, then opt in locally. Neither
+# enrollment nor real network connections are performed by the demo.
+heartbeat_controller: ''
+controller_host_id: ''
+# heartbeat_controller: wss://controller.your-tailnet.ts.net
+# controller_host_id: worker-node1
+# Example foreground process (never use a shell command string):
+# process_commands:
+#   example-worker:
+#     argv: [/usr/bin/python3, /opt/example/worker.py]
+#     expected_executable: /usr/bin/python3.13
+#     cwd: /opt/example
+# allow_processes: [example-worker]
+# state_dir: /var/lib/psc-agent
+# PID + creation time + executable + profile identity are persisted and checked.
+# Uncertain launches require local review; stop never force-kills automatically.
+
+log_files: {}
+
+# Interactive terminals are disabled by default. A profile grants the ordinary
+# agent account shell access; its cwd is not a filesystem sandbox. Signed agent
+# requests/private replay state are mandatory. Do not add privileged wrappers.
+terminal_profiles: {}
+installation_snapshot_refs: []
+installation_watch_roots: {}
+# Opt-in installation comparison; watch roots must be within this ref's file_roots.
+# installation_snapshot_refs: [compose-<discovery-hash>]
+# installation_watch_roots:
+#   compose-<discovery-hash>: [/opt/services/minecraft]
+# terminal_profiles:
+#   compose-<discovery-hash>:
+#     maintenance:
+#       label: Minecraft maintenance
+#       argv: [/bin/bash, --noprofile, --norc, -i]
+#       cwd: /opt/services/minecraft
+# Example: process-<discovery-hash>: /opt/example/worker.log
+# The same ref must have file_roots containing that existing log file.
+# Files are bounded/masked and symlink paths refused; no caller chooses a path.

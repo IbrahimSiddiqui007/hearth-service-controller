@@ -1,0 +1,1198 @@
+{
+  "counts": {
+    "Done": 102,
+    "Not started": 35,
+    "Partial": 6
+  },
+  "sections": [
+    {
+      "title": "Dashboard, hosts, and discovery",
+      "rows": [
+        [
+          "Central dashboard",
+          "One UI for services across the Pi, mini PC, and laptop.",
+          "Both",
+          "Planned",
+          "Done",
+          "Dashboard and navigation are implemented."
+        ],
+        [
+          "Mobile-friendly interface",
+          "Browser/phone access through a PWA.",
+          "Spec §5",
+          "Planned",
+          "Done",
+          "Responsive phone layout plus installable PWA, home-screen icons and a versioned offline app shell. Service data and controls require the controller."
+        ],
+        [
+          "Service grid and filters",
+          "Cards with state and controls; filter by host, tag, and state.",
+          "Both; spec API",
+          "Planned",
+          "Done",
+          "Service cards with host, tag and state filters, plus full-text search."
+        ],
+        [
+          "Service-first organization",
+          "Represent an application as one service containing its containers, units, processes, files, and metadata.",
+          "Spec §4",
+          "Planned",
+          "Done",
+          "Applications link same-host runtime components under one card while preserving every notebook, file policy and control permission; installation, backup-plan and recovery documentation are editable and exported."
+        ],
+        [
+          "Multi-host agents",
+          "Controller on the Pi; local agents discover and operate services on each managed Linux host.",
+          "Spec §5",
+          "Planned",
+          "Done",
+          "Controller-to-agent HTTP transport and per-host registration are implemented; deployment is still to verify."
+        ],
+        [
+          "Host availability",
+          "Online, stale, and offline states based on agent heartbeats.",
+          "Spec §5",
+          "Planned",
+          "Done",
+          "Opt-in 15-second persistent authenticated heartbeats with mutual HMAC proof, sequence-bound signed frames, durable handshake replay refusal, 45-second stale/150-second offline limits and immediate disconnect refusal; polling supports older agents."
+        ],
+        [
+          "Offline-tolerant operation",
+          "Handle the intermittently connected laptop; reject offline commands explicitly instead of silently queuing them.",
+          "Spec §3–5",
+          "Planned",
+          "Done",
+          "Offline/unverified host controls are refused; last inventory remains visible."
+        ],
+        [
+          "Docker discovery",
+          "Discover standalone containers, ports, mounts, and runtime details.",
+          "Both; F1",
+          "Planned",
+          "Done",
+          "Standalone containers, published ports, mounts, image, state and runtime details are discovered."
+        ],
+        [
+          "Compose discovery",
+          "Recognize Compose projects from labels and identify their components and paths.",
+          "Spec F1",
+          "Planned",
+          "Done",
+          "Project labels, working directories and grouped components are discovered."
+        ],
+        [
+          "systemd discovery",
+          "Discover system services and their units.",
+          "Both; F1",
+          "Planned",
+          "Done",
+          "Loaded units and enabled/linked unloaded units are discovered, including enabled-state metadata."
+        ],
+        [
+          "pm2 discovery",
+          "Discover applications managed by pm2.",
+          "Spec F1",
+          "Planned",
+          "Done",
+          "Opt-in selected pm2 metadata from an existing agent-owned daemon and configured PM2_HOME; environment values are omitted and discovery refuses to bootstrap an absent daemon."
+        ],
+        [
+          "Raw-process discovery",
+          "Suggest services from listening sockets not owned by another recognized runtime.",
+          "Spec F1",
+          "Planned",
+          "Not started",
+          ""
+        ],
+        [
+          "Known-application recognition",
+          "Prefill names, icons, and URLs for known applications such as Minecraft, Ollama, and Portainer.",
+          "Spec F1",
+          "Planned",
+          "Done",
+          "Deterministic Minecraft/Ollama/Kuma/Portainer/Vaultwarden/Tailscale/Samba fingerprints prefill identity and suitable access URLs."
+        ],
+        [
+          "OS-service filtering",
+          "Hide routine system units by default, with an option to reveal them.",
+          "Spec F1",
+          "Planned",
+          "Done",
+          "Routine OS units are hidden by default; discovery can reveal them without falsely marking hidden units missing."
+        ],
+        [
+          "Component grouping",
+          "Group related components using Compose projects, wrapper units, or shared working directories.",
+          "Spec §4",
+          "Planned",
+          "Done",
+          "Compose grouping plus explicit same-host cross-runtime relationships, exact native working-directory suggestions, dependency-order group controls and cycle/nesting/duplicate-control checks."
+        ],
+        [
+          "Manual split/merge",
+          "Correct service grouping through the UI.",
+          "Spec §4",
+          "Planned",
+          "Done",
+          "Notebook checkboxes link/unlink application components without deleting or merging their notes; child notebooks remain accessible and relationships round-trip in manifests/Markdown."
+        ],
+        [
+          "Discovery review",
+          "Review new, changed, and gone services; accept or reject candidates.",
+          "Spec F1",
+          "Planned",
+          "Done",
+          "Persistent new/changed/gone/unchanged review with field diffs, explicit selection and recorded unaccepted candidates. Missing notebooks are preserved."
+        ],
+        [
+          "Scheduled/manual rescans",
+          "Scan on demand and periodically, defaulting to every six hours.",
+          "Spec F1",
+          "Planned",
+          "Done",
+          "On-demand discovery and six-hour live-host discovery reviews, alongside periodic observations."
+        ]
+      ]
+    },
+    {
+      "title": "Service control, monitoring, and power",
+      "rows": [
+        [
+          "Start, stop, restart",
+          "One-click runtime-specific control for Docker, Compose, systemd, pm2, and configured raw processes.",
+          "Both; F2",
+          "Planned",
+          "Done",
+          "Docker/Compose/systemd, verified numeric pm2 instances and fixed Linux/macOS process profiles; PID/time/executable/profile checks, uncertain-outcome refusal and no force-kill. macOS launchd and Windows service controls remain read-only."
+        ],
+        [
+          "Boot behavior",
+          "Enable/disable startup behavior for systemd and Compose through their respective mechanisms.",
+          "Spec F2",
+          "Planned",
+          "Not started",
+          ""
+        ],
+        [
+          "Bulk actions",
+          "Select several services and perform an action together.",
+          "Spec F2",
+          "Planned",
+          "Done",
+          "Selected services execute sequentially with confirmation and individual audit outcomes."
+        ],
+        [
+          "Dependency-aware control",
+          "Offer to start dependencies; warn before stopping a service another running service needs.",
+          "Spec F2",
+          "Planned",
+          "Done",
+          "Explicit dependency-first startup, cycle/reference validation, full-plan preflight, verified prerequisite state and dependent-stop warnings."
+        ],
+        [
+          "Live runtime state",
+          "Show running, stopped, restarting, failed, or unknown state.",
+          "Both; F3",
+          "Planned",
+          "Done",
+          "Known states refresh through polling and after controls; offline services become unobserved."
+        ],
+        [
+          "Health checks",
+          "HTTP(S), TCP, and custom-command checks; default interval of 60 seconds.",
+          "Spec F3",
+          "Planned",
+          "Done",
+          "HTTP(S)/TCP/ICMP plus agent-owned fixed custom-check profiles, configurable intervals/timeouts, and synthetic demo checks; arbitrary caller commands are refused."
+        ],
+        [
+          "Uptime history",
+          "Uptime percentages for 24 hours, seven days, and 30 days.",
+          "Both; F3",
+          "Planned",
+          "Done",
+          "Time-weighted observed uptime for 24h/7d/30d, with bounded sample carry-forward and explicit unknown time/coverage."
+        ],
+        [
+          "Response times and incidents",
+          "Store latency, outages, and recent incident history.",
+          "Spec F3",
+          "Planned",
+          "Done",
+          "Latency history, persistent outage/recovery incidents, observed durations, cause editing and linked investigation notes."
+        ],
+        [
+          "Resource snapshots",
+          "CPU usage, memory usage, restart count, and uptime since last start.",
+          "Both; F3",
+          "Planned",
+          "Done",
+          "Docker/Compose, systemd cgroup/main-process and Windows service-process CPU/memory snapshots, observed scopes, restart/start metadata, and a consistent sampling opt-out. Unknown values stay unknown; live adapters remain deployment validation."
+        ],
+        [
+          "Operational alerts",
+          "Notify about service failures, offline hosts, and repeated restarts.",
+          "Both; F3",
+          "Planned",
+          "Done",
+          "Health failure/recovery, offline-host, repeated-restart and sustained host-threshold events feed an opt-in masked outbox with deduplication, bounded retries and simulated demo delivery."
+        ],
+        [
+          "Notification integrations",
+          "Deliver alerts through ntfy or Telegram, with the channel chosen in settings.",
+          "Spec F3",
+          "Planned; choice open",
+          "Done",
+          "ntfy/Telegram settings, environment-token references, save/test actions and delivery status; disabled by default. Real transports are mocked in tests; demo delivery is simulated."
+        ],
+        [
+          "Uptime Kuma import",
+          "Optional import of existing monitors, with the stated intent of retaining history.",
+          "Spec F3",
+          "Planned; optional",
+          "Not started",
+          ""
+        ],
+        [
+          "Uptime Kuma embedding",
+          "Embed Kuma views or pull its data instead of building equivalent monitoring.",
+          "History",
+          "Discussed alternative",
+          "Not started",
+          ""
+        ],
+        [
+          "Lightweight ping checks",
+          "Ping/HTTP monitoring was proposed in the earlier dashboard discussion; the spec lists HTTP/TCP/custom checks.",
+          "History",
+          "Discussed",
+          "Done",
+          "HTTP(S), TCP and ICMP checks; ping arguments are fixed and targets validated. Demo probes remain simulated."
+        ],
+        [
+          "Host wake",
+          "Send Wake-on-LAN packets from the Pi for configured hosts.",
+          "Spec F11",
+          "Planned",
+          "Done",
+          "Fixed locally configured MAC/private IPv4/UDP7-or-9 profiles, confirmed fingerprint-bound dispatch, host-operation reservation, persistent cooldown and audits. Demo and test sockets never send a real packet; dispatch does not imply observed wake. Hardware/network support remains unverified."
+        ],
+        [
+          "Host suspend/shutdown",
+          "Sleep or shut down a host, warning about its running services.",
+          "Spec F11",
+          "Planned",
+          "Done",
+          "Reviewed host impact, signed fixed Linux/macOS/Windows suspend and shutdown adapters, ordinary-account approval, durable uncertain holds and inspection acknowledgements are implemented and mocked. macOS shutdown requires an explicitly approved current GUI domain. Native execution/permissions remain owner-deferred platform evidence; no real power command was executed."
+        ],
+        [
+          "Service schedules",
+          "Cron-style start/stop windows.",
+          "Spec F11",
+          "Planned",
+          "Done",
+          "Opt-in individual and grouped application start/stop schedules with explicit component consent, IANA timezone previews, DST gap/fold handling, durable once-only decisions, fresh dependency/revision guards and no offline replay. Demo never dispatches automatically."
+        ],
+        [
+          "Idle service shutdown",
+          "Stop after a configured period without port connections; Minecraft’s example uses no players.",
+          "Spec F11",
+          "Planned",
+          "Done",
+          "Standalone and linked-application auto-stop require continuous explicit activity signals for the application and every linked component, with up to eight component profiles. Unknown/active signals, revised components, offline hosts, external dependents and missing permissions inhibit stops. Group reservation, dependency order and observed stopped states protect manual wake; no CPU-only inactivity inference."
+        ],
+        [
+          "Manual wake of idle services",
+          "Start an automatically stopped service again from the UI.",
+          "Spec F11",
+          "Planned",
+          "Done",
+          "Verified automatic stops mark standalone or entire linked applications asleep. Normal confirmed dependency-ordered startup clears sleep after verified running states."
+        ],
+        [
+          "Stop-reason visibility",
+          "Distinguish scheduled sleep from a manual stop.",
+          "Spec F11",
+          "Planned",
+          "Done",
+          "Last controller start/stop/restart requests retain manual, idle or schedule origin, timestamp, outcome and observed-result flag. Unrecorded stops remain unknown; an accepted command is not proof of state or of later external changes."
+        ]
+      ]
+    },
+    {
+      "title": "Service documentation and installation memory",
+      "rows": [
+        [
+          "Living service card",
+          "A single page combining identity, runtime, access, files, credentials, installation, backups, dependencies, and history.",
+          "Spec F4",
+          "Planned",
+          "Done",
+          "Identity, runtime/components/resources, access, files/config history, credential pointers, dependencies, health, owner installation/backup/recovery documentation and history appear in one notebook. Plans are not proof of executed backups; recorder/backup engines are separate roadmap items."
+        ],
+        [
+          "Editable identity",
+          "Service name, icon, tags, description, and host association.",
+          "Spec §4",
+          "Planned",
+          "Done",
+          "Name, icon, tags, description and host association are editable; moving a card clears its previous runtime access."
+        ],
+        [
+          "Access information",
+          "URLs, ports, and protocols.",
+          "Spec F4",
+          "Planned",
+          "Done",
+          "URLs, ports and protocols are stored, displayed and exported."
+        ],
+        [
+          "File-location inventory",
+          "Working directory, configuration, data directories, volumes, and log locations.",
+          "Both; F4",
+          "Planned",
+          "Done",
+          "Typed working/configuration/data/volume/log locations, discovery metadata and editable notebook fields; documentation does not grant filesystem permission."
+        ],
+        [
+          "Runtime documentation",
+          "Show Compose/unit configuration, restart policy, and boot behavior.",
+          "Spec F4",
+          "Planned",
+          "Done",
+          "Runtime/resources page shows start/restart/boot policy metadata and rooted, masked Compose/unit document previews. Boot editing remains separate."
+        ],
+        [
+          "Dependency listings",
+          "Show what a service needs and what depends on it.",
+          "Spec F4",
+          "Planned",
+          "Done",
+          "Required services and reverse dependencies are displayed and editable."
+        ],
+        [
+          "Owner notes",
+          "Free-form Markdown notes per service.",
+          "Spec F4",
+          "Planned",
+          "Done",
+          "Markdown editor, revision checks, previous notes and unsaved-draft protection are implemented."
+        ],
+        [
+          "Automatically maintained fields",
+          "Populate cards from discovery and keep observed fields current.",
+          "Spec F4",
+          "Planned",
+          "Done",
+          "Observed state, capabilities, runtime details and discovered metadata refresh; owner edits/manual definitions remain protected."
+        ],
+        [
+          "Change-review indicators",
+          "Mark configuration or metadata as changed since the last review.",
+          "Spec F4",
+          "Planned",
+          "Done",
+          "Cards show field-level drift against the last reviewed discovery snapshot; accepted reviews reset the baseline."
+        ],
+        [
+          "Combined service history",
+          "Present configuration changes, incidents, and control actions together.",
+          "Spec F4",
+          "Planned",
+          "Done",
+          "Configuration changes, incidents and control actions are presented together with prior owner notes, installation/recovery documentation revisions and linked investigation records."
+        ],
+        [
+          "Search",
+          "Search service cards by name, port, path, and documentation.",
+          "Spec F4",
+          "Planned",
+          "Done",
+          "Names, descriptions, notes, tags, runtimes, hosts, paths and ports are searchable."
+        ],
+        [
+          "Markdown export",
+          "Export one service or the entire lab’s documentation.",
+          "Spec F4",
+          "Planned",
+          "Done",
+          "Individual notes and a complete linked Markdown collection can be downloaded."
+        ],
+        [
+          "Registry export/import",
+          "Portable lab.yaml plus a Markdown docs/ folder.",
+          "Spec §7",
+          "Planned",
+          "Done",
+          "lab.yaml and docs export; reviewed, validated, repeatable import."
+        ],
+        [
+          "Live install recorder",
+          "Record a named installation session’s terminal commands and output.",
+          "Spec F5",
+          "Planned",
+          "Done",
+          "Named opt-in terminal sessions record bounded, best-effort masked input/output; metadata-only auditing by default. Demo is synthetic and a transcript does not prove installation success."
+        ],
+        [
+          "Replayable recording format",
+          "Store recordings using asciinema v2 cast format.",
+          "Spec F5, §10",
+          "Planned",
+          "Done",
+          "Opt-in recordings persist as private asciinema v2 cast artifacts with relative timing and output/resize events; authenticated scoped export omits input events."
+        ],
+        [
+          "Before/after snapshots",
+          "Compare packages, systemd units, Docker resources, ports, and watched files.",
+          "Spec F5",
+          "Planned",
+          "Done",
+          "Opt-in installation sessions compare bounded native package/app, service/unit, container, Docker image/network/volume, listening-port and approved file-hash metadata. Incomplete/different scopes do not imply removals; capture failure remains an explicit evidence gap. Native providers are mocked."
+        ],
+        [
+          "Configurable watched directories",
+          "Watch standard locations and user-added directories for installation changes.",
+          "Spec F5",
+          "Planned",
+          "Done",
+          "Locally approved per-reference watch directories must stay inside approved service file roots. Five-root, depth/time/file/byte budgets, symlink/junction/hardlink refusal and metadata-only UTF-8 hashes protect Linux/macOS/Windows capture; large/binary/secret files remain excluded."
+        ],
+        [
+          "Recording cleanup",
+          "Ignore noisy cache/log/temp changes and allow pruning before saving.",
+          "Spec §13",
+          "Planned",
+          "Done",
+          "Noisy cache/log/temp paths are excluded during file capture; owners can omit commands or changes from a revision-checked installation review before saving/exporting instructions. Original masked evidence is retained; cleanup never deletes it."
+        ],
+        [
+          "Generated reinstall instructions",
+          "Turn recording and snapshot differences into ordered instructions for user review.",
+          "Spec F5",
+          "Planned",
+          "Done",
+          "Ordered captured-command and snapshot-change drafts, editable owner instructions, explicit review state and scoped Markdown export. Evidence/reconstructed/demo labels and gaps persist; nothing runs automatically and reproducibility is not claimed."
+        ],
+        [
+          "Shell-history backfill",
+          "Import Bash, Zsh, and Fish history for services installed previously.",
+          "Spec F5",
+          "Planned",
+          "Done",
+          "Explicit bounded pasted Bash, Zsh extended-history and Fish history-file excerpts import only secret-free commands matching the selected service. Raw/unrelated history is discarded; no history files are fetched automatically."
+        ],
+        [
+          "Relevant-command filtering",
+          "Match historical commands using service names, paths, images, and ports.",
+          "Spec F5",
+          "Planned",
+          "Done",
+          "Service names/IDs, approved paths, images and numeric ports select candidate historical commands in source order; suspected credentials are omitted. Matching is heuristic and every inferred command remains unverified."
+        ],
+        [
+          "Reconstruction labels",
+          "Clearly mark inferred installation instructions as reconstructed and unverified.",
+          "Spec F5",
+          "Planned",
+          "Done",
+          "Imported histories, their review views, AI context and exported instructions are marked reconstructed/unverified. Demo evidence remains separately synthetic; owner approval never changes reproducibility to verified."
+        ]
+      ]
+    },
+    {
+      "title": "Files, configuration history, logs, and terminal",
+      "rows": [
+        [
+          "Per-service file browser",
+          "Browse files associated with each service.",
+          "Both; F6",
+          "Planned",
+          "Done",
+          "Read-only directory navigation and UTF-8 previews within an approved agent root."
+        ],
+        [
+          "File editor",
+          "Edit text configuration with syntax highlighting for YAML, JSON, TOML, INI, .env, and shell files.",
+          "Both; F6",
+          "Planned",
+          "Partial",
+          "Approved Linux editing/history/restore plus Windows owner/DACL checks and ReplaceFileW recovery, and macOS ACL/xattr-preserving metadata copy are implemented with mocked tests. Actual native replacement/permissions behavior remains unverified; secret files stay excluded."
+        ],
+        [
+          "Host-root browsing option",
+          "Explicit “open host root” toggle beyond service paths.",
+          "Spec F6",
+          "Planned text; conflicts with the stricter security section",
+          "Not started",
+          ""
+        ],
+        [
+          "File-size/type handling",
+          "Files over 2 MB become read-only; binaries are download-only.",
+          "Spec F6",
+          "Planned",
+          "Done",
+          "Read-only previews of the first 2 MB of large text files; binary download-only view. Downloads are bounded to 2 MB and apply secret-file exclusions."
+        ],
+        [
+          "Automatic configuration versioning",
+          "Commit UI saves into a per-service Git repository with a message.",
+          "Spec F6",
+          "Planned",
+          "Done",
+          "Controller-owned per-service Git baseline/prospective snapshots precede remote writes; validated outcomes, host-operation reservations and unknown crash recovery protect history. Git is required on the controller."
+        ],
+        [
+          "External-edit tracking",
+          "Periodically capture changes made outside the dashboard.",
+          "Spec F6",
+          "Planned",
+          "Done",
+          "Opt-in approved configuration capture detects baseline/changes, excludes secret/large/binary files, honors intervals, caps five files/service and three service attempts/live poll, and preserves notebook fields."
+        ],
+        [
+          "Configuration diffs",
+          "Compare any two tracked versions.",
+          "Spec F6",
+          "Planned",
+          "Done",
+          "Scoped comparison between verified tracked versions, bounded unified diffs, preserved whitespace and a frontend Before/After selector."
+        ],
+        [
+          "Configuration rollback",
+          "Revert to a previous version with one click.",
+          "Spec F6",
+          "Planned",
+          "Done",
+          "Review a scoped verified version and restore with current etag protection; records a new version and never restarts the service automatically."
+        ],
+        [
+          "Validate before saving",
+          "Optional YAML/JSON validation and Compose configuration checks.",
+          "Spec F6",
+          "Planned",
+          "Done",
+          "UTF-8/size/secret and YAML/JSON/TOML syntax checks; optional fixed agent argv validates a temporary candidate before atomic replacement. Failed validation preserves the original."
+        ],
+        [
+          "Secret-file exclusions",
+          "Exclude .env and other detected secret-bearing files from history by default.",
+          "Spec F6",
+          "Planned",
+          "Done",
+          "Secret filenames and conservatively detected secret content are excluded from managed editing/history/capture; plain environment references are accepted. Detection is not exhaustive."
+        ],
+        [
+          "Live log viewer",
+          "Stream Docker/Compose, systemd journal, pm2, or configured file logs.",
+          "Both; F7",
+          "Planned",
+          "Done",
+          "Authenticated bounded Docker/Compose/journal/pm2 followers and approved file-log tailing, snapshot downloads, filtering/error navigation, pause/disconnect cleanup, rotation handling and per-agent/controller follower limits."
+        ],
+        [
+          "Log navigation",
+          "Filter, pause, search, and jump to errors.",
+          "Spec F7",
+          "Planned",
+          "Done",
+          "Filter/search, refresh pause, highlighted warning/error lines and next-error navigation."
+        ],
+        [
+          "Log download",
+          "Download the last selected number of lines.",
+          "Spec F7",
+          "Planned",
+          "Done",
+          "Authenticated snapshot downloads with a selectable 100/300/1000/5000-line limit and masking."
+        ],
+        [
+          "Interactive host shell",
+          "Open a real browser terminal in the service’s working directory.",
+          "Both; F7",
+          "Planned",
+          "Done",
+          "Browser xterm with fixed locally approved argv/cwd profiles, POSIX PTY and optional Windows ConPTY adapters. Live execution requires signed transport and ordinary account checks; native target behavior remains unverified."
+        ],
+        [
+          "Shell-session safeguards",
+          "Explicit confirmation, non-root session user, 15-minute idle timeout, and optional reauthentication.",
+          "Spec F7, §9",
+          "Planned",
+          "Done",
+          "Explicit host/account/cwd confirmation, changed-profile refusal, owner-bound one-use tickets, optional recent login, host reservations, idle/absolute limits and disconnect cleanup. Cwd is not a filesystem sandbox."
+        ],
+        [
+          "Session auditing",
+          "Record session start/end and host; record content only when installation recording is enabled.",
+          "Spec F7",
+          "Planned",
+          "Done",
+          "Session start/end, host/service/profile and outcome are durable metadata; terminal content is stored only with explicit installation recording. Transcript/cast exports are scoped and audited."
+        ],
+        [
+          "Stream limits",
+          "Cap simultaneous terminals and log streams to limit memory pressure.",
+          "Spec §13",
+          "Planned",
+          "Done",
+          "Per-agent/controller terminal and log follower limits, bounded input/output/recordings, idle/absolute expiry, frame-rate caps and missing-poll cleanup."
+        ]
+      ]
+    },
+    {
+      "title": "AI and credential handling",
+      "rows": [
+        [
+          "Local AI integration",
+          "Use the user’s Ollama instance; configure endpoint, model, timeout, and context limits.",
+          "Spec F8",
+          "Planned",
+          "Done",
+          "Saved enable/endpoint/model/timeout/context settings, model availability checks and explicit-request Ollama explanations."
+        ],
+        [
+          "Failure explanation",
+          "Explain what happened, likely cause, suggested fix, and confidence.",
+          "Spec F8",
+          "Planned",
+          "Done",
+          "Ollama advice is generated on explicit request; real model accuracy is not verified."
+        ],
+        [
+          "Context-aware diagnosis",
+          "Use recent or selected logs, service metadata, configuration changes, and incidents.",
+          "Spec F8",
+          "Planned",
+          "Done",
+          "Bounded logs, metadata, discovery changes, incidents, audit history and scoped verified Git configuration diffs; unknown/prepared/other-service versions are excluded. Model requests remain explicit and advice-only."
+        ],
+        [
+          "Save explanations",
+          "Save AI responses as incident notes in service history.",
+          "Spec F8",
+          "Planned",
+          "Done",
+          "AI responses save as dedicated incident notes in service history, or can be reviewed in an owner-note draft."
+        ],
+        [
+          "AI-written summaries",
+          "Draft editable service descriptions from configuration and application fingerprints.",
+          "Spec F4/F8",
+          "Planned",
+          "Done",
+          "Explicit-request local-model description drafts from stored observed metadata and up to two verified configuration-history files, with masking and credential refusal. Editable UI drafts require an explicit use action and notebook save; demo never contacts a model."
+        ],
+        [
+          "AI installation cleanup",
+          "Convert recorded or historical commands into readable setup instructions.",
+          "Spec F5/F8",
+          "Planned",
+          "Done",
+          "Explicit-request advice-only model drafts use the saved reviewed installation evidence/exclusions. Returned instructions require owner review and a separate save; no commands run and model accuracy remains unverified."
+        ],
+        [
+          "AI availability indicator",
+          "Disable explanation actions with a reason when Ollama is unreachable.",
+          "Spec F8",
+          "Planned",
+          "Done",
+          "Model-catalogue probes, clear disabled reasons, periodic rechecks while logs are open and retry after failed explanations."
+        ],
+        [
+          "Advice-only AI",
+          "Display suggested commands without executing them automatically.",
+          "Spec F8, §9",
+          "Planned",
+          "Done",
+          "Model output is displayed; commands are never executed automatically."
+        ],
+        [
+          "Credential references",
+          "Store labels, optional usernames, Vaultwarden links/IDs, and non-secret location hints.",
+          "Spec F9",
+          "Planned",
+          "Done",
+          "Labels, usernames, item links/IDs and hints are stored and exported; no password field."
+        ],
+        [
+          "Credential shortcuts",
+          "Open Vaultwarden and copy usernames.",
+          "Spec F9",
+          "Planned",
+          "Done",
+          "Open vault links and copy usernames."
+        ],
+        [
+          "Secret discovery",
+          "Scan during discovery and file saves for likely embedded credentials.",
+          "Spec F9",
+          "Planned",
+          "Done",
+          "Best-effort fixed-category checks on discovery metadata, Docker environment assignments, locally approved exact configuration files and rejected configuration drafts. File roots, 20-file/64-KB/256-KB budgets and link/binary exclusions apply; secret filenames are flagged without reading contents. Findings contain no values, excerpts or value hashes. No root crawl; incomplete scope is explicit."
+        ],
+        [
+          "Vault-link workflow",
+          "Flag apparently unvaulted secrets and let the owner link them to a vault item.",
+          "Spec F9",
+          "Planned",
+          "Done",
+          "Persistent per-service findings show apparently unlinked credentials and let the owner save validated vault item links/IDs with finding revisions and audits. Linking never verifies item existence, secret removal or file safety; no vault login or credential export occurs."
+        ],
+        [
+          "Secret masking",
+          "Mask likely passwords, tokens, keys, headers, and high-entropy values before storage or AI use.",
+          "Spec F5/F8/F9",
+          "Planned",
+          "Done",
+          "Assignment/header/credential-URL, private-key/token and conservative entropy masking cover logs, audit, discovery metadata and AI context before storage/use. Sensitive runtime identities are refused; secret files/history remain excluded. Best-effort detection is not exhaustive."
+        ],
+        [
+          "Vault-reference verification",
+          "Use Bitwarden CLI to check whether linked items still exist.",
+          "Spec F9, post-v1",
+          "Later",
+          "Not started",
+          ""
+        ]
+      ]
+    },
+    {
+      "title": "Backup and restore",
+      "rows": [
+        [
+          "Per-service backups",
+          "Back up selected configuration, data directories, and volumes.",
+          "Spec F10",
+          "Planned",
+          "Not started",
+          ""
+        ],
+        [
+          "NAS storage",
+          "Store backups on the configured NAS through an SMB/NFS mount.",
+          "Spec F10",
+          "Planned",
+          "Not started",
+          ""
+        ],
+        [
+          "Manual/scheduled backups",
+          "Run on demand, daily, or weekly.",
+          "Spec F10",
+          "Planned",
+          "Not started",
+          ""
+        ],
+        [
+          "Retention policies",
+          "Configure snapshot retention, such as seven daily and four weekly backups.",
+          "Spec F10",
+          "Planned",
+          "Not started",
+          ""
+        ],
+        [
+          "Backup consistency modes",
+          "Stop-copy-start for consistency, or live copying for static configuration.",
+          "Spec F10",
+          "Planned",
+          "Not started",
+          ""
+        ],
+        [
+          "Encryption and deduplication",
+          "Use restic repositories for encrypted, deduplicated backups.",
+          "Spec F10",
+          "Planned",
+          "Not started",
+          ""
+        ],
+        [
+          "Backup-password sourcing",
+          "Keep the repository password in Vaultwarden and supply it to the agent at runtime.",
+          "Spec F10",
+          "Planned",
+          "Not started",
+          ""
+        ],
+        [
+          "Documentation-inclusive backups",
+          "Include service-card exports and Compose/unit files.",
+          "Spec F10",
+          "Planned",
+          "Not started",
+          ""
+        ],
+        [
+          "Backup status",
+          "Show last success, size, next run, and failures.",
+          "Spec F10",
+          "Planned",
+          "Not started",
+          ""
+        ],
+        [
+          "Snapshot selection and preview",
+          "Choose a backup and inspect files before restoring.",
+          "Spec F10",
+          "Planned",
+          "Not started",
+          ""
+        ],
+        [
+          "Guided restore",
+          "Stop the service, restore files, start it, and run a health check.",
+          "Spec F10",
+          "Planned",
+          "Not started",
+          ""
+        ],
+        [
+          "Pre-restore safety snapshot",
+          "Capture current data before overwriting it.",
+          "Spec §9",
+          "Planned",
+          "Not started",
+          ""
+        ],
+        [
+          "Backup failure alerts",
+          "Notify when a backup fails.",
+          "Spec F10",
+          "Planned",
+          "Not started",
+          ""
+        ]
+      ]
+    },
+    {
+      "title": "Unknown-activity and malware-related ideas",
+      "rows": [
+        [
+          "Unknown-activity alerts",
+          "Flag activity not previously recorded or approved.",
+          "History",
+          "Discussed; proposed for phase 5",
+          "Not started",
+          ""
+        ],
+        [
+          "New persistence/service detection",
+          "Flag new systemd units, cron jobs, containers, and listening ports.",
+          "History",
+          "Discussed",
+          "Done",
+          "Reviewed unit/container discovery plus opt-in cron file/job, Windows Run/RunOnce and TCP-listener metadata diffs with explicit baseline acknowledgment, stale fingerprints and incomplete-provider safeguards; no commands or permissions are changed."
+        ],
+        [
+          "Persistence-file monitoring",
+          "Watch changes to shell startup files, autostart entries, SSH authorized keys, and systemd configuration.",
+          "History",
+          "Discussed",
+          "Not started",
+          ""
+        ],
+        [
+          "Suspicious process indicators",
+          "Flag processes executing from /tmp, /dev/shm, or deleted binaries.",
+          "History",
+          "Discussed",
+          "Not started",
+          ""
+        ],
+        [
+          "Unexpected outbound connections",
+          "Flag connections to unexpected destinations.",
+          "History",
+          "Discussed",
+          "Not started",
+          ""
+        ],
+        [
+          "File malware scanning",
+          "Integrate ClamAV.",
+          "History",
+          "Discussed",
+          "Not started",
+          ""
+        ],
+        [
+          "Rootkit checks",
+          "Integrate rkhunter.",
+          "History",
+          "Discussed",
+          "Not started",
+          ""
+        ],
+        [
+          "Deeper security-tool integration",
+          "Consider osquery or Wazuh later.",
+          "History",
+          "Discussed",
+          "Not started",
+          ""
+        ],
+        [
+          "Scheduled security scans",
+          "Run external scanners periodically through agents.",
+          "History",
+          "Discussed",
+          "Not started",
+          ""
+        ],
+        [
+          "Host security results",
+          "Present scan findings on the host page.",
+          "History",
+          "Discussed",
+          "Not started",
+          ""
+        ]
+      ]
+    },
+    {
+      "title": "Security, platform support, and future extensions",
+      "rows": [
+        [
+          "Private remote access",
+          "Bind to Tailscale and avoid public internet exposure.",
+          "Both",
+          "Planned",
+          "Done",
+          "Standard CLI listeners require loopback or an IP verified against the running local Tailscale identity. Compose explicitly permits its internal listener while publishing the host port on loopback. Private ingress/ACL deployment remains owner setup; no network changes were applied."
+        ],
+        [
+          "Controller login",
+          "Passkey or password plus TOTP. The earlier chat suggested initially skipping application authentication; the spec adds it.",
+          "Both; spec §9",
+          "Planned; method open",
+          "Done",
+          "Optional single-owner scrypt password plus six-digit TOTP, replay/rate limits, revocable 12-hour HttpOnly/SameSite sessions, HTTPS for remote login, logout and configuration-change revocation; API bearer access remains available."
+        ],
+        [
+          "Agent authentication",
+          "Controller authentication through mTLS certificates or signed tokens/commands.",
+          "Spec §5/9",
+          "Planned",
+          "Done",
+          "Bearer tokens plus opt-in independent HMAC request signatures covering method/target/body/time/nonce; durable nonce claims reject replays across restart. Persistent channels additionally prove both endpoints and sign each sequence-bound frame. mTLS is an alternative, not implemented."
+        ],
+        [
+          "Restricted operations",
+          "Allow-listed runtime actions and narrowly scoped privileged operations.",
+          "Both; spec §9",
+          "Planned",
+          "Partial",
+          "Runtime/profile/file allow-lists, non-root startup and a narrow exact-unit/action polkit template exist. Actual journal, Docker and unit privilege grants need reviewed target-host setup and verification; no broad runtime groups are granted by the installer."
+        ],
+        [
+          "Filesystem restrictions",
+          "Restrict declared paths and reject traversal/symlink escapes.",
+          "Spec §9",
+          "Planned",
+          "Done",
+          "Approved-root checks, traversal rejection, resolved symlink escape checks and blocked secret-file previews."
+        ],
+        [
+          "Action audit trail",
+          "Log control actions, restores, reverts, shutdowns, and shell sessions.",
+          "Spec F2, §9",
+          "Planned",
+          "Done",
+          "Existing semantic action records plus durable authenticated write intents, fixed route templates, correlation IDs and accepted/refused/unknown outcomes. Crash/cancellation recovery never replays actions; bodies/secrets are excluded. Generic write hooks cover future restore routes when those engines are implemented; backup engines remain Not started."
+        ],
+        [
+          "Linux distribution support",
+          "Ubuntu and CachyOS, including relevant package-manager and shell differences.",
+          "Spec §3/13",
+          "Planned",
+          "Partial",
+          "Ubuntu/Debian/CachyOS/Arch installer prerequisites, systemd/shared runtime adapters, dpkg/pacman/RPM and desktop inventory are implemented in source. Actual Ubuntu/CachyOS installation, permissions and CLI behavior remain unverified."
+        ],
+        [
+          "ARM64 and AMD64 builds",
+          "Support Pi and x86 hosts; target approximately 250 MB combined controller/agent RAM.",
+          "Spec §3",
+          "Planned requirement",
+          "Partial",
+          "Portable source and build definitions exist; Docker is unavailable here. Both-target image builds and the approximately 250 MB Pi controller/agent memory target remain unverified."
+        ],
+        [
+          "Installable deployment",
+          "Compose deployment for the controller; agent installer and systemd service.",
+          "Spec §10–11",
+          "Planned",
+          "Done",
+          "Controller Compose/Dockerfile and reviewed Ubuntu/Debian/CachyOS/Arch agent installer with a default plan and explicit apply, non-root account, private state, preserved existing files and hardened systemd unit. Installer syntax verified; no target installation, service activation or image build was executed."
+        ],
+        [
+          "Programmatic API",
+          "REST operations plus WebSocket state, logs, and terminal streams.",
+          "Spec §8",
+          "Planned",
+          "Done",
+          "REST, authenticated state/event/log streams and interactive terminal WebSockets; one-use owner-bound attach tickets, signed agent requests, host reservations, bounded streams and disconnect cleanup."
+        ],
+        [
+          "PWA push notifications",
+          "Native-style mobile push through the PWA.",
+          "Spec post-v1",
+          "Later",
+          "Not started",
+          ""
+        ],
+        [
+          "MCP server",
+          "Let Claude or a local LLM query and control services.",
+          "Spec post-v1",
+          "Later",
+          "Not started",
+          ""
+        ],
+        [
+          "Dependency graph",
+          "Visualize dependencies and the impact of stopping a service.",
+          "Spec post-v1",
+          "Later",
+          "Done",
+          "Notebook graph and full linked lists show recorded prerequisites and transitive dependents/stop impact, observed states, bounded diagram nodes and unknown references. It does not infer undeclared dependencies or execute controls."
+        ],
+        [
+          "Safer application updates",
+          "Snapshot before image updates and automatically roll back if health checks fail.",
+          "Spec post-v1",
+          "Later",
+          "Not started",
+          ""
+        ],
+        [
+          "Out-of-band hardware agent",
+          "A possible Zero 2 W for power cycling or serial-console access when another host is unreachable.",
+          "History",
+          "Discussed only",
+          "Not started",
+          ""
+        ]
+      ]
+    },
+    {
+      "title": "Expanded scope and current additions",
+      "rows": [
+        [
+          "Broad host telemetry",
+          "CPU, memory, disk, network, temperatures and system history.",
+          "Spec F12",
+          "Planned",
+          "Partial",
+          "Native telemetry, volume/interface views, reset-aware disk/network rates and charts, sustained threshold policy/state and monitoring links exist. Optional adapters and measured Pi collection/resource budget remain."
+        ],
+        [
+          "Standalone container management/logging",
+          "Container inventory and individual control/log access.",
+          "Spec F13",
+          "Planned",
+          "Done",
+          "Dedicated persistent container screen, Compose components, current-state checks, confirmed allow-listed controls, filtered logs and snapshot downloads."
+        ],
+        [
+          "Manually maintained service manifest",
+          "JSON/YAML alongside reviewed auto-discovery.",
+          "Spec F14",
+          "Planned",
+          "Done",
+          "Validated preview/import/export and repeat-import reconciliation are implemented."
+        ],
+        [
+          "App store/one-click installation",
+          "Browse templates and install supported applications.",
+          "Spec F15",
+          "Planned",
+          "Not started",
+          ""
+        ],
+        [
+          "Kubernetes management",
+          "Cluster workload inventory, health, logs and lifecycle controls.",
+          "Spec F16",
+          "Planned",
+          "Not started",
+          ""
+        ],
+        [
+          "Proxmox and VM management",
+          "Nodes, guests, resource details and power controls.",
+          "Spec F16",
+          "Planned",
+          "Not started",
+          ""
+        ],
+        [
+          "Windows-side monitoring",
+          "Services, processes, ports, telemetry, Event Logs and dual-boot identity.",
+          "Spec F17",
+          "Planned",
+          "Done",
+          "Read-only Windows services/apps/processes/TCP/UDP/Event Log inventory, section-level availability/staleness, optional physical-host identity and OS-switch access invalidation are implemented. Providers are mocked; real dual-boot deployment is unverified."
+        ],
+        [
+          "Obsidian connection",
+          "Linked Markdown vault export and conflict-aware owner-note sync.",
+          "Spec F18",
+          "Planned",
+          "Done",
+          "Manual linked-vault export/sync works; automatic watching and remote sharing are future extensions."
+        ],
+        [
+          "Notebook header/top banner",
+          "A personalized paper cover on every service notebook.",
+          "Current request",
+          "Requested",
+          "Done",
+          "Each banner uses its service name, host, runtime and note excerpt."
+        ],
+        [
+          "Dark mode",
+          "Light, dark and system-following themes.",
+          "Current request",
+          "Requested",
+          "Done",
+          "Theme covers dashboard, notebook banners, forms and dialogs; preference persists across reloads."
+        ],
+        [
+          "User appearance settings",
+          "Accent color, density, text size and reduced motion.",
+          "Current request",
+          "Requested",
+          "Done",
+          "Saved per browser, with reset and cross-tab preference synchronization."
+        ],
+        [
+          "Windows software documentation/removal guides",
+          "Detect installed software including AutoCAD and Microsoft products and open recommended help/removal pages.",
+          "Current request",
+          "Requested",
+          "Done",
+          "Read-only machine/agent-user uninstall registry and optional current-user Store inventory with curated official Autodesk/Microsoft/Office/Edge links. No uninstall strings, downloads or uninstall execution."
+        ],
+        [
+          "Linux/macOS software inventory and guides",
+          "Include Linux and macOS software, process and socket visibility with appropriate official documentation and removal guidance.",
+          "Current request",
+          "Requested",
+          "Done",
+          "Bounded read-only dpkg/pacman/RPM and desktop-entry inventory, standard macOS app bundles, agent-account process/socket metadata, curated OS-specific links, physical identity/OS-switch checks and scoped synthetic examples. Flatpak/Snap/AppImage/Homebrew/receipts and other users are excluded."
+        ],
+        [
+          "macOS native service support",
+          "Focus on macOS alongside Linux and Windows.",
+          "Current request",
+          "Requested",
+          "Partial",
+          "Current-context inventory plus explicitly approved ordinary-user GUI LaunchAgent start/stop/restart with domain/path/hash and fresh-state guards, and mocked ACL/xattr editing. Actual old-macOS compatibility, launchctl context/output, permissions and Intel/Apple Silicon deployment remain unverified; system/Apple jobs remain read-only."
+        ]
+      ]
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+# Windows monitoring only. No administrator privileges are granted by the app.
+discover: [windows]
+secret_scan_files: {}
+power_actions: []
+# Fixed SetSuspendState suspend and shutdown adapters; native permissions/behavior are unverified.
+allow_containers: []
+allow_units: []
+allow_projects: {}
+file_roots: {}
+# Read-only Windows installed software, agent-user Store packages, processes and
+# listening ports are available through the host inventory endpoint.
+windows_packages: true
+# Opt in to bounded System/Application warning/error Event Log messages.
+windows_events: false
+resource_samples: true
+# Use the same explicit physical_host_id in this laptop's Linux and Windows
+# agent configs and controller host definition to reconcile active-OS identity.
+physical_host_id: ''
+# Optional request signing requires an existing private state_dir whose Windows
+# ACL grants only the agent account and administrators access.
+signing_key_env: ''
+heartbeat_controller: ''
+controller_host_id: ''
+state_dir: ''
+# Read-only Run/RunOnce metadata for machine + agent account and TCP listeners.
+# Scheduled tasks and other users' startup entries are not covered.
+persistence_inventory: false
+
+# Optional ConPTY terminals require requirements-windows.txt and a non-elevated
+# agent account. The cwd is not a filesystem sandbox. Signed requests and private
+# replay state are mandatory. Disabled until an explicit trusted profile is added.
+terminal_profiles: {}
+installation_snapshot_refs: []
+installation_watch_roots: {}
+# Locally approve snapshot refs and at most five watch directories per ref.
+# Watch directories must also be inside that ref's file_roots; junctions refused.
+# terminal_profiles:
+#   windows-<discovery-hash>:
+#     maintenance:
+#       argv: ['C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe', -NoLogo, -NoProfile]
+#       cwd: 'C:\Services\Example'

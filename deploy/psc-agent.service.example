@@ -1,0 +1,30 @@
+# Review and customize on the Linux host; this file is not installed automatically.
+[Unit]
+Description=Pi Service Controller Host Agent
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=psc-agent
+Group=psc-agent
+WorkingDirectory=/opt/pi-service-controller
+EnvironmentFile=/etc/psc/agent.env
+# Replace loopback with the host's Tailscale IP only when remote access is intended.
+ExecStart=/opt/pi-service-controller/.venv/bin/python -m agent.app --config /etc/psc/agent.yaml --host 127.0.0.1 --port 8788
+Restart=on-failure
+RestartSec=5
+NoNewPrivileges=true
+PrivateTmp=true
+StateDirectory=psc-agent
+StateDirectoryMode=0700
+ProtectSystem=strict
+ProtectHome=read-only
+# Config editing remains disabled by default. After reviewing file_roots and
+# allow_file_edits, add only the directories containing approved owned files:
+# ReadWritePaths=/opt/services/minecraft/config
+# Atomic replacement creates a temporary file beside the existing target.
+# Do not use ReadWritePaths=/ or broadly relax ProtectSystem/ProtectHome.
+
+[Install]
+WantedBy=multi-user.target

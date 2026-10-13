@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#101712" />
+    <meta name="description" content="Your homelab, remembered. Service inventory, control and linked documentation." />
+    <title>Hearth · Service Controller</title>
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <link rel="apple-touch-icon" href="/icon-192.png" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <script>
+      try {
+        const p = JSON.parse(localStorage.getItem('psc-appearance-v1') || '{}');
+        const root = document.documentElement;
+        root.dataset.theme = p.theme === 'system' ? (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : p.theme === 'dark' ? 'dark' : 'light';
+        root.dataset.accent = ['sage','teal','violet','amber'].includes(p.accent) ? p.accent : 'sage';
+        root.dataset.density = p.density === 'compact' ? 'compact' : 'comfortable';
+        root.dataset.textSize = ['standard','large','larger'].includes(p.textSize) ? p.textSize : 'standard';
+        root.dataset.reduceMotion = String(p.reduceMotion === true);
+        root.style.colorScheme = root.dataset.theme;
+      } catch {}
+    </script>
+  </head>
+  <body><div id="root"></div><script type="module" src="/src/main.tsx"></script></body>
+</html>
