@@ -15,7 +15,7 @@ The owner deferred native file replacement/metadata, restricted OS privileges, U
 
 ## Hosted CI — October 16, 2026
 
-[Source checks passed](https://github.com/IbrahimSiddiqui007/hearth-service-controller/actions/runs/38868007362) on sanitized-history commit `a59e257`: **382 backend tests passed on each of Windows, Linux and macOS**, with no failures, errors or skips. The frontend build and all nine Node tests also passed. This hosted result predates the backup implementation above.
+[Source checks passed](https://github.com/IbrahimSiddiqui007/hearth-service-controller/actions/runs/38870937704) on backup implementation commit `bef7fc5`: **407 backend tests passed on each of Windows, Linux and macOS**, with no failures or errors and one opt-in real-restic test skipped per runner. The frontend build and all nine Node tests also passed. The orchestration fixture explicitly mocks native ACL providers; real target ownership/ACL acceptance remains deferred. The separate disposable local real-restic test passed as described above.
 
 Hosted CI uses isolated fixtures and mocks for native providers, including the backup orchestration fixture's ACL boundary. Native permission refusal remains enabled in production; metadata helpers have separate regression tests. The real restic test is opt-in locally. These checks do not demonstrate real deployment, an actual phone-to-service control, target privileges or a NAS restore. Follow [first deployment acceptance](FIRST-DEPLOYMENT.md) before claiming those outcomes.
 
