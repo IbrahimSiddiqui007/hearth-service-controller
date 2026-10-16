@@ -2,6 +2,7 @@ import asyncio
 from datetime import datetime,timedelta,timezone
 import hashlib
 import json
+import os
 from pathlib import Path
 from types import SimpleNamespace
 
@@ -17,6 +18,14 @@ from shared.backups import AgentBackupRequest,BackupInspection,BackupAction,Back
 
 @pytest.fixture
 def engine(tmp_path,monkeypatch):
+    # This fixture tests backup orchestration. Native ACL providers have their
+    # own tests and explicit real-tool opt-in; hosted runner ownership/ACLs vary.
+    metadata=[]
+    monkeypatch.setattr('agent.backups.security',lambda *args:b'synthetic-owned-acl')
+    monkeypatch.setattr('agent.backups.copy_metadata',lambda *args:metadata.append('copy'))
+    def replace(source,target,*args):
+        metadata.append('replace');os.replace(source,target)
+    monkeypatch.setattr('agent.backups.replace_preserving_metadata',replace)
     mount=tmp_path/'nas';repository=mount/'repo';repository.mkdir(parents=True);(repository/'config').write_text('owner provisioned')
     source=tmp_path/'data';source.mkdir();(source/'config.yaml').write_text('current: true\n');(source/'extra.txt').write_text('preserve')
     state=tmp_path/'state';state.mkdir(mode=0o700)
@@ -50,7 +59,7 @@ def engine(tmp_path,monkeypatch):
     replay=ReplayGuard(str(state))
     observer=lambda:{'services':[{'runtime':'systemd','control_handle':{'unit':'app.service'},'status':'stopped'}]}
     backups=Backups(config,replay,execute,observer)
-    return SimpleNamespace(backups=backups,calls=calls,config=config,source=source,mount=mount,snapshots=snapshots,events=events,replay=replay)
+    return SimpleNamespace(backups=backups,calls=calls,config=config,source=source,mount=mount,snapshots=snapshots,events=events,replay=replay,metadata=metadata)
 
 
 def request(engine,action='backup',**kwargs):
@@ -95,6 +104,7 @@ def test_restore_has_preview_safety_snapshot_and_preserves_extra_files(engine,ca
         assert engine.events==['backup','safety','restore']
         assert (engine.source/'config.yaml').read_text()=='old: true\n'
         assert (engine.source/'extra.txt').read_text()=='preserve'
+        assert engine.metadata==['copy','replace']
 
 
 def test_backup_uncertain_intent_blocks_replay_until_inspection(engine):
