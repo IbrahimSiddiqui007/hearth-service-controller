@@ -29,6 +29,25 @@ def test_config_content_whitespace_is_not_stripped():
     assert FileWrite(content=content, etag='hash').content == content
 
 
+def test_managed_history_reads_versions_under_long_workspace_paths(tmp_path):
+    from controller.config_history import file_key, repository, snapshot, version
+    from controller.store import Store
+
+    # Git for Windows probes <cwd>/<commit>:<filename> as a possible worktree
+    # path. That can exceed MAX_PATH even when the snapshot file itself does not.
+    padding = max(1, 170 - len(str(tmp_path.resolve())) - 49)
+    store = Store(tmp_path / ('nested-' + 'x' * padding))
+    service = {'id': 'long-path-service', 'host_id': 'host'}
+    info = {'path': 'config.yaml', 'resolved_path': '/approved/config.yaml'}
+    original = '\n  safe: true\n'
+    before = snapshot(store, service, info, original, 'Baseline')
+    after = snapshot(store, service, info, '\n  safe: false\n', 'Changed', 'applied')
+    key = file_key(service, info)
+    assert len(str(repository(store, service['id']).resolve())) + 107 > 260
+    assert version(store, service['id'], key, before)['content'] == original
+    assert version(store, service['id'], key, after)['content'] == '\n  safe: false\n'
+
+
 def test_atomic_edit_permissions_etag_validation_and_line_endings(editing_agent):
     c, root, _ = editing_agent
     original = c.get('/files?ref=approved&path=config.yaml').json()

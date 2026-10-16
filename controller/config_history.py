@@ -51,7 +51,9 @@ def repository(store, sid):
 
 def git(folder, *args):
     env = dict(os.environ, GIT_CONFIG_NOSYSTEM='1', GIT_CONFIG_GLOBAL=os.devnull, GIT_TERMINAL_PROMPT='0')
-    fixed = ['git', '-c', 'core.hooksPath=' + str(folder / 'disabled-hooks'), '-c', 'core.fsmonitor=false', '-c', 'core.autocrlf=false', '-c', 'commit.gpgsign=false', '-c', 'user.name=Hearth owner', '-c', 'user.email=hearth@localhost']
+    # A commit:path argument can exceed Windows MAX_PATH during Git's path
+    # disambiguation even when every real worktree file has a shorter path.
+    fixed = ['git', '-c', 'core.hooksPath=' + str(folder / 'disabled-hooks'), '-c', 'core.fsmonitor=false', '-c', 'core.autocrlf=false', '-c', 'core.longpaths=true', '-c', 'commit.gpgsign=false', '-c', 'user.name=Hearth owner', '-c', 'user.email=hearth@localhost']
     try:
         result = subprocess.run(fixed + list(args), cwd=folder, env=env, capture_output=True, text=True, encoding='utf-8', errors='replace', timeout=15)
         if result.returncode:

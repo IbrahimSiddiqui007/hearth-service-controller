@@ -1,4 +1,5 @@
 import json
+from pathlib import Path
 from types import SimpleNamespace
 
 import psutil
@@ -14,8 +15,9 @@ from agent.extra_runtimes import file_log, managed_process, pm2_args, pm2_invent
 def pm2(tmp_path, monkeypatch):
     (tmp_path / 'pm2.pid').write_text('123')
     monkeypatch.setattr('pathlib.Path.is_socket', lambda path: path.name == 'rpc.sock')
-    monkeypatch.setattr('agent.extra_runtimes.psutil.Process', lambda pid: SimpleNamespace(is_running=lambda: True, cmdline=lambda: ['PM2 GodDaemon'], uids=lambda: SimpleNamespace(real=0)))
-    monkeypatch.setattr('agent.extra_runtimes.os.getuid', lambda: 0, raising=False)
+    owner_uid = (tmp_path / 'pm2.pid').stat().st_uid
+    monkeypatch.setattr('agent.extra_runtimes.psutil.Process', lambda pid: SimpleNamespace(is_running=lambda: True, cmdline=lambda: ['PM2 GodDaemon'], uids=lambda: SimpleNamespace(real=owner_uid)))
+    monkeypatch.setattr('agent.extra_runtimes.os.getuid', lambda: owner_uid, raising=False)
     return {'pm2_home': str(tmp_path), 'allow_pm2': ['web']}
 
 
@@ -40,6 +42,16 @@ def test_pm2_refuses_missing_daemon_without_cli_call(tmp_path):
         raise AssertionError('pm2 would bootstrap a daemon')
     with pytest.raises(HTTPException) as refused:
         pm2_inventory({'pm2_home': str(tmp_path)}, prohibited)
+    assert refused.value.status_code == 409
+
+
+def test_pm2_refuses_daemon_owned_by_a_different_user(pm2, monkeypatch):
+    owner_uid = Path(pm2['pm2_home']).stat().st_uid
+    monkeypatch.setattr('agent.extra_runtimes.psutil.Process', lambda pid: SimpleNamespace(is_running=lambda: True, cmdline=lambda: ['PM2 GodDaemon'], uids=lambda: SimpleNamespace(real=owner_uid + 1)))
+    def prohibited(*args, **kwargs):
+        raise AssertionError('Unowned daemon must never receive a CLI request')
+    with pytest.raises(HTTPException) as refused:
+        pm2_inventory(pm2, prohibited)
     assert refused.value.status_code == 409
 
 
