@@ -19,7 +19,7 @@ The Schedules notebook tab saves disabled-by-default policy with its service rev
 
 Fresh host/service/dependency observations, known states, exact revision/connection context, control allow-lists and free host reservations are required at dispatch. A stopped prerequisite or running/unknown dependent blocks the relevant action. Conflicting start/stop rules are refused. Each minute's durable decision is made once; offline/blocked/uncertain windows have no backlog and no automatic retry. Changing a service revision rearms its policy rather than replaying an old decision. Demo schedules save/preview but never dispatch automatically.
 
-The UI's last controller request records manual/idle/schedule origin and outcome. It is historical evidence, not a claim about the cause of every later external stop. Unknown stops/outcomes remain unknown.
+The UI's last controller request records manual/idle/schedule/backup origin and outcome. It is historical evidence, not a claim about the cause of every later external stop. Unknown stops/outcomes remain unknown.
 
 ## Host power
 
@@ -31,8 +31,8 @@ Fixed source adapters: Linux `systemctl --no-ask-password suspend` / `poweroff`;
 
 Intent persists before dispatch at both controller and agent. A returned command, lost connection, crash or timeout never proves a sleep/shutdown state. Host/services become unobserved and further writes stay held. There is no automatic retry. Configured Wake-on-LAN remains available for recovery. After the owner inspects the host, fresh post-request host/service observations and an explicit acknowledgement release the hold; historical power uncertainty remains. An acknowledgement tombstones even an unreceived request so a delayed old request cannot execute later. No power scheduler exists.
 
-Backups/restores and boot-policy controls are still absent. Nothing here is a backup safety snapshot or an OS privilege setup.
+Backup/restore workflows have separate local approval, mandatory pre-restore safety snapshots and durable host holds; see [backup scope](BACKUPS.md). They do not grant OS privileges. Boot-policy editing remains absent.
 
 ## Durable write auditing
 
-Authenticated API writes persist an intent before validation or execution. Fixed route templates, known service/host IDs, correlation IDs and HTTP outcomes appear in Activity and notebook History. Refused inputs are recorded; interruption/server failure stays unknown. Restart recovery marks unfinished intents unknown and never replays them. Bodies, query strings, authorization values and raw error text are excluded. HTTP acceptance does not establish observed runtime success; semantic action history provides that context. Future backup routes inherit the write journal when their engines exist.
+Authenticated API writes persist an intent before validation or execution. Fixed route templates, known service/host IDs, correlation IDs and HTTP outcomes appear in Activity and notebook History. Refused inputs are recorded; interruption/server failure stays unknown. Restart recovery marks unfinished intents unknown and never replays them. Bodies, query strings, authorization values and raw error text are excluded. HTTP acceptance does not establish observed runtime success; semantic action history provides that context. Backup policy, dispatch, retention and inspection routes also inherit the write journal.

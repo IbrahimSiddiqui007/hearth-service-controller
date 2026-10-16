@@ -199,6 +199,24 @@ DONE.update({
 for feature in DONE:
     PARTIAL.pop(feature, None)
 
+# Backup source workflows; actual NAS/application recovery remains unverified.
+DONE.update({
+    'Per-service backups': 'Locally approved restic profiles select one to eight config/data/mounted-volume directories; fixed argv, immutable snapshots and signed durable intents. No automatic volume export.',
+    'NAS storage': 'Existing owner-mounted SMB/NFS storage and provisioned repository required; missing mount or changed mount identity refuses local fallback. Actual NAS permissions and restore remain unverified.',
+    'Manual/scheduled backups': 'Confirmed manual and opt-in daily/weekly UTC backups with durable once-only windows, no restart backlog or automatic retries. Demo automatic dispatch is disabled.',
+    'Retention policies': 'Bounded daily/weekly policy, dry-run removal review and separately approved exact-ID forget; safety snapshots excluded. No automatic prune or deletion.',
+    'Backup consistency modes': 'Explicit static-file live profiles or observed stop-copy-start for independent runtimes with stopped dependents; linked applications support static backups only. Uncertain outcomes retain a host hold.',
+    'Encryption and deduplication': 'Delegated to restic repositories; disposable real encrypted repository backup/restore/check verified locally. Native NAS and application acceptance remains pending.',
+    'Backup-password sourcing': 'Owner supplies the vault-managed password through an approved PSC_ environment reference. Values never enter argv, registry or results; automatic vault login/unlock is excluded.',
+    'Documentation-inclusive backups': 'Service-card Markdown shares the data snapshot; approved roots include Compose/unit files. Restored prose is returned for separate review without overwriting owner notes.',
+    'Backup status': 'Per-service history includes last success, snapshot IDs, byte counts, next UTC window and failures/unknown holds; policy alone never implies backup availability.',
+    'Snapshot selection and preview': 'Full immutable scoped snapshot selection, bounded file metadata preview, traversal/link/special-file refusal and separate overwrite confirmation.',
+    'Guided restore': 'Independent runtime stop, staged verified restore, atomic file overlay, restart if originally running and configured health check. Previously stopped runtimes remain stopped with health unverified; extra current files are preserved.',
+    'Pre-restore safety snapshot': 'Mandatory completed current-data snapshot before target overwrites, durable safety ID before overlay, native metadata checks and interrupted-operation inspection. No multi-file transaction or automatic rollback is claimed.',
+    'Backup failure alerts': 'Backup/restore failures feed the existing masked notification outbox and persistent audit/history; real external delivery remains deployment verification.',
+})
+DONE['Action audit trail'] = 'Durable authenticated write intents plus semantic controls, backup/restore/retention, inspection and schedule records; interrupted results remain unknown and are never replayed. Bodies and secrets are excluded.'
+
 EXTRA = [
     ("Broad host telemetry", "CPU, memory, disk, network, temperatures and system history.", "Spec F12", "Planned", "Partial", "Native telemetry, volume/interface views, reset-aware disk/network rates and charts, sustained threshold policy/state and monitoring links exist. Optional adapters and measured Pi collection/resource budget remain."),
     ("Standalone container management/logging", "Container inventory and individual control/log access.", "Spec F13", "Planned", "Done", "Dedicated persistent container screen, Compose components, current-state checks, confirmed allow-listed controls, filtered logs and snapshot downloads."),
@@ -239,10 +257,10 @@ def main():
     sections.append({"title": "Expanded scope and current additions", "rows": [list(row) for row in EXTRA]})
     counts = Counter(row[4] for section in sections for row in section["rows"])
     lines = ["# Complete feature inventory and implementation status", "",
-             "Updated October 13, 2026. Original descriptions, sources and planning status are preserved from the supplied list; implementation and coverage columns are added.", "",
+             "Updated October 16, 2026. Descriptions, sources and planning status retain the supplied scope with lab-specific details generalized; implementation and coverage columns are added.", "",
              "**Done** = the described capability is implemented in the current app. **Partial** = a usable subset exists, with missing coverage listed. **Not started** = no implementation of that capability yet. Done is a code/workflow assessment, not a claim that the Pi, mini PC or laptop has been deployed or verified live.", "",
              f"**Totals: {counts['Done']} Done · {counts['Partial']} Partial · {counts['Not started']} Not started ({sum(counts.values())} entries).**", "",
-             "Session 9 completes grouped/local-time schedules, all scoped source power adapters and durable write auditing. The owner explicitly deferred the six remaining native/platform rows. Native APIs/models/sockets are mocked; Ubuntu/CachyOS/older-Mac and Docker/Pi evidence remain pending. See VERIFICATION.md, PLATFORM-SUPPORT.md and MANUAL-PLATFORM-CHECKS.md. No real-host deployment, privilege change, uninstall, wake packet, power command or hardware measurement was performed.", "",
+             "Guarded restic backup/restore source workflows are implemented next after schedules, source power adapters and durable auditing. The six Partial rows remain native verification deferred by the owner. Broader integrations are paused pending target evidence. A disposable local restic restore is separate from NAS/application acceptance; no real-host deployment, privilege change, uninstall, wake packet, power command or Pi measurement was performed. See VERIFICATION.md, BACKUPS.md and FIRST-DEPLOYMENT.md.", "",
              "The original attachment ends at the heading ‘Alternatives and explicitly excluded capabilities’ without rows. The capabilities subsequently added back to scope are included in the final table. Security-tripwire ideas remain discussion items; they are separate from F12 telemetry.", ""]
     for section in sections:
         lines += ["## " + section["title"], "", "| Feature | What was discussed | Source | Planning status | Implementation | Current coverage / remaining work |",

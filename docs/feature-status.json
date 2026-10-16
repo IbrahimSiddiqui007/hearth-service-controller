@@ -1,7 +1,7 @@
 {
   "counts": {
-    "Done": 102,
-    "Not started": 35,
+    "Done": 115,
+    "Not started": 22,
     "Partial": 6
   },
   "sections": [
@@ -766,104 +766,104 @@
           "Back up selected configuration, data directories, and volumes.",
           "Spec F10",
           "Planned",
-          "Not started",
-          ""
+          "Done",
+          "Locally approved restic profiles select one to eight config/data/mounted-volume directories; fixed argv, immutable snapshots and signed durable intents. No automatic volume export."
         ],
         [
           "NAS storage",
           "Store backups on the configured NAS through an SMB/NFS mount.",
           "Spec F10",
           "Planned",
-          "Not started",
-          ""
+          "Done",
+          "Existing owner-mounted SMB/NFS storage and provisioned repository required; missing mount or changed mount identity refuses local fallback. Actual NAS permissions and restore remain unverified."
         ],
         [
           "Manual/scheduled backups",
           "Run on demand, daily, or weekly.",
           "Spec F10",
           "Planned",
-          "Not started",
-          ""
+          "Done",
+          "Confirmed manual and opt-in daily/weekly UTC backups with durable once-only windows, no restart backlog or automatic retries. Demo automatic dispatch is disabled."
         ],
         [
           "Retention policies",
           "Configure snapshot retention, such as seven daily and four weekly backups.",
           "Spec F10",
           "Planned",
-          "Not started",
-          ""
+          "Done",
+          "Bounded daily/weekly policy, dry-run removal review and separately approved exact-ID forget; safety snapshots excluded. No automatic prune or deletion."
         ],
         [
           "Backup consistency modes",
           "Stop-copy-start for consistency, or live copying for static configuration.",
           "Spec F10",
           "Planned",
-          "Not started",
-          ""
+          "Done",
+          "Explicit static-file live profiles or observed stop-copy-start for independent runtimes with stopped dependents; linked applications support static backups only. Uncertain outcomes retain a host hold."
         ],
         [
           "Encryption and deduplication",
           "Use restic repositories for encrypted, deduplicated backups.",
           "Spec F10",
           "Planned",
-          "Not started",
-          ""
+          "Done",
+          "Delegated to restic repositories; disposable real encrypted repository backup/restore/check verified locally. Native NAS and application acceptance remains pending."
         ],
         [
           "Backup-password sourcing",
           "Keep the repository password in Vaultwarden and supply it to the agent at runtime.",
           "Spec F10",
           "Planned",
-          "Not started",
-          ""
+          "Done",
+          "Owner supplies the vault-managed password through an approved PSC_ environment reference. Values never enter argv, registry or results; automatic vault login/unlock is excluded."
         ],
         [
           "Documentation-inclusive backups",
           "Include service-card exports and Compose/unit files.",
           "Spec F10",
           "Planned",
-          "Not started",
-          ""
+          "Done",
+          "Service-card Markdown shares the data snapshot; approved roots include Compose/unit files. Restored prose is returned for separate review without overwriting owner notes."
         ],
         [
           "Backup status",
           "Show last success, size, next run, and failures.",
           "Spec F10",
           "Planned",
-          "Not started",
-          ""
+          "Done",
+          "Per-service history includes last success, snapshot IDs, byte counts, next UTC window and failures/unknown holds; policy alone never implies backup availability."
         ],
         [
           "Snapshot selection and preview",
           "Choose a backup and inspect files before restoring.",
           "Spec F10",
           "Planned",
-          "Not started",
-          ""
+          "Done",
+          "Full immutable scoped snapshot selection, bounded file metadata preview, traversal/link/special-file refusal and separate overwrite confirmation."
         ],
         [
           "Guided restore",
           "Stop the service, restore files, start it, and run a health check.",
           "Spec F10",
           "Planned",
-          "Not started",
-          ""
+          "Done",
+          "Independent runtime stop, staged verified restore, atomic file overlay, restart if originally running and configured health check. Previously stopped runtimes remain stopped with health unverified; extra current files are preserved."
         ],
         [
           "Pre-restore safety snapshot",
           "Capture current data before overwriting it.",
           "Spec §9",
           "Planned",
-          "Not started",
-          ""
+          "Done",
+          "Mandatory completed current-data snapshot before target overwrites, durable safety ID before overlay, native metadata checks and interrupted-operation inspection. No multi-file transaction or automatic rollback is claimed."
         ],
         [
           "Backup failure alerts",
           "Notify when a backup fails.",
           "Spec F10",
           "Planned",
-          "Not started",
-          ""
+          "Done",
+          "Backup/restore failures feed the existing masked notification outbox and persistent audit/history; real external delivery remains deployment verification."
         ]
       ]
     },
@@ -1001,7 +1001,7 @@
           "Spec F2, §9",
           "Planned",
           "Done",
-          "Existing semantic action records plus durable authenticated write intents, fixed route templates, correlation IDs and accepted/refused/unknown outcomes. Crash/cancellation recovery never replays actions; bodies/secrets are excluded. Generic write hooks cover future restore routes when those engines are implemented; backup engines remain Not started."
+          "Durable authenticated write intents plus semantic controls, backup/restore/retention, inspection and schedule records; interrupted results remain unknown and are never replayed. Bodies and secrets are excluded."
         ],
         [
           "Linux distribution support",

@@ -640,91 +640,91 @@
     "feature_id": "F092",
     "feature": "Per-service backups",
     "description": "Back up selected configuration, data directories, and volumes.",
-    "implementation": "Not started",
+    "implementation": "Done",
     "target_verification": "mocked/source evidence; not deployed"
   },
   {
     "feature_id": "F093",
     "feature": "NAS storage",
     "description": "Store backups on the configured NAS through an SMB/NFS mount.",
-    "implementation": "Not started",
+    "implementation": "Done",
     "target_verification": "mocked/source evidence; not deployed"
   },
   {
     "feature_id": "F094",
     "feature": "Manual/scheduled backups",
     "description": "Run on demand, daily, or weekly.",
-    "implementation": "Not started",
+    "implementation": "Done",
     "target_verification": "mocked/source evidence; not deployed"
   },
   {
     "feature_id": "F095",
     "feature": "Retention policies",
     "description": "Configure snapshot retention, such as seven daily and four weekly backups.",
-    "implementation": "Not started",
+    "implementation": "Done",
     "target_verification": "mocked/source evidence; not deployed"
   },
   {
     "feature_id": "F096",
     "feature": "Backup consistency modes",
     "description": "Stop-copy-start for consistency, or live copying for static configuration.",
-    "implementation": "Not started",
+    "implementation": "Done",
     "target_verification": "mocked/source evidence; not deployed"
   },
   {
     "feature_id": "F097",
     "feature": "Encryption and deduplication",
     "description": "Use restic repositories for encrypted, deduplicated backups.",
-    "implementation": "Not started",
+    "implementation": "Done",
     "target_verification": "mocked/source evidence; not deployed"
   },
   {
     "feature_id": "F098",
     "feature": "Backup-password sourcing",
     "description": "Keep the repository password in Vaultwarden and supply it to the agent at runtime.",
-    "implementation": "Not started",
+    "implementation": "Done",
     "target_verification": "mocked/source evidence; not deployed"
   },
   {
     "feature_id": "F099",
     "feature": "Documentation-inclusive backups",
     "description": "Include service-card exports and Compose/unit files.",
-    "implementation": "Not started",
+    "implementation": "Done",
     "target_verification": "mocked/source evidence; not deployed"
   },
   {
     "feature_id": "F100",
     "feature": "Backup status",
     "description": "Show last success, size, next run, and failures.",
-    "implementation": "Not started",
+    "implementation": "Done",
     "target_verification": "mocked/source evidence; not deployed"
   },
   {
     "feature_id": "F101",
     "feature": "Snapshot selection and preview",
     "description": "Choose a backup and inspect files before restoring.",
-    "implementation": "Not started",
+    "implementation": "Done",
     "target_verification": "mocked/source evidence; not deployed"
   },
   {
     "feature_id": "F102",
     "feature": "Guided restore",
     "description": "Stop the service, restore files, start it, and run a health check.",
-    "implementation": "Not started",
+    "implementation": "Done",
     "target_verification": "mocked/source evidence; not deployed"
   },
   {
     "feature_id": "F103",
     "feature": "Pre-restore safety snapshot",
     "description": "Capture current data before overwriting it.",
-    "implementation": "Not started",
+    "implementation": "Done",
     "target_verification": "mocked/source evidence; not deployed"
   },
   {
     "feature_id": "F104",
     "feature": "Backup failure alerts",
     "description": "Notify when a backup fails.",
-    "implementation": "Not started",
+    "implementation": "Done",
     "target_verification": "mocked/source evidence; not deployed"
   },
   {

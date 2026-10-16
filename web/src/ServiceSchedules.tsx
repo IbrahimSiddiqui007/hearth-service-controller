@@ -6,7 +6,7 @@ type LastControl = { action: string; source: string; ts: string; outcome: string
 
 export function StopReason({ value, state }: { value?: LastControl; state: string }) {
   if (!value) return state === 'stopped' ? <div className="info-box">Stopped · reason unknown. No controller action is recorded for this state.</div> : null;
-  return <div className="info-box">Last controller request: {value.action} · {value.source === 'schedule' ? 'scheduled window' : value.source === 'idle' ? 'verified inactivity' : 'manual action'} · {new Date(value.ts).toLocaleString()} · {value.outcome}{value.verified ? ' · resulting state observed at that time' : ' · resulting state unverified'}. Later external changes may have another cause.</div>;
+  return <div className="info-box">Last controller request: {value.action} · {value.source === 'schedule' ? 'scheduled window' : value.source === 'idle' ? 'verified inactivity' : value.source === 'backup' ? 'backup workflow' : 'manual action'} · {new Date(value.ts).toLocaleString()} · {value.outcome}{value.verified ? ' · resulting state observed at that time' : ' · resulting state unverified'}. Later external changes may have another cause.</div>;
 }
 
 export function ServiceSchedules({ sid, grouped, child=false, componentNames=[], request, notify, refresh, dirty }: { sid: string; grouped: boolean; child?:boolean; componentNames?:string[]; request: <T>(path:string, options?:RequestInit) => Promise<T>; notify:(message:string,error?:boolean)=>void; refresh:()=>Promise<void>; dirty:(value:boolean)=>void }) {

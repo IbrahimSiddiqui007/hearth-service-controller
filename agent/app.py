@@ -33,6 +33,8 @@ from agent.idle_activity import check as activity_check
 from shared.configuration import secret_filename, secret_reasons
 from agent.secret_scan import scan as scan_secrets
 from agent.power import Power
+from agent.backups import Backups
+from shared.backups import AgentBackupRequest, BackupInspection
 from shared.power import PowerRequest, PowerAcknowledge
 from shared.secret_findings import categories as secret_categories
 
@@ -281,6 +283,31 @@ def create_agent(config: dict | None = None, token: str | None = None):
     if signing_env and len(os.environ.get(signing_env, '').encode()) < 32:
         raise ValueError('Configured request signing key is missing or too short')
     power = Power(config, replay, command)
+    backups = Backups(config,replay,observer=lambda:scan(ScanOptions(include_system=True)))
+    app.state.backups = backups
+
+    @app.get('/backups/profile')
+    def get_backup_profile(name: str,keep_daily: int=Query(default=7,ge=1,le=90),keep_weekly: int=Query(default=4,ge=0,le=52)):
+        return backups.plan(name,keep_daily,keep_weekly)
+
+    @app.get('/backups/preview')
+    def get_backup_preview(name: str,snapshot: str):
+        import re
+        if not re.fullmatch(r'[a-f0-9]{64}',snapshot):
+            raise HTTPException(422,'Choose a full immutable snapshot ID')
+        return backups.preview(name,snapshot)
+
+    @app.post('/backups')
+    def run_backup(body: AgentBackupRequest):
+        return backups.request(body)
+
+    @app.post('/backups/acknowledge')
+    def acknowledge_backup(body: BackupInspection):
+        return backups.acknowledge(body)
+
+    @app.get('/backups/inspection')
+    def inspect_backup(operation_id: str=Query(pattern=r'^[a-f0-9]{32}$')):
+        return backups.inspection(operation_id)
 
     @app.get('/power/profile')
     def power_profile():
@@ -293,6 +320,7 @@ def create_agent(config: dict | None = None, token: str | None = None):
     @app.post('/power/acknowledge')
     def power_acknowledge(body: PowerAcknowledge):
         return power.acknowledge(body)
+
 
     def runtime_command(argv, **kwargs):
         if argv and argv[0] == "pm2":

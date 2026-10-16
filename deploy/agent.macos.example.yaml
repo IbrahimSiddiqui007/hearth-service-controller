@@ -50,3 +50,5 @@ installation_watch_roots: {}
 # matching host identity, independent signing key and local private state_dir.
 heartbeat_controller: ''
 controller_host_id: ''
+backup_profiles: {}
+# Disabled; review docs/BACKUPS.md before approving storage or restore.

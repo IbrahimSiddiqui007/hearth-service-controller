@@ -170,7 +170,11 @@ def replace(candidate, target, system, expected):
             raise ReplacementUncertain('Windows replacement outcome is unverified; candidate/recovery copies were retained beside the file. Inspect locally before retrying.')
         try:
             if security(target, system) != expected:
-                raise ReplacementUncertain('Replaced file permissions could not be verified; recovery copy retained. Inspect locally before retrying.')
+                # ReplaceFileW may materialize inherited ACEs as explicit entries.
+                # Restore the original inheritance state, then verify exact ACLs.
+                copy_metadata(backup, target, system, expected)
+                if security(target, system) != expected:
+                    raise ReplacementUncertain('Replaced file permissions could not be verified; recovery copy retained. Inspect locally before retrying.')
         except OSError as exc:
             raise ReplacementUncertain('Replaced file permissions are unverified; recovery copy retained. Inspect locally before retrying.') from exc
         try:

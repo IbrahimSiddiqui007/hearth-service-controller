@@ -39,3 +39,5 @@ installation_watch_roots: {}
 #     maintenance:
 #       argv: ['C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe', -NoLogo, -NoProfile]
 #       cwd: 'C:\Services\Example'
+backup_profiles: {}
+# Disabled; review docs/BACKUPS.md before approving storage or restore.

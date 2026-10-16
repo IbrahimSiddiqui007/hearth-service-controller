@@ -1,6 +1,8 @@
 # Opt-in permissions. Copy to agent.local.yaml and edit before starting.
 discover: [docker, systemd]
 secret_scan_files: {}
+backup_profiles: {}
+# Separate local approval for existing mounted restic repositories; see docs/BACKUPS.md.
 power_actions: []
 # Exact-file secret scans and signed host power are separate local opt-ins.
 # No example enables a power action or grants OS privileges.

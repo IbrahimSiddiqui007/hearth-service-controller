@@ -94,6 +94,28 @@ def test_metadata_unavailable_and_secret_files_stay_readonly(files, monkeypatch)
     assert not editable(config, 'approved', original, 'PASSWORD=secret', False, 'Windows')
 
 
+@pytest.mark.parametrize('repair_succeeds',[True,False])
+def test_windows_replacement_restores_exact_inheritance_or_keeps_recovery(tmp_path,monkeypatch,repair_succeeds):
+    expected=b'original-owner-acl-and-inheritance'
+    observed=[b'native-materialized-inherited-aces']
+    recovery=[]
+    def native(target,candidate,backup,*args):
+        Path(backup).write_bytes(b'original content');recovery.append(Path(backup));return True
+    def restore_metadata(source,target,system,original):
+        assert source==recovery[0] and original==expected
+        if not repair_succeeds:raise PermissionError('Cannot restore exact inheritance')
+        observed[0]=expected
+    monkeypatch.setattr('agent.file_metadata.windows_api',lambda:(None,SimpleNamespace(ReplaceFileW=native)))
+    monkeypatch.setattr('agent.file_metadata.security',lambda *args:observed[0])
+    monkeypatch.setattr('agent.file_metadata.copy_metadata',restore_metadata)
+    if repair_succeeds:
+        replace(tmp_path/'candidate',tmp_path/'target','Windows',expected)
+        assert observed[0]==expected and not recovery[0].exists()
+    else:
+        with pytest.raises(ReplacementUncertain):replace(tmp_path/'candidate',tmp_path/'target','Windows',expected)
+        assert recovery[0].read_bytes()==b'original content'
+
+
 def test_windows_security_compares_actual_acl_not_descriptor_layout():
     first = WindowsSecurity(b'layout-one', b'owner', b'ordered-aces', True)
     second = WindowsSecurity(b'layout-two', b'owner', b'ordered-aces', True)

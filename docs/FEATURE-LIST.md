@@ -95,19 +95,19 @@ Complete 143-entry list; original descriptions and requested additions are prese
 | F089 | Vault-link workflow | Flag apparently unvaulted secrets and let the owner link them to a vault item. | Done | mocked/source evidence; not deployed |
 | F090 | Secret masking | Mask likely passwords, tokens, keys, headers, and high-entropy values before storage or AI use. | Done | mocked/source evidence; not deployed |
 | F091 | Vault-reference verification | Use Bitwarden CLI to check whether linked items still exist. | Not started | mocked/source evidence; not deployed |
-| F092 | Per-service backups | Back up selected configuration, data directories, and volumes. | Not started | mocked/source evidence; not deployed |
-| F093 | NAS storage | Store backups on the configured NAS through an SMB/NFS mount. | Not started | mocked/source evidence; not deployed |
-| F094 | Manual/scheduled backups | Run on demand, daily, or weekly. | Not started | mocked/source evidence; not deployed |
-| F095 | Retention policies | Configure snapshot retention, such as seven daily and four weekly backups. | Not started | mocked/source evidence; not deployed |
-| F096 | Backup consistency modes | Stop-copy-start for consistency, or live copying for static configuration. | Not started | mocked/source evidence; not deployed |
-| F097 | Encryption and deduplication | Use restic repositories for encrypted, deduplicated backups. | Not started | mocked/source evidence; not deployed |
-| F098 | Backup-password sourcing | Keep the repository password in Vaultwarden and supply it to the agent at runtime. | Not started | mocked/source evidence; not deployed |
-| F099 | Documentation-inclusive backups | Include service-card exports and Compose/unit files. | Not started | mocked/source evidence; not deployed |
-| F100 | Backup status | Show last success, size, next run, and failures. | Not started | mocked/source evidence; not deployed |
-| F101 | Snapshot selection and preview | Choose a backup and inspect files before restoring. | Not started | mocked/source evidence; not deployed |
-| F102 | Guided restore | Stop the service, restore files, start it, and run a health check. | Not started | mocked/source evidence; not deployed |
-| F103 | Pre-restore safety snapshot | Capture current data before overwriting it. | Not started | mocked/source evidence; not deployed |
-| F104 | Backup failure alerts | Notify when a backup fails. | Not started | mocked/source evidence; not deployed |
+| F092 | Per-service backups | Back up selected configuration, data directories, and volumes. | Done | mocked/source evidence; not deployed |
+| F093 | NAS storage | Store backups on the configured NAS through an SMB/NFS mount. | Done | mocked/source evidence; not deployed |
+| F094 | Manual/scheduled backups | Run on demand, daily, or weekly. | Done | mocked/source evidence; not deployed |
+| F095 | Retention policies | Configure snapshot retention, such as seven daily and four weekly backups. | Done | mocked/source evidence; not deployed |
+| F096 | Backup consistency modes | Stop-copy-start for consistency, or live copying for static configuration. | Done | mocked/source evidence; not deployed |
+| F097 | Encryption and deduplication | Use restic repositories for encrypted, deduplicated backups. | Done | mocked/source evidence; not deployed |
+| F098 | Backup-password sourcing | Keep the repository password in Vaultwarden and supply it to the agent at runtime. | Done | mocked/source evidence; not deployed |
+| F099 | Documentation-inclusive backups | Include service-card exports and Compose/unit files. | Done | mocked/source evidence; not deployed |
+| F100 | Backup status | Show last success, size, next run, and failures. | Done | mocked/source evidence; not deployed |
+| F101 | Snapshot selection and preview | Choose a backup and inspect files before restoring. | Done | mocked/source evidence; not deployed |
+| F102 | Guided restore | Stop the service, restore files, start it, and run a health check. | Done | mocked/source evidence; not deployed |
+| F103 | Pre-restore safety snapshot | Capture current data before overwriting it. | Done | mocked/source evidence; not deployed |
+| F104 | Backup failure alerts | Notify when a backup fails. | Done | mocked/source evidence; not deployed |
 | F105 | Unknown-activity alerts | Flag activity not previously recorded or approved. | Not started | mocked/source evidence; not deployed |
 | F106 | New persistence/service detection | Flag new systemd units, cron jobs, containers, and listening ports. | Done | mocked/source evidence; not deployed |
 | F107 | Persistence-file monitoring | Watch changes to shell startup files, autostart entries, SSH authorized keys, and systemd configuration. | Not started | mocked/source evidence; not deployed |

@@ -1,12 +1,12 @@
 # Complete feature inventory and implementation status
 
-Updated October 13, 2026. Original descriptions, sources and planning status are preserved from the supplied list; implementation and coverage columns are added.
+Updated October 16, 2026. Descriptions, sources and planning status retain the supplied scope with lab-specific details generalized; implementation and coverage columns are added.
 
 **Done** = the described capability is implemented in the current app. **Partial** = a usable subset exists, with missing coverage listed. **Not started** = no implementation of that capability yet. Done is a code/workflow assessment, not a claim that the Pi, mini PC or laptop has been deployed or verified live.
 
-**Totals: 102 Done · 6 Partial · 35 Not started (143 entries).**
+**Totals: 115 Done · 6 Partial · 22 Not started (143 entries).**
 
-Session 9 completes grouped/local-time schedules, all scoped source power adapters and durable write auditing. The owner explicitly deferred the six remaining native/platform rows. Native APIs/models/sockets are mocked; Ubuntu/CachyOS/older-Mac and Docker/Pi evidence remain pending. See VERIFICATION.md, PLATFORM-SUPPORT.md and MANUAL-PLATFORM-CHECKS.md. No real-host deployment, privilege change, uninstall, wake packet, power command or hardware measurement was performed.
+Guarded restic backup/restore source workflows are implemented next after schedules, source power adapters and durable auditing. The six Partial rows remain native verification deferred by the owner. Broader integrations are paused pending target evidence. A disposable local restic restore is separate from NAS/application acceptance; no real-host deployment, privilege change, uninstall, wake packet, power command or Pi measurement was performed. See VERIFICATION.md, BACKUPS.md and FIRST-DEPLOYMENT.md.
 
 The original attachment ends at the heading ‘Alternatives and explicitly excluded capabilities’ without rows. The capabilities subsequently added back to scope are included in the final table. Security-tripwire ideas remain discussion items; they are separate from F12 telemetry.
 
@@ -130,19 +130,19 @@ The original attachment ends at the heading ‘Alternatives and explicitly exclu
 
 | Feature | What was discussed | Source | Planning status | Implementation | Current coverage / remaining work |
 | --- | --- | --- | --- | --- | --- |
-| Per-service backups | Back up selected configuration, data directories, and volumes. | Spec F10 | Planned | Not started |  |
-| NAS storage | Store backups on the configured NAS through an SMB/NFS mount. | Spec F10 | Planned | Not started |  |
-| Manual/scheduled backups | Run on demand, daily, or weekly. | Spec F10 | Planned | Not started |  |
-| Retention policies | Configure snapshot retention, such as seven daily and four weekly backups. | Spec F10 | Planned | Not started |  |
-| Backup consistency modes | Stop-copy-start for consistency, or live copying for static configuration. | Spec F10 | Planned | Not started |  |
-| Encryption and deduplication | Use restic repositories for encrypted, deduplicated backups. | Spec F10 | Planned | Not started |  |
-| Backup-password sourcing | Keep the repository password in Vaultwarden and supply it to the agent at runtime. | Spec F10 | Planned | Not started |  |
-| Documentation-inclusive backups | Include service-card exports and Compose/unit files. | Spec F10 | Planned | Not started |  |
-| Backup status | Show last success, size, next run, and failures. | Spec F10 | Planned | Not started |  |
-| Snapshot selection and preview | Choose a backup and inspect files before restoring. | Spec F10 | Planned | Not started |  |
-| Guided restore | Stop the service, restore files, start it, and run a health check. | Spec F10 | Planned | Not started |  |
-| Pre-restore safety snapshot | Capture current data before overwriting it. | Spec §9 | Planned | Not started |  |
-| Backup failure alerts | Notify when a backup fails. | Spec F10 | Planned | Not started |  |
+| Per-service backups | Back up selected configuration, data directories, and volumes. | Spec F10 | Planned | Done | Locally approved restic profiles select one to eight config/data/mounted-volume directories; fixed argv, immutable snapshots and signed durable intents. No automatic volume export. |
+| NAS storage | Store backups on the configured NAS through an SMB/NFS mount. | Spec F10 | Planned | Done | Existing owner-mounted SMB/NFS storage and provisioned repository required; missing mount or changed mount identity refuses local fallback. Actual NAS permissions and restore remain unverified. |
+| Manual/scheduled backups | Run on demand, daily, or weekly. | Spec F10 | Planned | Done | Confirmed manual and opt-in daily/weekly UTC backups with durable once-only windows, no restart backlog or automatic retries. Demo automatic dispatch is disabled. |
+| Retention policies | Configure snapshot retention, such as seven daily and four weekly backups. | Spec F10 | Planned | Done | Bounded daily/weekly policy, dry-run removal review and separately approved exact-ID forget; safety snapshots excluded. No automatic prune or deletion. |
+| Backup consistency modes | Stop-copy-start for consistency, or live copying for static configuration. | Spec F10 | Planned | Done | Explicit static-file live profiles or observed stop-copy-start for independent runtimes with stopped dependents; linked applications support static backups only. Uncertain outcomes retain a host hold. |
+| Encryption and deduplication | Use restic repositories for encrypted, deduplicated backups. | Spec F10 | Planned | Done | Delegated to restic repositories; disposable real encrypted repository backup/restore/check verified locally. Native NAS and application acceptance remains pending. |
+| Backup-password sourcing | Keep the repository password in Vaultwarden and supply it to the agent at runtime. | Spec F10 | Planned | Done | Owner supplies the vault-managed password through an approved PSC_ environment reference. Values never enter argv, registry or results; automatic vault login/unlock is excluded. |
+| Documentation-inclusive backups | Include service-card exports and Compose/unit files. | Spec F10 | Planned | Done | Service-card Markdown shares the data snapshot; approved roots include Compose/unit files. Restored prose is returned for separate review without overwriting owner notes. |
+| Backup status | Show last success, size, next run, and failures. | Spec F10 | Planned | Done | Per-service history includes last success, snapshot IDs, byte counts, next UTC window and failures/unknown holds; policy alone never implies backup availability. |
+| Snapshot selection and preview | Choose a backup and inspect files before restoring. | Spec F10 | Planned | Done | Full immutable scoped snapshot selection, bounded file metadata preview, traversal/link/special-file refusal and separate overwrite confirmation. |
+| Guided restore | Stop the service, restore files, start it, and run a health check. | Spec F10 | Planned | Done | Independent runtime stop, staged verified restore, atomic file overlay, restart if originally running and configured health check. Previously stopped runtimes remain stopped with health unverified; extra current files are preserved. |
+| Pre-restore safety snapshot | Capture current data before overwriting it. | Spec §9 | Planned | Done | Mandatory completed current-data snapshot before target overwrites, durable safety ID before overlay, native metadata checks and interrupted-operation inspection. No multi-file transaction or automatic rollback is claimed. |
+| Backup failure alerts | Notify when a backup fails. | Spec F10 | Planned | Done | Backup/restore failures feed the existing masked notification outbox and persistent audit/history; real external delivery remains deployment verification. |
 
 ## Unknown-activity and malware-related ideas
 
@@ -168,7 +168,7 @@ The original attachment ends at the heading ‘Alternatives and explicitly exclu
 | Agent authentication | Controller authentication through mTLS certificates or signed tokens/commands. | Spec §5/9 | Planned | Done | Bearer tokens plus opt-in independent HMAC request signatures covering method/target/body/time/nonce; durable nonce claims reject replays across restart. Persistent channels additionally prove both endpoints and sign each sequence-bound frame. mTLS is an alternative, not implemented. |
 | Restricted operations | Allow-listed runtime actions and narrowly scoped privileged operations. | Both; spec §9 | Planned | Partial | Runtime/profile/file allow-lists, non-root startup and a narrow exact-unit/action polkit template exist. Actual journal, Docker and unit privilege grants need reviewed target-host setup and verification; no broad runtime groups are granted by the installer. |
 | Filesystem restrictions | Restrict declared paths and reject traversal/symlink escapes. | Spec §9 | Planned | Done | Approved-root checks, traversal rejection, resolved symlink escape checks and blocked secret-file previews. |
-| Action audit trail | Log control actions, restores, reverts, shutdowns, and shell sessions. | Spec F2, §9 | Planned | Done | Existing semantic action records plus durable authenticated write intents, fixed route templates, correlation IDs and accepted/refused/unknown outcomes. Crash/cancellation recovery never replays actions; bodies/secrets are excluded. Generic write hooks cover future restore routes when those engines are implemented; backup engines remain Not started. |
+| Action audit trail | Log control actions, restores, reverts, shutdowns, and shell sessions. | Spec F2, §9 | Planned | Done | Durable authenticated write intents plus semantic controls, backup/restore/retention, inspection and schedule records; interrupted results remain unknown and are never replayed. Bodies and secrets are excluded. |
 | Linux distribution support | Ubuntu and CachyOS, including relevant package-manager and shell differences. | Spec §3/13 | Planned | Partial | Ubuntu/Debian/CachyOS/Arch installer prerequisites, systemd/shared runtime adapters, dpkg/pacman/RPM and desktop inventory are implemented in source. Actual Ubuntu/CachyOS installation, permissions and CLI behavior remain unverified. |
 | ARM64 and AMD64 builds | Support Pi and x86 hosts; target approximately 250 MB combined controller/agent RAM. | Spec §3 | Planned requirement | Partial | Portable source and build definitions exist; Docker is unavailable here. Both-target image builds and the approximately 250 MB Pi controller/agent memory target remain unverified. |
 | Installable deployment | Compose deployment for the controller; agent installer and systemd service. | Spec §10–11 | Planned | Done | Controller Compose/Dockerfile and reviewed Ubuntu/Debian/CachyOS/Arch agent installer with a default plan and explicit apply, non-root account, private state, preserved existing files and hardened systemd unit. Installer syntax verified; no target installation, service activation or image build was executed. |

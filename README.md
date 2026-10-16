@@ -1,6 +1,6 @@
 # Hearth Service Controller
 
-A private, service-first homelab dashboard that remembers what runs where, how it was installed, where its configuration lives and how to investigate failures.
+A self-hosted, service-first homelab dashboard that remembers what runs where, how it was installed, where its configuration lives and how to investigate failures.
 
 **Experimental public source.** CI verifies fixtures and mocked providers; real deployment and the first phone-to-service control remain unverified. Feature counts describe source/workflow coverage, not production readiness. Start with the [first deployment acceptance](docs/FIRST-DEPLOYMENT.md). Demo names, addresses and hardware labels are illustrative, not a contributor's network inventory.
 
@@ -18,6 +18,7 @@ Hearth is the working interface name. The controller serves a React/TypeScript P
 - Scoped credential findings and owner vault references; advice-only local AI drafts and explanations.
 - Confirmed configured Wake-on-LAN and guarded suspend/shutdown requests with durable uncertain-outcome holds.
 - Opt-in individual/application schedules with IANA timezones, daylight-saving rules, fresh-state guards and no offline backlog.
+- Approved restic backup profiles, manual/daily/weekly policies, snapshot previews, safety snapshots and guided restore. See [backup scope and setup](docs/BACKUPS.md); real NAS/application recovery remains unverified.
 - Cross-platform software/startup metadata with curated documentation links; optional owner password/TOTP login and independently signed agent transport.
 - Semantic action history plus a durable API write journal for accepted/refused/interrupted requests. Journal records contain fixed route templates and outcome metadata, without bodies, query strings or credentials.
 
@@ -83,7 +84,7 @@ Remote controller binding requires private ingress and owner authentication. Sta
 - Runtime/config/terminal/power operations reserve their host. Unknown results require observation/inspection; they are not automatically retried.
 - Power affects all user sessions and unregistered applications. Plans show registered services and declared dependent impact; no forced closure or inhibitor bypass is used.
 - A terminal's working directory is not a filesystem sandbox. Content recordings require explicit opt-in and cannot guarantee comprehensive secret removal.
-- Configuration restore creates a new version and never silently restarts a service. Backup/restore engines, boot-policy editing, vault-item verification and the remaining roadmap are listed as unfinished in the ledger.
+- Configuration restore creates a new version and never silently restarts a service. Backup restore is separately confirmed, creates a current-data safety snapshot, and can restart an originally running service. Interrupted operations stay held for inspection.
 - PWA caching includes only the public app shell, never API data, credentials, logs, files or commands. Offline controls are unavailable.
 - Data, caches, private local configs, environment files, keys and internal continuation notes are excluded by `.gitignore`. Review the prospective file list before publishing; Git initialization does not publish anything.
 
@@ -106,11 +107,11 @@ GitHub Actions definitions run mocked backend checks on Windows/Linux/macOS and 
 
 ## Platform verification and roadmap
 
-Current ledger: **102 Done, 6 Partial (native verification deferred), 35 Not started** across 143 features. The full list and three-case evidence matrix are linked above.
+Current ledger: **115 Done, 6 Partial (native verification deferred), 22 Not started** across 143 features. The full list and three-case evidence matrix are linked above. These are source/workflow assessments; the first real deployment is still pending.
 
 Six target-dependent rows are deferred at the owner's request: native file-edit behavior, restricted OS privileges, Ubuntu/CachyOS installation, ARM64/AMD64/Pi resource validation, broad-telemetry resource measurement and native macOS compatibility. Read-only platform reports come first. Mock success is not deployment evidence, and an older Mac may lack compatible Python/dependencies.
 
-The remaining planned entries include boot policies, backup/restore, vault verification, Kuma/platform/security integrations, application installation and Kubernetes/Proxmox support. The complete ledger retains discussion/later items instead of silently dropping them.
+Broader feature work is paused until the six deferred platform checks have target evidence. Remaining planned entries include boot policies, vault verification, Kuma/platform/security integrations, application installation and Kubernetes/Proxmox support. The complete ledger retains discussion/later items instead of silently dropping them.
 
 ## License
 

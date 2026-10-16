@@ -280,6 +280,8 @@ def create_app(data_dir: Path | None = None, demo=False, token: str | None = Non
     def host_operation_busy(hid, exclude=None, allow_power_pending=False):
         ids = {row["id"] for row in store.all("services") if row["host_id"] == hid}
         with store.connection() as db:
+            if db.execute('SELECT 1 FROM backup_runs WHERE host_id=? AND active=1 AND id<>?',(hid,exclude or '')).fetchone():
+                return True
             return (not allow_power_pending and bool(db.execute('SELECT 1 FROM power_requests WHERE host_id=? AND active=1', (hid,)).fetchone())) or any(row["service_id"] in ids or row["service_id"] == 'host:' + hid or row["service_id"].startswith("container:" + hid + ":") for row in db.execute("SELECT service_id FROM operations WHERE status='running' AND id<>?", (exclude or '',)))
 
     def update_observations(hid, result):
@@ -393,6 +395,7 @@ def create_app(data_dir: Path | None = None, demo=False, token: str | None = Non
                 except HTTPException:
                     pass
             await scheduler.tick()
+            await backup_coordinator.tick()
             await flush_notifications(store, demo=demo)
             await asyncio.sleep(30)
 
@@ -400,6 +403,7 @@ def create_app(data_dir: Path | None = None, demo=False, token: str | None = Non
     async def lifespan(app):
         audit_journal.recover()
         scheduler.recover()
+        backup_coordinator.recover()
         with store.connection() as db:
             db.execute("UPDATE operations SET status='unknown', detail='Controller restarted before result was recorded' WHERE status='running'")
             # A prepared snapshot proves intent, never that the remote write completed.
@@ -426,6 +430,7 @@ def create_app(data_dir: Path | None = None, demo=False, token: str | None = Non
                 task.cancel()
                 await asyncio.gather(task, return_exceptions=True)
             await terminal_coordinator.close_all()
+            await backup_coordinator.close()
 
     app = FastAPI(title="Pi Service Controller", version="0.1.0", lifespan=lifespan,
                   docs_url=None, redoc_url=None, openapi_url=None)
@@ -578,7 +583,7 @@ def create_app(data_dir: Path | None = None, demo=False, token: str | None = Non
         return {"name": "Hearth", "version": "0.1.0", "demo": demo, "authenticated": bool(token or owner_login.enabled), "login_method": "password_totp" if owner_login.enabled else "token" if token else "local",
                 "workspace": str(store.root), "obsidian_path": str(store.root / "obsidian"),
                 "features": {"manifests": True, "obsidian": True, "agent": True, "telemetry": True,
-                             "health": True, "credentials": True, "ai": True, "terminal": True, "backups": False, "app_store": False}}
+                             "health": True, "credentials": True, "ai": True, "terminal": True, "backups": True, "app_store": False}}
 
     @app.get("/api/v1/hosts")
     def hosts():
@@ -1970,6 +1975,11 @@ def create_app(data_dir: Path | None = None, demo=False, token: str | None = Non
     register_wake(app, store, demo, require, lock, lambda hid: host_operation_busy(hid, allow_power_pending=True))
     from controller.power import register as register_power
     register_power(app, store, demo, require, lock, host_operation_busy, agent_request)
+    from controller.backups import Coordinator as BackupCoordinator
+    async def backup_control(sid, action, reservation, guard):
+        return await control_single(sid,Action(action=action),reservation=reservation,origin='backup',schedule_guard=guard)
+    backup_coordinator = BackupCoordinator(app,store,demo,require,lock,host_operation_busy,agent_request,backup_control,run_health)
+    app.state.backups = backup_coordinator
     audit_journal = AuditJournal(app, store)
     app.state.audit_journal = audit_journal
 
