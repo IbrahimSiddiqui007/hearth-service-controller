@@ -1,10 +1,8 @@
-Session 9 supersedes older limitations below: grouped/IANA/DST schedules and fixed macOS shutdown/Windows suspend source adapters are now implemented and mocked. The owner deferred all six native/platform evidence rows. Initial reports use `python3 scripts/platform_check.py` (the actual script name). Do not execute power actions or change privileges to collect reports. See BUILD-SESSION-9.md and POWER-AND-SCHEDULES.md.
-
 # Manual target checks
 
-Session 8 power adapters and exact-file secret scanners were tested with mocks, not actual native commands. Initial `platform_check.py` reports must remain read-only; do not enable `power_actions`, provision power privileges or try shutdown/suspend while collecting compatibility reports. Native power acceptance will need a separately reviewed disposable target/session, explicit authorization and a recovery path. Group schedules/local-time/DST and some native power adapters remain unavailable. See POWER-AND-SCHEDULES.md for the inert configuration contracts.
+The six platform-dependent ledger rows remain **Partial**; their native verification is deferred. Grouped/IANA/DST schedules and fixed macOS shutdown/Windows suspend source adapters are implemented and tested with mocks. Initial `platform_check.py` reports are read-only. Do not enable power actions, provision OS privileges or attempt shutdown/suspend to collect them. See [scope contracts](POWER-AND-SCHEDULES.md) and [first deployment acceptance](FIRST-DEPLOYMENT.md).
 
-The owner has CachyOS, Ubuntu and an older Mac available for manual checks. No remote access is configured or assumed. Raspberry Pi and Docker build environments are still unconfirmed. All native changes in session 6 were tested using mocks on Windows; this document is a checklist, not evidence that target checks passed.
+No target is assumed reachable or configured. An ordinary-account report from a Linux controller, Linux worker and supported macOS target is useful when the owner is ready. Docker/ARM64 builds and resource measurements need their own environment. This checklist is not proof that target checks passed.
 
 First, copy the project source to each machine using your usual method. From its project directory, run this with an existing Python interpreter, as your ordinary user:
 

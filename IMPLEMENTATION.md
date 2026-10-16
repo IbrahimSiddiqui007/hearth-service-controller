@@ -40,6 +40,6 @@ Installable PWA with offline public-shell caching, notebook banners and saved ap
 
 ## Remaining work
 
-The ledger is **102 Done / 6 owner-deferred platform checks / 35 Not started (143 entries)**. Backend: 379 passed, one skipped, one warning. Production build and nine Node tests passed. Three cases per feature have explicit traceability; 105 cases remain planned for unimplemented features.
+The ledger is **102 Done / 6 Partial (native verification deferred) / 35 Not started (143 entries)**. Backend: 379 passed, one skipped, one warning. Production build and nine Node tests passed. Three cases per feature have explicit traceability; 105 cases remain planned for unimplemented features.
 
 Deferred checks cover native file metadata, restricted OS privileges, Ubuntu/CachyOS deployment, ARM64/AMD64/Pi budget, telemetry resource measurements and macOS compatibility. Backup/restore engines, boot policy, vault verification and other integrations remain planned. Schedules, source power adapters and write auditing are complete for their implemented scope. See the complete ledger and manual platform checks; no real-host deployment or privilege changes were performed.

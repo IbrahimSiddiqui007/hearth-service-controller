@@ -2,9 +2,11 @@
 
 A private, service-first homelab dashboard that remembers what runs where, how it was installed, where its configuration lives and how to investigate failures.
 
+**Experimental public source.** CI verifies fixtures and mocked providers; real deployment and the first phone-to-service control remain unverified. Feature counts describe source/workflow coverage, not production readiness. Start with the [first deployment acceptance](docs/FIRST-DEPLOYMENT.md). Demo names, addresses and hardware labels are illustrative, not a contributor's network inventory.
+
 Hearth is the working interface name. The controller serves a React/TypeScript PWA and keeps a SQLite registry, linked Markdown notebooks, configuration history and action evidence. Optional agents expose explicitly approved operations on Linux, macOS and Windows.
 
-![Hearth dashboard](docs/screenshots/dashboard-preview.jpg)
+![Hearth dashboard with illustrative demo data](docs/screenshots/dashboard-preview.png)
 
 ## Features
 
@@ -104,7 +106,7 @@ GitHub Actions definitions run mocked backend checks on Windows/Linux/macOS and 
 
 ## Platform verification and roadmap
 
-Current ledger: **102 Done, 6 owner-deferred platform rows, 35 Not started** across 143 features. The full list and three-case evidence matrix are linked above.
+Current ledger: **102 Done, 6 Partial (native verification deferred), 35 Not started** across 143 features. The full list and three-case evidence matrix are linked above.
 
 Six target-dependent rows are deferred at the owner's request: native file-edit behavior, restricted OS privileges, Ubuntu/CachyOS installation, ARM64/AMD64/Pi resource validation, broad-telemetry resource measurement and native macOS compatibility. Read-only platform reports come first. Mock success is not deployment evidence, and an older Mac may lack compatible Python/dependencies.
 

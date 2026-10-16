@@ -1,10 +1,10 @@
-Session 9 supersedes older limitations below: grouped/IANA/DST schedules and fixed macOS shutdown/Windows suspend source adapters are now implemented and mocked. The owner deferred all six native/platform evidence rows. Initial reports use `python3 scripts/platform_check.py` (the actual script name). Do not execute power actions or change privileges to collect reports. See BUILD-SESSION-9.md and POWER-AND-SCHEDULES.md.
-
 # Platform support and verification
 
-Session 8 adds mocked source adapters for Linux suspend/shutdown, macOS suspend and Windows shutdown, guarded by independent signing, controller-local host approval, agent-local action opt-in and ordinary-account refusal of elevated agents. macOS shutdown and Windows suspend are unavailable. Native permissions/behavior remain unverified; no power command or privilege grant occurred. Scoped exact-file secret discovery and independent-service UTC schedules are portable source workflows; group schedules/local-time/DST are not supported yet. See BUILD-SESSION-8.md and POWER-AND-SCHEDULES.md.
+Updated October 16, 2026. Source adapters for Linux/macOS/Windows suspend and shutdown are implemented with fixed commands, independent signing, separate controller/agent approval and ordinary-account checks. Grouped schedules and IANA/DST schedules are implemented. Native permissions and behavior remain unverified; no power command or privilege grant was performed on a real target.
 
-October 13, 2026. All native adapters added in this continuation are tested with mocks on Windows. No Linux or macOS machine was enrolled, contacted, controlled or installed. Source support and target deployment verification are separate.
+Hosted CI passed on Windows, Linux and macOS: **382 backend tests passed on each runner**, plus the frontend build and nine Node tests. These are fixture/mocked-provider checks, not evidence of target enrollment, service control, native file replacement or measured hardware budgets. See [verification evidence](VERIFICATION.md), [scope contracts](POWER-AND-SCHEDULES.md) and [first deployment acceptance](FIRST-DEPLOYMENT.md).
+
+The ledger's status labels are **Done**, **Partial** and **Not started**. Six rows remain **Partial** because native/platform verification is incomplete; collecting that evidence is deferred at the owner's request. Deferral is a separate verification decision, not another implementation status.
 
 | Capability | Linux | macOS | Windows |
 |---|---|---|---|
