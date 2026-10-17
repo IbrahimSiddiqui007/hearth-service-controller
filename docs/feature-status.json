@@ -1,8 +1,8 @@
 {
   "counts": {
-    "Done": 115,
-    "Not started": 22,
-    "Partial": 6
+    "Done": 121,
+    "Partial": 6,
+    "Not started": 16
   },
   "sections": [
     {
@@ -101,8 +101,8 @@
           "Suggest services from listening sockets not owned by another recognized runtime.",
           "Spec F1",
           "Planned",
-          "Not started",
-          ""
+          "Done",
+          "Opt-in bounded agent-account listener suggestions exclude already recognized ports/PIDs, never read argv/environment, and remain non-controllable until separately configured. Permission failures remain incomplete observations."
         ],
         [
           "Known-application recognition",
@@ -170,8 +170,8 @@
           "Enable/disable startup behavior for systemd and Compose through their respective mechanisms.",
           "Spec F2",
           "Planned",
-          "Not started",
-          ""
+          "Done",
+          "Separately approved systemd enable/disable and existing Docker/Compose container restart policies, exact target/fingerprint review, signed durable intents and uncertain-outcome inspection holds. Compose recreation can reset runtime policies; source files are unchanged. No OS privileges are granted."
         ],
         [
           "Bulk actions",
@@ -250,16 +250,16 @@
           "Optional import of existing monitors, with the stated intent of retaining history.",
           "Spec F3",
           "Planned; optional",
-          "Not started",
-          ""
+          "Done",
+          "Explicit per-service mapping from monitor/heartbeat JSON or approved published API data; bounded immutable review preserves available observations separately and repeat imports deduplicate. Existing health checks/notes are unchanged; private credentials and notification settings are not imported."
         ],
         [
           "Uptime Kuma embedding",
           "Embed Kuma views or pull its data instead of building equivalent monitoring.",
           "History",
           "Discussed alternative",
-          "Not started",
-          ""
+          "Done",
+          "Pull and display published status-page monitor/heartbeat data from controller-approved origins after explicit review. No iframe, vault login or automatic polling; public endpoints may expose only recent history. Imported/pending/maintenance evidence is not a fresh Hearth health result."
         ],
         [
           "Lightweight ping checks",
@@ -524,8 +524,8 @@
           "Explicit “open host root” toggle beyond service paths.",
           "Spec F6",
           "Planned text; conflicts with the stricter security section",
-          "Not started",
-          ""
+          "Done",
+          "Explicit host-scope review beyond service folders, separate agent-local root approval and signed identity-bound transport. Read-only bounded text previews; private/virtual paths, agent state, links, hardlinks and suspected secrets are excluded. No host editing/download or privilege grant."
         ],
         [
           "File-size/type handling",
@@ -753,8 +753,8 @@
           "Use Bitwarden CLI to check whether linked items still exist.",
           "Spec F9, post-v1",
           "Later",
-          "Not started",
-          ""
+          "Done",
+          "Locally approved exact UUIDs use an already unlocked Bitwarden CLI session supplied privately through an environment reference. Bounded existence-only results, revision checks and audits; locked/offline/denied/missing remain unverified. No automatic login/sync, item contents or session values are returned/stored."
         ]
       ]
     },

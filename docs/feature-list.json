@@ -80,7 +80,7 @@
     "feature_id": "F012",
     "feature": "Raw-process discovery",
     "description": "Suggest services from listening sockets not owned by another recognized runtime.",
-    "implementation": "Not started",
+    "implementation": "Done",
     "target_verification": "mocked/source evidence; not deployed"
   },
   {
@@ -136,7 +136,7 @@
     "feature_id": "F020",
     "feature": "Boot behavior",
     "description": "Enable/disable startup behavior for systemd and Compose through their respective mechanisms.",
-    "implementation": "Not started",
+    "implementation": "Done",
     "target_verification": "mocked/source evidence; not deployed"
   },
   {
@@ -206,14 +206,14 @@
     "feature_id": "F030",
     "feature": "Uptime Kuma import",
     "description": "Optional import of existing monitors, with the stated intent of retaining history.",
-    "implementation": "Not started",
+    "implementation": "Done",
     "target_verification": "mocked/source evidence; not deployed"
   },
   {
     "feature_id": "F031",
     "feature": "Uptime Kuma embedding",
     "description": "Embed Kuma views or pull its data instead of building equivalent monitoring.",
-    "implementation": "Not started",
+    "implementation": "Done",
     "target_verification": "mocked/source evidence; not deployed"
   },
   {
@@ -437,7 +437,7 @@
     "feature_id": "F063",
     "feature": "Host-root browsing option",
     "description": "Explicit “open host root” toggle beyond service paths.",
-    "implementation": "Not started",
+    "implementation": "Done",
     "target_verification": "mocked/source evidence; not deployed"
   },
   {
@@ -633,7 +633,7 @@
     "feature_id": "F091",
     "feature": "Vault-reference verification",
     "description": "Use Bitwarden CLI to check whether linked items still exist.",
-    "implementation": "Not started",
+    "implementation": "Done",
     "target_verification": "mocked/source evidence; not deployed"
   },
   {

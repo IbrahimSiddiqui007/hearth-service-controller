@@ -240,6 +240,15 @@ BACKUP_SCENARIOS={
  104: [('An interrupted backup enqueues one failure alert and retains an inspection hold.','backup_failure_alert_and_cross_action_hold_survive_restart'),('A stale manual request is refused and durably audited.','backup_api_plan_revision_guards_null_and_durable_audit[invalid]'),('Restart preserves uncertain history and blocks conflicting controls.','backup_failure_alert_and_cross_action_hold_survive_restart')],
 }
 
+CORE_SCENARIOS={
+ 12:[('Suggest owned listening processes without argv/environment reads or control permission.','remaining_controls','listener_suggestions_are_scoped_readonly_and_do_not_read_arguments[valid]'),('Exclude unowned process identities.','remaining_controls','listener_suggestions_are_scoped_readonly_and_do_not_read_arguments[invalid]'),('An empty socket inventory produces no invented service.','remaining_controls','listener_suggestions_are_scoped_readonly_and_do_not_read_arguments[edge]')],
+ 20:[('Review a fixed enabled/disabled unit action and observe its resulting boot policy.','remaining_controls','boot_fixed_commands_review_and_observation[valid]'),('A stale reviewed boot fingerprint refuses the write.','remaining_controls','boot_api_current_stale_and_null_plans[invalid]'),('Interrupted boot results survive restart and old dispatch IDs never replay.','core_completion','boot_uncertainty_survives_restart_and_old_dispatch_never_replays')],
+ 30:[('Preserve selected Kuma monitor/history while leaving live health settings unchanged; repeats deduplicate.','core_completion','kuma_import_retains_available_history_without_changing_live_checks[valid]'),('A wrong preview token refuses history import.','core_completion','kuma_import_retains_available_history_without_changing_live_checks[invalid]'),('A null monitor ID refuses import without a mutation.','core_completion','kuma_import_retains_available_history_without_changing_live_checks[null-edge]')],
+ 31:[('Pull published monitor and heartbeat data only from the approved controller origin.','core_completion','kuma_published_view_pulls_only_controller_approved_scope[valid]'),('Unapproved origins execute no request.','core_completion','kuma_published_view_pulls_only_controller_approved_scope[invalid]'),('Pending states and empty history never invent uptime; conflicting samples refuse import.','core_completion','kuma_unknown_states_and_conflicts_never_invent_uptime')],
+ 63:[('Browse separately approved host text read-only while hiding secret filenames.','core_completion','host_browser_requires_separate_approval_and_never_exposes_secrets[valid]'),('Reject traversal and secret files beyond service roots.','core_completion','host_browser_requires_separate_approval_and_never_exposes_secrets[invalid]'),('No local host approval means no host browsing.','core_completion','host_browser_requires_separate_approval_and_never_exposes_secrets[null-edge]')],
+ 91:[('Return only linked-item existence from an approved unlocked CLI session.','remaining_controls','vault_check_returns_existence_only_and_never_secret_data[valid]'),('Unapproved item IDs never invoke the CLI.','remaining_controls','vault_check_returns_existence_only_and_never_secret_data[invalid]'),('Locked/offline/failed CLI results remain unverified and contain no secret values.','remaining_controls','vault_check_returns_existence_only_and_never_secret_data[edge]')],
+}
+
 def cases():
     ledger=json.loads((ROOT/'docs/feature-status.json').read_text(encoding='utf-8'))
     rows=[row for section in ledger['sections'] for row in section['rows']]
@@ -256,6 +265,8 @@ def cases():
             triplet=[('390px layout and interactive tabs fit without horizontal document overflow.','browser:mobile.valid'),('Offline-host controls are disabled on a narrow viewport.','browser:mobile.invalid'),('320px viewport and large text remain navigable without document overflow.','browser:mobile.edge')]
         elif index==143:
             triplet=[('Approved current-user LaunchAgent controls use exact fixed domain/path/hash.',node('launchd_control','launchagent_actions_are_exact_current_user_domain')),('Wrong domain, Apple jobs, changed hash or root accounts cannot mutate native services.',node('launchd_control','wrong_domain_changed_hash_or_apple_job_never_mutates')),('Unloaded approved jobs remain observable; missing native permissions remain explicit.',node('launchd_control','inventory_keeps_unloaded_approved_jobs_and_never_exports_argv'))]
+        elif index in CORE_SCENARIOS:
+            triplet=[(scenario,node(module,test)) for scenario,module,test in CORE_SCENARIOS[index]]
         elif index in BACKUP_SCENARIOS:
             triplet=[(scenario,node('backups',test)) for scenario,test in BACKUP_SCENARIOS[index]]
         elif row[4]=='Not started':

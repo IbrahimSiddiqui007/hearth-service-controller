@@ -103,15 +103,15 @@ python scripts/feature_test_report.py --junit .cache/backend.xml
 
 Build the public app shell before backend tests. Use a fresh temporary test directory for each run. Backend fixtures use isolated databases and mocked agents/native/network/model providers. Appearance tests cover valid settings, invalid settings and null/corrupt storage. Browser acceptance covers layout and actual interaction in a separate synthetic workspace. The 429 matrix cases are scenario definitions linked to behavioral assertions; shared integration tests can exercise multiple scenarios. Native target checks and planned-feature cases remain clearly identified. The report only marks evidence supplied to that run as passed; without Node/browser results those cases remain unverified.
 
-GitHub Actions definitions run mocked backend checks on Windows/Linux/macOS and build/test the frontend after the repository is pushed. Those workflows are prepared locally; no GitHub run or native target deployment is claimed.
+GitHub Actions definitions run mocked backend checks on Windows/Linux/macOS and build/test the frontend after the repository is pushed. Hosted source checks have passed on all three platforms; see [verification evidence](docs/VERIFICATION.md). Native target deployment remains unverified.
 
 ## Platform verification and roadmap
 
-Current ledger: **115 Done, 6 Partial (native verification deferred), 22 Not started** across 143 features. The full list and three-case evidence matrix are linked above. These are source/workflow assessments; the first real deployment is still pending.
+Current ledger: **121 Done, 6 Partial (native verification deferred), 16 Not started** across 143 features. The full list and three-case evidence matrix are linked above. These are source/workflow assessments; the first real deployment is still pending.
 
 Six target-dependent rows are deferred at the owner's request: native file-edit behavior, restricted OS privileges, Ubuntu/CachyOS installation, ARM64/AMD64/Pi resource validation, broad-telemetry resource measurement and native macOS compatibility. Read-only platform reports come first. Mock success is not deployment evidence, and an older Mac may lack compatible Python/dependencies.
 
-Broader feature work is paused until the six deferred platform checks have target evidence. Remaining planned entries include boot policies, vault verification, Kuma/platform/security integrations, application installation and Kubernetes/Proxmox support. The complete ledger retains discussion/later items instead of silently dropping them.
+The owner chose core completion before later integrations. Discovery, boot review, Kuma history/data views, host browsing and vault-item existence workflows are now implemented; see [core workflow scope](docs/CORE-WORKFLOWS.md). Remaining planned entries include security tools, PWA push, MCP, guarded application updates, hardware recovery, application installation and Kubernetes/Proxmox support. The complete ledger retains discussion/later items instead of silently dropping them.
 
 ## License
 

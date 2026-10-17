@@ -2,8 +2,8 @@
   "features": 143,
   "cases": 429,
   "counts": {
-    "passed": 363,
-    "planned; feature not implemented": 66
+    "passed": 381,
+    "planned; feature not implemented": 48
   },
   "cases_detail": [
     {
@@ -407,36 +407,36 @@
       "feature_id": "F012",
       "feature": "Raw-process discovery",
       "description": "Suggest services from listening sockets not owned by another recognized runtime.",
-      "implementation": "Not started",
+      "implementation": "Done",
       "kind": "valid",
-      "scenario": "Planned valid scenario: Suggest services from listening sockets not owned by another recognized runtime.",
-      "test": null,
+      "scenario": "Suggest owned listening processes without argv/environment reads or control permission.",
+      "test": "tests/test_remaining_controls.py::test_listener_suggestions_are_scoped_readonly_and_do_not_read_arguments[valid]",
       "target_verification": "mocked/source evidence; not deployed",
-      "evidence": "planned; feature not implemented"
+      "evidence": "passed"
     },
     {
       "id": "F012-invalid",
       "feature_id": "F012",
       "feature": "Raw-process discovery",
       "description": "Suggest services from listening sockets not owned by another recognized runtime.",
-      "implementation": "Not started",
+      "implementation": "Done",
       "kind": "invalid",
-      "scenario": "Planned invalid scenario: refuse unapproved targets, references or actions for Raw-process discovery without mutations.",
-      "test": null,
+      "scenario": "Exclude unowned process identities.",
+      "test": "tests/test_remaining_controls.py::test_listener_suggestions_are_scoped_readonly_and_do_not_read_arguments[invalid]",
       "target_verification": "mocked/source evidence; not deployed",
-      "evidence": "planned; feature not implemented"
+      "evidence": "passed"
     },
     {
       "id": "F012-edge",
       "feature_id": "F012",
       "feature": "Raw-process discovery",
       "description": "Suggest services from listening sockets not owned by another recognized runtime.",
-      "implementation": "Not started",
+      "implementation": "Done",
       "kind": "edge",
-      "scenario": "Planned null/edge scenario: absent provider/input stays unavailable; Raw-process discovery must not invent success or silently queue actions.",
-      "test": null,
+      "scenario": "An empty socket inventory produces no invented service.",
+      "test": "tests/test_remaining_controls.py::test_listener_suggestions_are_scoped_readonly_and_do_not_read_arguments[edge]",
       "target_verification": "mocked/source evidence; not deployed",
-      "evidence": "planned; feature not implemented"
+      "evidence": "passed"
     },
     {
       "id": "F013-valid",
@@ -695,36 +695,36 @@
       "feature_id": "F020",
       "feature": "Boot behavior",
       "description": "Enable/disable startup behavior for systemd and Compose through their respective mechanisms.",
-      "implementation": "Not started",
+      "implementation": "Done",
       "kind": "valid",
-      "scenario": "Planned valid scenario: Enable/disable startup behavior for systemd and Compose through their respective mechanisms.",
-      "test": null,
+      "scenario": "Review a fixed enabled/disabled unit action and observe its resulting boot policy.",
+      "test": "tests/test_remaining_controls.py::test_boot_fixed_commands_review_and_observation[valid]",
       "target_verification": "mocked/source evidence; not deployed",
-      "evidence": "planned; feature not implemented"
+      "evidence": "passed"
     },
     {
       "id": "F020-invalid",
       "feature_id": "F020",
       "feature": "Boot behavior",
       "description": "Enable/disable startup behavior for systemd and Compose through their respective mechanisms.",
-      "implementation": "Not started",
+      "implementation": "Done",
       "kind": "invalid",
-      "scenario": "Planned invalid scenario: refuse unapproved targets, references or actions for Boot behavior without mutations.",
-      "test": null,
+      "scenario": "A stale reviewed boot fingerprint refuses the write.",
+      "test": "tests/test_remaining_controls.py::test_boot_api_current_stale_and_null_plans[invalid]",
       "target_verification": "mocked/source evidence; not deployed",
-      "evidence": "planned; feature not implemented"
+      "evidence": "passed"
     },
     {
       "id": "F020-edge",
       "feature_id": "F020",
       "feature": "Boot behavior",
       "description": "Enable/disable startup behavior for systemd and Compose through their respective mechanisms.",
-      "implementation": "Not started",
+      "implementation": "Done",
       "kind": "edge",
-      "scenario": "Planned null/edge scenario: absent provider/input stays unavailable; Boot behavior must not invent success or silently queue actions.",
-      "test": null,
+      "scenario": "Interrupted boot results survive restart and old dispatch IDs never replay.",
+      "test": "tests/test_core_completion.py::test_boot_uncertainty_survives_restart_and_old_dispatch_never_replays",
       "target_verification": "mocked/source evidence; not deployed",
-      "evidence": "planned; feature not implemented"
+      "evidence": "passed"
     },
     {
       "id": "F021-valid",
@@ -1055,72 +1055,72 @@
       "feature_id": "F030",
       "feature": "Uptime Kuma import",
       "description": "Optional import of existing monitors, with the stated intent of retaining history.",
-      "implementation": "Not started",
+      "implementation": "Done",
       "kind": "valid",
-      "scenario": "Planned valid scenario: Optional import of existing monitors, with the stated intent of retaining history.",
-      "test": null,
+      "scenario": "Preserve selected Kuma monitor/history while leaving live health settings unchanged; repeats deduplicate.",
+      "test": "tests/test_core_completion.py::test_kuma_import_retains_available_history_without_changing_live_checks[valid]",
       "target_verification": "mocked/source evidence; not deployed",
-      "evidence": "planned; feature not implemented"
+      "evidence": "passed"
     },
     {
       "id": "F030-invalid",
       "feature_id": "F030",
       "feature": "Uptime Kuma import",
       "description": "Optional import of existing monitors, with the stated intent of retaining history.",
-      "implementation": "Not started",
+      "implementation": "Done",
       "kind": "invalid",
-      "scenario": "Planned invalid scenario: refuse unapproved targets, references or actions for Uptime Kuma import without mutations.",
-      "test": null,
+      "scenario": "A wrong preview token refuses history import.",
+      "test": "tests/test_core_completion.py::test_kuma_import_retains_available_history_without_changing_live_checks[invalid]",
       "target_verification": "mocked/source evidence; not deployed",
-      "evidence": "planned; feature not implemented"
+      "evidence": "passed"
     },
     {
       "id": "F030-edge",
       "feature_id": "F030",
       "feature": "Uptime Kuma import",
       "description": "Optional import of existing monitors, with the stated intent of retaining history.",
-      "implementation": "Not started",
+      "implementation": "Done",
       "kind": "edge",
-      "scenario": "Planned null/edge scenario: absent provider/input stays unavailable; Uptime Kuma import must not invent success or silently queue actions.",
-      "test": null,
+      "scenario": "A null monitor ID refuses import without a mutation.",
+      "test": "tests/test_core_completion.py::test_kuma_import_retains_available_history_without_changing_live_checks[null-edge]",
       "target_verification": "mocked/source evidence; not deployed",
-      "evidence": "planned; feature not implemented"
+      "evidence": "passed"
     },
     {
       "id": "F031-valid",
       "feature_id": "F031",
       "feature": "Uptime Kuma embedding",
       "description": "Embed Kuma views or pull its data instead of building equivalent monitoring.",
-      "implementation": "Not started",
+      "implementation": "Done",
       "kind": "valid",
-      "scenario": "Planned valid scenario: Embed Kuma views or pull its data instead of building equivalent monitoring.",
-      "test": null,
+      "scenario": "Pull published monitor and heartbeat data only from the approved controller origin.",
+      "test": "tests/test_core_completion.py::test_kuma_published_view_pulls_only_controller_approved_scope[valid]",
       "target_verification": "mocked/source evidence; not deployed",
-      "evidence": "planned; feature not implemented"
+      "evidence": "passed"
     },
     {
       "id": "F031-invalid",
       "feature_id": "F031",
       "feature": "Uptime Kuma embedding",
       "description": "Embed Kuma views or pull its data instead of building equivalent monitoring.",
-      "implementation": "Not started",
+      "implementation": "Done",
       "kind": "invalid",
-      "scenario": "Planned invalid scenario: refuse unapproved targets, references or actions for Uptime Kuma embedding without mutations.",
-      "test": null,
+      "scenario": "Unapproved origins execute no request.",
+      "test": "tests/test_core_completion.py::test_kuma_published_view_pulls_only_controller_approved_scope[invalid]",
       "target_verification": "mocked/source evidence; not deployed",
-      "evidence": "planned; feature not implemented"
+      "evidence": "passed"
     },
     {
       "id": "F031-edge",
       "feature_id": "F031",
       "feature": "Uptime Kuma embedding",
       "description": "Embed Kuma views or pull its data instead of building equivalent monitoring.",
-      "implementation": "Not started",
+      "implementation": "Done",
       "kind": "edge",
-      "scenario": "Planned null/edge scenario: absent provider/input stays unavailable; Uptime Kuma embedding must not invent success or silently queue actions.",
-      "test": null,
+      "scenario": "Pending states and empty history never invent uptime; conflicting samples refuse import.",
+      "test": "tests/test_core_completion.py::test_kuma_unknown_states_and_conflicts_never_invent_uptime",
       "target_verification": "mocked/source evidence; not deployed",
-      "evidence": "planned; feature not implemented"
+      "evidence": "passed"
     },
     {
       "id": "F032-valid",
@@ -2243,36 +2243,36 @@
       "feature_id": "F063",
       "feature": "Host-root browsing option",
       "description": "Explicit “open host root” toggle beyond service paths.",
-      "implementation": "Not started",
+      "implementation": "Done",
       "kind": "valid",
-      "scenario": "Planned valid scenario: Explicit “open host root” toggle beyond service paths.",
-      "test": null,
+      "scenario": "Browse separately approved host text read-only while hiding secret filenames.",
+      "test": "tests/test_core_completion.py::test_host_browser_requires_separate_approval_and_never_exposes_secrets[valid]",
       "target_verification": "mocked/source evidence; not deployed",
-      "evidence": "planned; feature not implemented"
+      "evidence": "passed"
     },
     {
       "id": "F063-invalid",
       "feature_id": "F063",
       "feature": "Host-root browsing option",
       "description": "Explicit “open host root” toggle beyond service paths.",
-      "implementation": "Not started",
+      "implementation": "Done",
       "kind": "invalid",
-      "scenario": "Planned invalid scenario: refuse unapproved targets, references or actions for Host-root browsing option without mutations.",
-      "test": null,
+      "scenario": "Reject traversal and secret files beyond service roots.",
+      "test": "tests/test_core_completion.py::test_host_browser_requires_separate_approval_and_never_exposes_secrets[invalid]",
       "target_verification": "mocked/source evidence; not deployed",
-      "evidence": "planned; feature not implemented"
+      "evidence": "passed"
     },
     {
       "id": "F063-edge",
       "feature_id": "F063",
       "feature": "Host-root browsing option",
       "description": "Explicit “open host root” toggle beyond service paths.",
-      "implementation": "Not started",
+      "implementation": "Done",
       "kind": "edge",
-      "scenario": "Planned null/edge scenario: absent provider/input stays unavailable; Host-root browsing option must not invent success or silently queue actions.",
-      "test": null,
+      "scenario": "No local host approval means no host browsing.",
+      "test": "tests/test_core_completion.py::test_host_browser_requires_separate_approval_and_never_exposes_secrets[null-edge]",
       "target_verification": "mocked/source evidence; not deployed",
-      "evidence": "planned; feature not implemented"
+      "evidence": "passed"
     },
     {
       "id": "F064-valid",
@@ -3251,36 +3251,36 @@
       "feature_id": "F091",
       "feature": "Vault-reference verification",
       "description": "Use Bitwarden CLI to check whether linked items still exist.",
-      "implementation": "Not started",
+      "implementation": "Done",
       "kind": "valid",
-      "scenario": "Planned valid scenario: Use Bitwarden CLI to check whether linked items still exist.",
-      "test": null,
+      "scenario": "Return only linked-item existence from an approved unlocked CLI session.",
+      "test": "tests/test_remaining_controls.py::test_vault_check_returns_existence_only_and_never_secret_data[valid]",
       "target_verification": "mocked/source evidence; not deployed",
-      "evidence": "planned; feature not implemented"
+      "evidence": "passed"
     },
     {
       "id": "F091-invalid",
       "feature_id": "F091",
       "feature": "Vault-reference verification",
       "description": "Use Bitwarden CLI to check whether linked items still exist.",
-      "implementation": "Not started",
+      "implementation": "Done",
       "kind": "invalid",
-      "scenario": "Planned invalid scenario: refuse unapproved targets, references or actions for Vault-reference verification without mutations.",
-      "test": null,
+      "scenario": "Unapproved item IDs never invoke the CLI.",
+      "test": "tests/test_remaining_controls.py::test_vault_check_returns_existence_only_and_never_secret_data[invalid]",
       "target_verification": "mocked/source evidence; not deployed",
-      "evidence": "planned; feature not implemented"
+      "evidence": "passed"
     },
     {
       "id": "F091-edge",
       "feature_id": "F091",
       "feature": "Vault-reference verification",
       "description": "Use Bitwarden CLI to check whether linked items still exist.",
-      "implementation": "Not started",
+      "implementation": "Done",
       "kind": "edge",
-      "scenario": "Planned null/edge scenario: absent provider/input stays unavailable; Vault-reference verification must not invent success or silently queue actions.",
-      "test": null,
+      "scenario": "Locked/offline/failed CLI results remain unverified and contain no secret values.",
+      "test": "tests/test_remaining_controls.py::test_vault_check_returns_existence_only_and_never_secret_data[edge]",
       "target_verification": "mocked/source evidence; not deployed",
-      "evidence": "planned; feature not implemented"
+      "evidence": "passed"
     },
     {
       "id": "F092-valid",

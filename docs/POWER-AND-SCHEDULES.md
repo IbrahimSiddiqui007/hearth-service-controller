@@ -31,7 +31,7 @@ Fixed source adapters: Linux `systemctl --no-ask-password suspend` / `poweroff`;
 
 Intent persists before dispatch at both controller and agent. A returned command, lost connection, crash or timeout never proves a sleep/shutdown state. Host/services become unobserved and further writes stay held. There is no automatic retry. Configured Wake-on-LAN remains available for recovery. After the owner inspects the host, fresh post-request host/service observations and an explicit acknowledgement release the hold; historical power uncertainty remains. An acknowledgement tombstones even an unreceived request so a delayed old request cannot execute later. No power scheduler exists.
 
-Backup/restore workflows have separate local approval, mandatory pre-restore safety snapshots and durable host holds; see [backup scope](BACKUPS.md). They do not grant OS privileges. Boot-policy editing remains absent.
+Backup/restore workflows have separate local approval, mandatory pre-restore safety snapshots and durable host holds; see [backup scope](BACKUPS.md). They do not grant OS privileges. Separately approved boot-policy editing has its own review, durable intents and uncertain-outcome holds; see [core workflows](CORE-WORKFLOWS.md).
 
 ## Durable write auditing
 

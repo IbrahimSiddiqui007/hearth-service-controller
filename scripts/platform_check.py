@@ -21,7 +21,7 @@ def report():
         'python': platform.python_version(),
         'ordinary_account': os.getuid() != 0 if hasattr(os, 'getuid') else 'not checked',
         'tools_present': {name: bool(shutil.which(name)) for name in (
-            'systemctl', 'launchctl', 'docker', 'git', 'dpkg-query', 'pacman',
+            'systemctl', 'launchctl', 'docker', 'git', 'restic', 'bw', 'dpkg-query', 'pacman',
             'rpm', 'bash', 'zsh', 'node', 'npm')},
         'python_packages': {},
         'checks_not_run': ['native controls', 'file metadata replacement',

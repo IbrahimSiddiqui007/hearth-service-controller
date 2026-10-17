@@ -120,3 +120,6 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,
 .backup-panel code, .backup-panel p { overflow-wrap: anywhere; }
 .backup-panel pre { white-space: pre-wrap; overflow-wrap: anywhere; max-width: 100%; }
 .backup-panel .info-box { display: block; }
+.core-panel{min-width:0;overflow-wrap:anywhere}.core-panel .info-box{display:block}.core-panel .field input,.core-panel .field select,.core-panel .field textarea{min-width:0;max-width:100%;width:100%}.host-panel .core-panel{border-top:1px solid var(--line);margin-top:20px;padding-top:16px}.core-panel button{max-width:100%;white-space:normal}
+/* Stack observations on phones so enlarged labels keep their full reading width. */
+@media(max-width:480px){.health-summary{grid-template-columns:minmax(0,1fr)}.sidebar{padding-inline:2px}}

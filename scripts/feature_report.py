@@ -217,6 +217,16 @@ DONE.update({
 })
 DONE['Action audit trail'] = 'Durable authenticated write intents plus semantic controls, backup/restore/retention, inspection and schedule records; interrupted results remain unknown and are never replayed. Bodies and secrets are excluded.'
 
+# Core completion after the owner chose core work before later integrations.
+DONE.update({
+    'Raw-process discovery': 'Opt-in bounded agent-account listener suggestions exclude already recognized ports/PIDs, never read argv/environment, and remain non-controllable until separately configured. Permission failures remain incomplete observations.',
+    'Boot behavior': 'Separately approved systemd enable/disable and existing Docker/Compose container restart policies, exact target/fingerprint review, signed durable intents and uncertain-outcome inspection holds. Compose recreation can reset runtime policies; source files are unchanged. No OS privileges are granted.',
+    'Uptime Kuma import': 'Explicit per-service mapping from monitor/heartbeat JSON or approved published API data; bounded immutable review preserves available observations separately and repeat imports deduplicate. Existing health checks/notes are unchanged; private credentials and notification settings are not imported.',
+    'Uptime Kuma embedding': 'Pull and display published status-page monitor/heartbeat data from controller-approved origins after explicit review. No iframe, vault login or automatic polling; public endpoints may expose only recent history. Imported/pending/maintenance evidence is not a fresh Hearth health result.',
+    'Host-root browsing option': 'Explicit host-scope review beyond service folders, separate agent-local root approval and signed identity-bound transport. Read-only bounded text previews; private/virtual paths, agent state, links, hardlinks and suspected secrets are excluded. No host editing/download or privilege grant.',
+    'Vault-reference verification': 'Locally approved exact UUIDs use an already unlocked Bitwarden CLI session supplied privately through an environment reference. Bounded existence-only results, revision checks and audits; locked/offline/denied/missing remain unverified. No automatic login/sync, item contents or session values are returned/stored.',
+})
+
 EXTRA = [
     ("Broad host telemetry", "CPU, memory, disk, network, temperatures and system history.", "Spec F12", "Planned", "Partial", "Native telemetry, volume/interface views, reset-aware disk/network rates and charts, sustained threshold policy/state and monitoring links exist. Optional adapters and measured Pi collection/resource budget remain."),
     ("Standalone container management/logging", "Container inventory and individual control/log access.", "Spec F13", "Planned", "Done", "Dedicated persistent container screen, Compose components, current-state checks, confirmed allow-listed controls, filtered logs and snapshot downloads."),
@@ -257,10 +267,10 @@ def main():
     sections.append({"title": "Expanded scope and current additions", "rows": [list(row) for row in EXTRA]})
     counts = Counter(row[4] for section in sections for row in section["rows"])
     lines = ["# Complete feature inventory and implementation status", "",
-             "Updated October 16, 2026. Descriptions, sources and planning status retain the supplied scope with lab-specific details generalized; implementation and coverage columns are added.", "",
+             "Updated October 17, 2026. Descriptions, sources and planning status retain the supplied scope with lab-specific details generalized; implementation and coverage columns are added.", "",
              "**Done** = the described capability is implemented in the current app. **Partial** = a usable subset exists, with missing coverage listed. **Not started** = no implementation of that capability yet. Done is a code/workflow assessment, not a claim that the Pi, mini PC or laptop has been deployed or verified live.", "",
              f"**Totals: {counts['Done']} Done · {counts['Partial']} Partial · {counts['Not started']} Not started ({sum(counts.values())} entries).**", "",
-             "Guarded restic backup/restore source workflows are implemented next after schedules, source power adapters and durable auditing. The six Partial rows remain native verification deferred by the owner. Broader integrations are paused pending target evidence. A disposable local restic restore is separate from NAS/application acceptance; no real-host deployment, privilege change, uninstall, wake packet, power command or Pi measurement was performed. See VERIFICATION.md, BACKUPS.md and FIRST-DEPLOYMENT.md.", "",
+             "Core discovery, boot-policy review, host browsing, Kuma monitor/history import and vault-item existence workflows follow guarded backups, schedules, source power adapters and durable auditing. Six Partial rows remain native verification deferred by the owner. The owner chose core completion before the remaining later integrations. Source/mock evidence and a disposable local restic restore are separate from real target/NAS/application acceptance. See VERIFICATION.md, CORE-WORKFLOWS.md, BACKUPS.md and FIRST-DEPLOYMENT.md.", "",
              "The original attachment ends at the heading ‘Alternatives and explicitly excluded capabilities’ without rows. The capabilities subsequently added back to scope are included in the final table. Security-tripwire ideas remain discussion items; they are separate from F12 telemetry.", ""]
     for section in sections:
         lines += ["## " + section["title"], "", "| Feature | What was discussed | Source | Planning status | Implementation | Current coverage / remaining work |",

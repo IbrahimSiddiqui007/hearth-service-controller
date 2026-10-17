@@ -8,6 +8,7 @@ import hmac
 import json
 import os
 import platform
+import re
 import subprocess
 import time
 from pathlib import Path
@@ -34,6 +35,11 @@ from shared.configuration import secret_filename, secret_reasons
 from agent.secret_scan import scan as scan_secrets
 from agent.power import Power
 from agent.backups import Backups
+from agent.boot import Boot
+from agent.listeners import inventory as listener_inventory
+from agent.vault import check as check_vault,VaultCheck
+from shared.boot import BootTarget,BootChange,BootInspection
+from agent.host_files import read as read_host_file
 from shared.backups import AgentBackupRequest, BackupInspection
 from shared.power import PowerRequest, PowerAcknowledge
 from shared.secret_findings import categories as secret_categories
@@ -285,6 +291,34 @@ def create_agent(config: dict | None = None, token: str | None = None):
     power = Power(config, replay, command)
     backups = Backups(config,replay,observer=lambda:scan(ScanOptions(include_system=True)))
     app.state.backups = backups
+    boot = Boot(config,replay,command)
+
+    @app.get('/host-files/profiles')
+    def host_file_profiles():
+        if not replay:raise HTTPException(403,'Host browsing requires signed transport')
+        roots=config.get('host_browse_roots',{})
+        if not isinstance(roots,dict) or len(roots)>8 or any(not isinstance(k,str) or not re.fullmatch(r'[a-zA-Z0-9_.-]{1,80}',k) or not isinstance(v,str) for k,v in roots.items()):raise HTTPException(409,'Invalid local host browse profiles')
+        return {'profiles':list(roots),'physical_host_id':config.get('physical_host_id',''),'os':platform.system()}
+
+    @app.get('/host-files')
+    def host_file(profile:str=Query(max_length=80),path:str=Query(default='',max_length=4096)):
+        host_file_profiles()
+        try:return read_host_file(config,profile,path,replay.path.parent)
+        except (FileNotFoundError,NotADirectoryError):raise HTTPException(404,'Host path not found')
+
+    @app.post('/boot/plan')
+    def boot_plan(body:BootTarget):return boot.plan(body)
+
+    @app.post('/boot')
+    def boot_change(body:BootChange):return boot.change(body)
+
+    @app.post('/boot/acknowledge')
+    def boot_acknowledge(body:BootInspection):return boot.acknowledge(body)
+
+    @app.post('/vault/check')
+    def vault_check(body:VaultCheck):
+        if not replay:raise HTTPException(403,'Vault checks require signed transport')
+        return check_vault(config,body)
 
     @app.get('/backups/profile')
     def get_backup_profile(name: str,keep_daily: int=Query(default=7,ge=1,le=90),keep_weekly: int=Query(default=4,ge=0,le=52)):
@@ -425,6 +459,15 @@ def create_agent(config: dict | None = None, token: str | None = None):
                     completed.append("process")
             except (HTTPException, OSError, ValueError) as exc:
                 warnings.append({"runtime": runtime, "detail": str(exc.detail) if isinstance(exc, HTTPException) else "Runtime discovery failed"})
+        if config.get('listener_suggestions') is True:
+            # Bounded suggestions and per-process permission gaps never establish
+            # a complete process inventory or prove a previous process vanished.
+            completed=[runtime for runtime in completed if runtime!='process']
+            try:
+                services.extend(listener_inventory(services))
+            except (psutil.Error,OSError):
+                completed=[runtime for runtime in completed if runtime!='process']
+                warnings.append({'runtime':'process','detail':'Listening-process inventory unavailable; disappearance is unverified'})
         for row in services:
             findings = scan_secrets(config, row['agent_ref'], safe_path)
             row['secret_categories'] = sorted(set(row.get('secret_categories', []) + findings['categories']))

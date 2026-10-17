@@ -15,7 +15,7 @@ Complete 143-entry list; original descriptions and requested additions are prese
 | F009 | Compose discovery | Recognize Compose projects from labels and identify their components and paths. | Done | mocked/source evidence; not deployed |
 | F010 | systemd discovery | Discover system services and their units. | Done | mocked/source evidence; not deployed |
 | F011 | pm2 discovery | Discover applications managed by pm2. | Done | mocked/source evidence; not deployed |
-| F012 | Raw-process discovery | Suggest services from listening sockets not owned by another recognized runtime. | Not started | mocked/source evidence; not deployed |
+| F012 | Raw-process discovery | Suggest services from listening sockets not owned by another recognized runtime. | Done | mocked/source evidence; not deployed |
 | F013 | Known-application recognition | Prefill names, icons, and URLs for known applications such as Minecraft, Ollama, and Portainer. | Done | mocked/source evidence; not deployed |
 | F014 | OS-service filtering | Hide routine system units by default, with an option to reveal them. | Done | mocked/source evidence; not deployed |
 | F015 | Component grouping | Group related components using Compose projects, wrapper units, or shared working directories. | Done | mocked/source evidence; not deployed |
@@ -23,7 +23,7 @@ Complete 143-entry list; original descriptions and requested additions are prese
 | F017 | Discovery review | Review new, changed, and gone services; accept or reject candidates. | Done | mocked/source evidence; not deployed |
 | F018 | Scheduled/manual rescans | Scan on demand and periodically, defaulting to every six hours. | Done | mocked/source evidence; not deployed |
 | F019 | Start, stop, restart | One-click runtime-specific control for Docker, Compose, systemd, pm2, and configured raw processes. | Done | mocked/source evidence; not deployed |
-| F020 | Boot behavior | Enable/disable startup behavior for systemd and Compose through their respective mechanisms. | Not started | mocked/source evidence; not deployed |
+| F020 | Boot behavior | Enable/disable startup behavior for systemd and Compose through their respective mechanisms. | Done | mocked/source evidence; not deployed |
 | F021 | Bulk actions | Select several services and perform an action together. | Done | mocked/source evidence; not deployed |
 | F022 | Dependency-aware control | Offer to start dependencies; warn before stopping a service another running service needs. | Done | mocked/source evidence; not deployed |
 | F023 | Live runtime state | Show running, stopped, restarting, failed, or unknown state. | Done | mocked/source evidence; not deployed |
@@ -33,8 +33,8 @@ Complete 143-entry list; original descriptions and requested additions are prese
 | F027 | Resource snapshots | CPU usage, memory usage, restart count, and uptime since last start. | Done | mocked/source evidence; not deployed |
 | F028 | Operational alerts | Notify about service failures, offline hosts, and repeated restarts. | Done | mocked/source evidence; not deployed |
 | F029 | Notification integrations | Deliver alerts through ntfy or Telegram, with the channel chosen in settings. | Done | mocked/source evidence; not deployed |
-| F030 | Uptime Kuma import | Optional import of existing monitors, with the stated intent of retaining history. | Not started | mocked/source evidence; not deployed |
-| F031 | Uptime Kuma embedding | Embed Kuma views or pull its data instead of building equivalent monitoring. | Not started | mocked/source evidence; not deployed |
+| F030 | Uptime Kuma import | Optional import of existing monitors, with the stated intent of retaining history. | Done | mocked/source evidence; not deployed |
+| F031 | Uptime Kuma embedding | Embed Kuma views or pull its data instead of building equivalent monitoring. | Done | mocked/source evidence; not deployed |
 | F032 | Lightweight ping checks | Ping/HTTP monitoring was proposed in the earlier dashboard discussion; the spec lists HTTP/TCP/custom checks. | Done | mocked/source evidence; not deployed |
 | F033 | Host wake | Send Wake-on-LAN packets from the Pi for configured hosts. | Done | mocked/source evidence; not deployed |
 | F034 | Host suspend/shutdown | Sleep or shut down a host, warning about its running services. | Done | mocked/source evidence; not deployed |
@@ -66,7 +66,7 @@ Complete 143-entry list; original descriptions and requested additions are prese
 | F060 | Reconstruction labels | Clearly mark inferred installation instructions as reconstructed and unverified. | Done | mocked/source evidence; not deployed |
 | F061 | Per-service file browser | Browse files associated with each service. | Done | mocked/source evidence; not deployed |
 | F062 | File editor | Edit text configuration with syntax highlighting for YAML, JSON, TOML, INI, .env, and shell files. | Partial | deferred by owner |
-| F063 | Host-root browsing option | Explicit “open host root” toggle beyond service paths. | Not started | mocked/source evidence; not deployed |
+| F063 | Host-root browsing option | Explicit “open host root” toggle beyond service paths. | Done | mocked/source evidence; not deployed |
 | F064 | File-size/type handling | Files over 2 MB become read-only; binaries are download-only. | Done | mocked/source evidence; not deployed |
 | F065 | Automatic configuration versioning | Commit UI saves into a per-service Git repository with a message. | Done | mocked/source evidence; not deployed |
 | F066 | External-edit tracking | Periodically capture changes made outside the dashboard. | Done | mocked/source evidence; not deployed |
@@ -94,7 +94,7 @@ Complete 143-entry list; original descriptions and requested additions are prese
 | F088 | Secret discovery | Scan during discovery and file saves for likely embedded credentials. | Done | mocked/source evidence; not deployed |
 | F089 | Vault-link workflow | Flag apparently unvaulted secrets and let the owner link them to a vault item. | Done | mocked/source evidence; not deployed |
 | F090 | Secret masking | Mask likely passwords, tokens, keys, headers, and high-entropy values before storage or AI use. | Done | mocked/source evidence; not deployed |
-| F091 | Vault-reference verification | Use Bitwarden CLI to check whether linked items still exist. | Not started | mocked/source evidence; not deployed |
+| F091 | Vault-reference verification | Use Bitwarden CLI to check whether linked items still exist. | Done | mocked/source evidence; not deployed |
 | F092 | Per-service backups | Back up selected configuration, data directories, and volumes. | Done | mocked/source evidence; not deployed |
 | F093 | NAS storage | Store backups on the configured NAS through an SMB/NFS mount. | Done | mocked/source evidence; not deployed |
 | F094 | Manual/scheduled backups | Run on demand, daily, or weekly. | Done | mocked/source evidence; not deployed |

@@ -52,3 +52,13 @@ heartbeat_controller: ''
 controller_host_id: ''
 backup_profiles: {}
 # Disabled; review docs/BACKUPS.md before approving storage or restore.
+
+# Optional core workflows; separate local approvals, all disabled by default.
+listener_suggestions: false
+allow_boot_units: []
+allow_boot_containers: []
+allow_boot_projects: {}
+host_browse_roots: {}
+vault_check_items: []
+vault_session_env: ''
+# See docs/CORE-WORKFLOWS.md before enabling any of these.

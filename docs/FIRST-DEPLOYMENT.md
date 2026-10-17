@@ -2,7 +2,7 @@
 
 The next deployment milestone is deliberately small: one controller, one worker agent, Docker/Compose discovery, and one owner-confirmed service control from a phone. The current public source and passing CI do not prove that this milestone works on any contributor's hardware.
 
-Broader platform integrations and application installation should wait for this acceptance and the six Partial platform rows. Backup/restore is the next core implementation priority. A written backup plan is documentation; it is not a backup, a completed restic run or a tested recovery path.
+Broader platform integrations and application installation should wait for this acceptance and the six Partial platform rows. Backup/restore and the remaining core source workflows are implemented, but actual NAS/application recovery and target acceptance are still pending. A written backup plan is documentation; it is not a backup, a completed restic run or a tested recovery path.
 
 ## 1. Read-only platform reports
 
