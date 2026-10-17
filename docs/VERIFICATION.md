@@ -13,11 +13,11 @@ Grouped schedules require component consent and enforce dependency/context guard
 
 The owner deferred native file replacement/metadata, restricted OS privileges, Ubuntu/CachyOS deployment, ARM64/AMD64/Pi resource validation, telemetry resource budgets and macOS compatibility. Initial target reports use `python3 scripts/platform_check.py`. These checks do not enable native controls or change privileges.
 
-## Hosted CI — October 16, 2026
+## Hosted CI — October 17, 2026
 
-[Source checks passed](https://github.com/IbrahimSiddiqui007/hearth-service-controller/actions/runs/38870937704) on backup implementation commit `bef7fc5`: **407 backend tests passed on each of Windows, Linux and macOS**, with no failures or errors and one opt-in real-restic test skipped per runner. The frontend build and all nine Node tests also passed. The orchestration fixture explicitly mocks native ACL providers; real target ownership/ACL acceptance remains deferred. The separate disposable local real-restic test passed as described above.
+[Core source checks passed](https://github.com/IbrahimSiddiqui007/hearth-service-controller/actions/runs/39018010226) on commit `afb4be7`: **441 backend tests passed on each of Windows, Linux and macOS**, with no failures/errors and one opt-in real-restic skip per runner. The frontend build and all nine Node tests passed. Hosted Windows could run the symlink case skipped on the local ordinary-account run. This verifies source/fixture behavior, not the six deferred native platform checks.
 
-That hosted baseline predates the core workflows above. Core source is covered by the local evidence above; a hosted result is only claimed after its run completes.
+The preceding [published baseline](https://github.com/IbrahimSiddiqui007/hearth-service-controller/actions/runs/38871271612) also passed all four jobs at `48742ea`. The core result above supersedes that baseline for the new workflows.
 
 Hosted CI uses isolated fixtures and mocks for native providers, including the backup orchestration fixture's ACL boundary. Native permission refusal remains enabled in production; metadata helpers have separate regression tests. The real restic test is opt-in locally. These checks do not demonstrate real deployment, an actual phone-to-service control, target privileges or a NAS restore. Follow [first deployment acceptance](FIRST-DEPLOYMENT.md) before claiming those outcomes.
 
